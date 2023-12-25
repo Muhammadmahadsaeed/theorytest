@@ -1,12 +1,7 @@
 import React from 'react'
 import { View, Dimensions } from 'react-native'
 
-// new app asset start
-import AppLogo from '../../assets/app-images/Logo.svg'
-import Care01 from '../../assets/app-images/care01.svg'
-import Care02 from '../../assets/app-images/care02.svg'
-import Care03 from '../../assets/app-images/care03.svg'
-import Care04 from '../../assets/app-images/care04.svg'
+// old app assets images
 import MapSearch from '../../assets/app-images/search.svg'
 import MapPin from '../../assets/app-images/pin.svg'
 import Avatar from '../../assets/app-images/avatar.svg'
@@ -82,10 +77,61 @@ import Eye from '../../assets/app-images/eye.svg'
 import PlusCircle from '../../assets/app-images/plus-circle.svg'
 import Visa from '../../assets/app-images/visa.svg'
 import Voucher from '../../assets/app-images/voucher.svg'
-import AddressBook from '../../assets/app-images/address-book.svg'
 import ForwardEn from '../../assets/app-images/forward_en.svg'
 import Back from '../../assets/app-images/back.svg'
 import BackIconAr from '../../assets/app-images/back_icon_ar.svg'
+
+// new app asset start
+import AppLogo from '../../assets/images/Logo.svg'
+import Care01 from '../../assets/images/care01.svg'
+import Care02 from '../../assets/images/care02.svg'
+import Care03 from '../../assets/images/care03.svg'
+import Care04 from '../../assets/images/care04.svg'
+import AddressBook from '../../assets/images/address-book.svg'
+import Alert from '../../assets/images/alert.svg'
+
+export const AlertIcon = ({ svgStyle }) => (
+     <View style={{ ...svgStyle }}>
+          <Alert width="100%" height="100%" />
+     </View>
+)
+export const AddressBookIcon = ({ svgStyle }) => (
+     <View style={{ ...svgStyle }}>
+          <AddressBook width="100%" height="100%" />
+     </View>
+)
+
+export const Care04Icon = ({ svgStyle }) => (
+     <View style={{ ...svgStyle }}>
+          <Care04 width="100%" height="100%" />
+     </View>
+)
+export const Care03Icon = ({ svgStyle }) => (
+     <View style={{ ...svgStyle }}>
+          <Care03 width="100%" height="100%" />
+     </View>
+)
+export const Care02Icon = ({ svgStyle }) => (
+     <View style={{ ...svgStyle }}>
+          <Care02 width="100%" height="100%" />
+     </View>
+)
+export const Care01Icon = ({ svgStyle }) => (
+     <View style={{ ...svgStyle }}>
+          <Care01 width="100%" height="100%" />
+     </View>
+)
+export const AppLogoIcon = ({ svgStyle }) => (
+     <View style={{ ...svgStyle }}>
+          <AppLogo width="100%" height="100%" />
+     </View>
+)
+
+
+
+
+
+
 
 export const BackIcon = ({ svgStyle }) => (
      <View style={{ ...svgStyle }}>
@@ -102,11 +148,7 @@ export const ForwardEnIcon = ({ svgStyle }) => (
           <ForwardEn width="100%" height="100%" fill="#000" />
      </View>
 )
-export const AddressBookIcon = ({ svgStyle }) => (
-     <View style={{ ...svgStyle }}>
-          <AddressBook width="100%" height="100%" fill="#000" />
-     </View>
-)
+
 export const VoucherIcon = ({ svgStyle }) => (
      <View style={{ ...svgStyle }}>
           <Voucher width="100%" height="100%" fill="#000" />
@@ -483,31 +525,7 @@ export const SearchIcon = ({ svgStyle }) => (
           <MapSearch width="100%" height="100%" />
      </View>
 )
-export const Care04Icon = ({ svgStyle }) => (
-     <View style={{ ...svgStyle }}>
-          <Care04 width="100%" height="100%" />
-     </View>
-)
-export const Care03Icon = ({ svgStyle }) => (
-     <View style={{ ...svgStyle }}>
-          <Care03 width="100%" height="100%" />
-     </View>
-)
-export const Care02Icon = ({ svgStyle }) => (
-     <View style={{ ...svgStyle }}>
-          <Care02 width="100%" height="100%" />
-     </View>
-)
-export const Care01Icon = ({ svgStyle }) => (
-     <View style={{ ...svgStyle }}>
-          <Care01 width="100%" height="100%" />
-     </View>
-)
-export const AppLogoIcon = ({ svgStyle }) => (
-     <View style={{ ...svgStyle }}>
-          <AppLogo width="100%" height="100%" />
-     </View>
-)
+
 
 export const custom_pin = require('../../assets/app-images/pin.png')
 export const profile = require('../../assets/app-images/profile.png')

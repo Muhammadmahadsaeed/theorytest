@@ -1,192 +1,144 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
     View,
     Text,
     TextInput,
     ScrollView,
-    TouchableOpacity
+    TouchableOpacity,
+    StyleSheet
 } from 'react-native';
+import { Video, ResizeMode } from 'expo-av';
 import { theme } from '../../utils/colors';
 import HomeHeader from '../../components/Headers/HomeHeader';
 import { Fonts } from '../../utils/fonts';
-import { DoctorWritingIcon, MedicalHistoryIcon, NewsPaper1Icon, NewsPaperIcon, OldIcon } from '../../utils/images';
-import CategoryList from './CategoryList';
-import DoctorList from './DoctorList';
-import WrapperContainer from '../../components/Wrapper/WrapperContainer';
+import { AddressBookIcon, AlertIcon } from '../../utils/images';
 import { useSelector } from 'react-redux';
-import { getHomeData, postAppointment } from '../../services/api';
-import { Loading } from '../../components/Loading/Loading';
 import moment from 'moment';
 import WrapperContainer1 from '../../components/Wrapper/WrapperContainer1';
 import { floatToTime, isObjEmpty } from '../../helper/helper';
+import { Loading } from '../../components/Loading/Loading';
 
 const today = moment().format('dddd, DD MMM YYYY');
 
 const HomeScreen = ({ navigation }) => {
 
-    const { currentLocation, userData, } = useSelector(state => state.userReducer)
+    const { userData, } = useSelector(state => state.userReducer)
+    const video = useRef(null);
 
-    const [category, setCategory] = useState([])
-    const [doctor, setDoctorList] = useState([])
-    const [news, setNews] = useState([])
-    const [loading, setLoading] = useState(true)
-    const [appointmentList, setAppointmentList] = useState({})
-    const [isClear, setIsClear] = useState(false)
+    const [list, setList] = useState([
+        {
+            id: 1,
+            name: 'FREE Pass Guarantee',
 
-    useEffect(() => {
-        getData()
-    }, [])
-
-    const getData = async () => {
-        try {
-            let body = {
-                first: { "latlng": `${currentLocation?.lat},${currentLocation?.lng}` },
-                second: { "dont_load_services": true },
-                third: {},
-                fourth: {}
-            }
-
-            const { topSeller, categories, appointment, news } = await getHomeData(body)
-            if (topSeller?.result?.services?.length > 0) {
-                setDoctorList(topSeller?.result?.services)
-            }
-            if (categories?.result?.data?.length > 0) {
-                setCategory(categories?.result?.data)
-            }
-            if (appointment?.result?.length > 0) {
-                setAppointmentList(appointment?.result[0])
-            }
-            if (news?.result?.data?.length > 0) {
-                setNews(news?.result?.data)
-            }
-        } catch (error) {
-            console.log(error);
-        } finally {
-            setLoading(false)
-        }
-    }
-
-    const goToNewScreen = (params) => {
-        navigation.navigate('Profile', {
-            screen: 'news-screen',
-            params: {
-                ...params,
-                path: 'home'
-            }
-        })
-    }
+        },
+        {
+            id: 2,
+            name: 'Theory Test',
+            css: {
+                borderColor: theme.lightGreen
+            },
+            icon: <AddressBookIcon />
+        },
+        {
+            id: 3,
+            name: 'Hazard Perception',
+            css: {
+                borderColor: theme.red
+            },
+            icon: <AlertIcon />
+        },
+        {
+            id: 4,
+            name: 'Driving Lessons'
+        },
+        {
+            id: 5,
+            name: 'Highway Code'
+        },
+        {
+            id: 6,
+            name: 'Road Signs'
+        },
+    ])
+    const [videoLoading, setVideoLoading] = useState(true)
 
     return (
         <WrapperContainer1>
             <View style={styles.innerContainer}>
                 <HomeHeader />
                 <View style={styles.body}>
-                    {loading && <Loading size={60} color={theme.black} />}
-                    {!loading &&
-                        <ScrollView
-                            showsVerticalScrollIndicator={false}
-                            contentContainerStyle={styles.contentContainerStyle}>
-                            <View style={styles.textView}>
-                                <Text style={styles.date}>
-                                    {today}
-                                </Text>
-                                <Text style={styles.name}>
-                                    Hi, {userData?.name || "Guest"}
-                                </Text>
-                            </View>
-                            {!isObjEmpty(appointmentList) > 0 && !isClear &&
-                                <View style={styles.searchView}>
-                                    <View style={styles.searchTextView}>
-                                        <Text style={styles.searchHeading}>
-                                            Don't forget
-                                        </Text>
-                                        <TouchableOpacity
-                                            activeOpacity={0.8}
-                                            onPress={() => setIsClear(!isClear)}>
-                                            <Text style={styles.clearText}>
-                                                Clear
-                                            </Text>
-                                        </TouchableOpacity>
+                    <ScrollView
+                        showsVerticalScrollIndicator={false}
+                        contentContainerStyle={styles.contentContainerStyle}>
+                        <View style={styles.textView0}>
+                            <Text style={styles.date}>
+                                {today}
+                            </Text>
+                            <Text style={styles.name}>
+                                Hi, {userData?.name || "Guest"}
+                            </Text>
+                        </View>
+                        <View style={styles.videoView}>
+                            {/* {videoLoading &&
+                                <Loading color={theme.skyBlue} size={40} />
+                            } */}
+                            <Video
+                                ref={video}
+                                style={styles.video}
+                                source={{
+                                    uri: 'https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
+                                }}
+                                useNativeControls={false}
+                                resizeMode={ResizeMode.COVER}
+                                shouldPlay
+                                isMuted
+                                isLooping={true}
+                                onLoad={() => setVideoLoading(false)}
+                            // onPlaybackStatusUpdate={status => setStatus(() => status)}
+                            />
+
+                        </View>
+                        <View style={styles.headingView}>
+                            <Text style={styles.heading}>
+                                What are you looking for?
+                            </Text>
+                        </View>
+                        <View style={styles.box}>
+                            {list.map((el, index) => (
+                                <View style={[styles.row, { ...el?.css }]} key={index}>
+                                    <View style={styles.imgView}>
+                                        {el.icon}
                                     </View>
-                                    <View style={styles.searchBox}>
-                                        <View style={styles.searchBoxIcon}>
-                                            <MedicalHistoryIcon />
-                                        </View>
-                                        <TextInput
-                                            style={styles.input}
-                                            placeholder={"Nanny, Linda B. Johnson"}
-                                            value={appointmentList?.name}
-                                            editable={false} />
-                                        <View>
-                                            <Text style={styles.time}>
-                                                {floatToTime(appointmentList?.booking_start_time)}
-                                            </Text>
-                                        </View>
+                                    <View style={styles.textView}>
+                                        <Text style={styles.text}>
+                                            {el.name}
+                                        </Text>
                                     </View>
                                 </View>
-                            }
-                            <View style={styles.headingView}>
-                                <Text style={styles.heading}>
-                                    What are you looking for?
-                                </Text>
-                            </View>
-                            <View style={styles.categoryList}>
-                                <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                                    {category?.map((el, index) => (
-                                        <CategoryList data={el} key={index} />
-                                    ))}
-                                </ScrollView>
-                            </View>
-                            <View style={styles.headingView}>
-                                <Text style={styles.heading}>
-                                    Our Services
-                                </Text>
-                            </View>
-                            <View style={styles.categoryList1}>
-                                <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                                    {doctor?.map((el, index) => (
-                                        <DoctorList data={el} key={index} />
-                                    ))}
-                                </ScrollView>
-                            </View>
-                            <View style={[styles.headingView, styles.row]}>
-                                <Text style={styles.heading}>
-                                    Our News
-                                </Text>
-                                <TouchableOpacity
-                                    style={styles.link}
-                                    activeOpacity={0.8}
-                                    onPress={() => goToNewScreen(news[0])}>
-                                    <Text style={styles.linkText}>
-                                        Show all
-                                    </Text>
-                                </TouchableOpacity>
-                            </View>
-                            <View style={styles.categoryList1}>
-                                <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                                    {news?.map((el, index) => (
-                                        <DoctorList
-                                            data={el}
-                                            key={index}
-                                            isNews={true}
-                                            goToNewScreen={goToNewScreen} />
-                                    ))}
-                                </ScrollView>
-                            </View>
-                        </ScrollView>
-                    }
+                            ))}
+                        </View>
+                    </ScrollView>
                 </View>
             </View>
-        </WrapperContainer1 >
+        </WrapperContainer1>
     )
 
 }
 
 export default HomeScreen
 
-const styles = ({
+const styles = StyleSheet.create({
     innerContainer: {
         flex: 1,
+    },
+    videoView: {
+        height: 200,
+        width: '100%',
+        marginTop: 15
+    },
+    video: {
+        height: 200,
+        width: '100%'
     },
     svgStyle: {
         height: 70,
@@ -198,61 +150,18 @@ const styles = ({
         marginTop: 20
     },
     textView: {
-
+        flex: 1,
+        marginLeft: 20
     },
     date: {
         fontSize: 16,
         fontFamily: Fonts.medium,
-        color: theme.gray,
+        color: theme.grayShade1,
     },
     name: {
         fontSize: 25,
         fontFamily: Fonts.bold,
-        color: theme.textBlack,
-    },
-    searchView: {
-        marginTop: 25
-    },
-    searchTextView: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center'
-    },
-    searchHeading: {
-        fontSize: 18,
-        fontFamily: Fonts.bold,
-        color: theme.textBlack,
-    },
-    clearText: {
-        fontSize: 14,
-        fontFamily: Fonts.medium,
-        color: theme.textBlack,
-    },
-    searchBox: {
-        marginTop: 15,
-        height: 54,
-        borderRadius: 16,
-        paddingHorizontal: 10,
-        borderWidth: 1,
-        borderColor: theme.borderColor,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center'
-    },
-    searchBoxIcon: {
-        height: 24,
-        width: 24
-    },
-    input: {
-        flex: 1,
-        fontSize: 16,
-        fontFamily: Fonts.medium,
-        color: theme.inputText,
-    },
-    time: {
-        fontSize: 12,
-        fontFamily: Fonts.medium,
-        color: theme.buttonBg,
+        color: theme.black,
     },
     headingView: {
         marginVertical: 15,
@@ -260,7 +169,7 @@ const styles = ({
     heading: {
         fontFamily: Fonts.bold,
         fontSize: 18,
-        color: theme.textBlack
+        color: theme.black
     },
     contentContainerStyle: {
         paddingBottom: 100
@@ -269,16 +178,20 @@ const styles = ({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginBottom: 10
+        borderWidth: 2,
+        borderColor: theme.skyBlue,
+        marginBottom: 15,
+        borderRadius: 8,
+        padding: 10
     },
-    link: {
-        paddingVertical: 5,
+    imgView: {
+        height: 60,
+        width: 60,
+        backgroundColor: theme.white
     },
-    linkText: {
-        fontFamily: Fonts.bold,
-        color: theme.buttonBg,
-        fontSize: 14,
-        borderBottomColor: theme.buttonBg,
-        borderBottomWidth: 1
+    text: {
+        fontFamily: Fonts.medium,
+        fontSize: 16,
+        color: theme.black
     }
 })

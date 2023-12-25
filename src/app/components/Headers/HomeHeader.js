@@ -29,23 +29,7 @@ const HomeHeader = ({ }) => {
                 onPress={() => navigation.navigate('Profile')}>
                 <AvatarIcon svgStyle={styles.menuIcon} />
             </TouchableOpacity>
-            <TouchableOpacity
-                style={styles.centerView}
-                activeOpacity={0.8}
-                onPress={() => goToLocation()}>
-                <View style={styles.markerIcon}>
-                    <MapPinWhiteIcon />
-                </View>
-                <Text
-                    style={styles.locationDes}
-                    numberOfLines={1}
-                    ellipsizeMode='tail'>
-                    {currentLocation?.city}
-                </Text>
-                <View style={styles.arrowIcon}>
-                    <UpArrowIcon svgStyle={styles.arrowIcon} />
-                </View>
-            </TouchableOpacity>
+         
             <View style={styles.right}>
                 <TouchableOpacity
                     style={styles.bellIcon}

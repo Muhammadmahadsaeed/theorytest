@@ -29,7 +29,7 @@ export default Button
 
 const styles = StyleSheet.create({
     btn: (is) => ({
-        backgroundColor: theme.buttonBg,
+        backgroundColor: theme.skyBlue,
         height: 44,
         width: '100%',
         borderRadius: 16,
@@ -41,6 +41,6 @@ const styles = StyleSheet.create({
     btnText: {
         fontFamily: Fonts.medium,
         fontSize: 16,
-        color: theme.textWhite
+        color: theme.white
     }
 })

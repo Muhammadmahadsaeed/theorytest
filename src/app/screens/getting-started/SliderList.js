@@ -45,14 +45,14 @@ const styles = ({
     itemText: {
         fontSize: 16,
         fontFamily: Fonts.bold,
-        color: theme.textBlack,
+        color: theme.black,
         textAlign: 'center'
     },
     itemDescription: {
         marginTop: 15,
         fontSize: 16,
         fontFamily: Fonts.medium,
-        color: theme.textBlack,
+        color: theme.grayShade1,
         textAlign: 'center'
     }
 })

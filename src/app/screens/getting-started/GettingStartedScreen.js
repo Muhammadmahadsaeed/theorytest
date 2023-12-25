@@ -104,7 +104,6 @@ const GettingStartedScreen = ({ navigation }) => {
                         <Pagination index={index} slides={slider} />
                     </View>
                     <Button title={"Get Started!"} onPress={() => onGettingStart()} />
-
                 </View>
             </View>
         </WrapperContainer1>

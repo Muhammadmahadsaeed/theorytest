@@ -3,7 +3,7 @@ import {
     View,
     StyleSheet
 } from 'react-native';
-import { black, gray1, gray2, gray4, red } from '../../utils/colors';
+import { black, gray1, gray2, gray4, red, theme } from '../../utils/colors';
 
 const Pagination = ({ index, slides }) => {
     return (
@@ -41,6 +41,6 @@ const styles = StyleSheet.create({
         backgroundColor: red,
         marginLeft: 10,
     },
-    paginationDotActive: { backgroundColor: black },
-    paginationDotInactive: { backgroundColor: gray4 },
+    paginationDotActive: { backgroundColor: theme.skyBlue },
+    paginationDotInactive: { backgroundColor: theme.lightBorderGrey },
 })
