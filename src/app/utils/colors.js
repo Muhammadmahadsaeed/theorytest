@@ -28,5 +28,7 @@ export const theme = {
     textBlack: '#191632',
     hiddenGray: '#e3e3e6',
     green: '#47b01a',
-    lightGreen: '#74E8AE'
+    lightGreen: '#74E8AE',
+    lightPurple: '#E7E5FF',
+    purple: '#7065E4'
 }

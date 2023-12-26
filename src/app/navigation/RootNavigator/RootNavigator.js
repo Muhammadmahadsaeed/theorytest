@@ -8,6 +8,7 @@ import AuthStackNavigator from '../AuthStack/AuthStackNavigator';
 import { useDispatch, useSelector } from 'react-redux';
 import { Loading } from '../../components/Loading/Loading';
 import { theme } from '../../utils/colors';
+import TheoryTestScreen from '../../screens/theory-test/TheoryTestScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -47,6 +48,7 @@ const RootNavigation = () => {
             screenOptions={{ headerShown: false }}>
             <Stack.Screen name="getting" component={GettingStartedScreen} />
             <Stack.Screen name="bottom-tab" component={BottomTabNavigator} />
+            <Stack.Screen name="theory-test" component={TheoryTestScreen} />
             <Stack.Screen name="auth-stack" component={AuthStackNavigator} />
         </Stack.Navigator>
     )

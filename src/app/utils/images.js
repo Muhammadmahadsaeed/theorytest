@@ -29,7 +29,6 @@ import ChatActive from '../../assets/app-images/chat-active.svg'
 import CalenderCircle from '../../assets/app-images/calender-circle.svg'
 import AppointmentType from '../../assets/app-images/appointment-type.svg'
 import SearchFill from '../../assets/app-images/search-fill.svg'
-import BackLeft from '../../assets/app-images/back-left.svg'
 import Star from '../../assets/app-images/star.svg'
 import PinBlue from '../../assets/app-images/pin-blue.svg'
 import Share from '../../assets/app-images/share.svg'
@@ -89,7 +88,37 @@ import Care03 from '../../assets/images/care03.svg'
 import Care04 from '../../assets/images/care04.svg'
 import AddressBook from '../../assets/images/address-book.svg'
 import Alert from '../../assets/images/alert.svg'
+import ClockWatch from '../../assets/images/clock-watch.svg'
+import Review from '../../assets/images/review.svg'
+import Question from '../../assets/images/question.svg'
+import BackLeft from '../../assets/images/back-left.svg'
+import SearchFile from '../../assets/images/search-file.svg'
 
+export const SearchFileIcon = ({ svgStyle }) => (
+     <View style={{ ...svgStyle }}>
+          <SearchFile width="100%" height="100%" />
+     </View>
+)
+export const BackLeftIcon = ({ svgStyle }) => (
+     <View style={{ ...svgStyle }}>
+          <BackLeft width="100%" height="100%" />
+     </View>
+)
+export const QuestionIcon = ({ svgStyle }) => (
+     <View style={{ ...svgStyle }}>
+          <Question width="100%" height="100%" />
+     </View>
+)
+export const ReviewIcon = ({ svgStyle }) => (
+     <View style={{ ...svgStyle }}>
+          <Review width="100%" height="100%" />
+     </View>
+)
+export const ClockWatchIcon = ({ svgStyle }) => (
+     <View style={{ ...svgStyle }}>
+          <ClockWatch width="100%" height="100%" />
+     </View>
+)
 export const AlertIcon = ({ svgStyle }) => (
      <View style={{ ...svgStyle }}>
           <Alert width="100%" height="100%" />
@@ -382,11 +411,6 @@ export const PinBlueIcon = ({ svgStyle }) => (
 export const StarIcon = ({ svgStyle }) => (
      <View style={{ ...svgStyle }}>
           <Star width="100%" height="100%" />
-     </View>
-)
-export const BackLeftIcon = ({ svgStyle }) => (
-     <View style={{ ...svgStyle }}>
-          <BackLeft width="100%" height="100%" />
      </View>
 )
 export const SearchFillIcon = ({ svgStyle }) => (

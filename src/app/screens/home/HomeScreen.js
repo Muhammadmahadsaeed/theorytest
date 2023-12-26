@@ -37,7 +37,8 @@ const HomeScreen = ({ navigation }) => {
             css: {
                 borderColor: theme.lightGreen
             },
-            icon: <AddressBookIcon />
+            icon: <AddressBookIcon />,
+            link: 'theory-test'
         },
         {
             id: 3,
@@ -61,6 +62,10 @@ const HomeScreen = ({ navigation }) => {
         },
     ])
     const [videoLoading, setVideoLoading] = useState(true)
+
+    const onClick = (el) => {
+        navigation.navigate(el.link)
+    }
 
     return (
         <WrapperContainer1>
@@ -105,7 +110,11 @@ const HomeScreen = ({ navigation }) => {
                         </View>
                         <View style={styles.box}>
                             {list.map((el, index) => (
-                                <View style={[styles.row, { ...el?.css }]} key={index}>
+                                <TouchableOpacity
+                                    style={[styles.row, { ...el?.css }]}
+                                    key={index}
+                                    activeOpacity={0.8}
+                                    onPress={() => onClick(el)}>
                                     <View style={styles.imgView}>
                                         {el.icon}
                                     </View>
@@ -114,7 +123,7 @@ const HomeScreen = ({ navigation }) => {
                                             {el.name}
                                         </Text>
                                     </View>
-                                </View>
+                                </TouchableOpacity>
                             ))}
                         </View>
                     </ScrollView>
@@ -179,14 +188,14 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         borderWidth: 2,
-        borderColor: theme.skyBlue,
+        borderColor: theme.purple,
         marginBottom: 15,
         borderRadius: 8,
         padding: 10
     },
     imgView: {
-        height: 60,
-        width: 60,
+        height: 45,
+        width: 45,
         backgroundColor: theme.white
     },
     text: {
