@@ -10,10 +10,10 @@ import HeaderWithBackButton from '../../components/Headers/HeaderWithBackButton'
 import WrapperContainer1 from '../../components/Wrapper/WrapperContainer1';
 import { theme } from '../../utils/colors';
 import { Fonts } from '../../utils/fonts';
-import { ClockWatchIcon, QuestionIcon, ReviewIcon, SearchFileIcon } from '../../utils/images';
+import { ClockWatchIcon, ForwardEnIcon, QuestionIcon, ReviewIcon, SearchFileIcon } from '../../utils/images';
 import TheoryTestBottomSheet from '../../components/BottomSheet/TheoryTestBottomSheet';
 
-const TheoryTestScreen = ({ }) => {
+const TheoryTestScreen = ({ navigation }) => {
 
     const bottomSheetRef = useRef(null);
 
@@ -22,13 +22,15 @@ const TheoryTestScreen = ({ }) => {
             id: 1,
             name: 'Mock Test',
             description: 'Challenge yourself with a practice test',
-            icon: <ClockWatchIcon />
+            icon: <ClockWatchIcon />,
+
         },
         {
             id: 2,
             name: "Practive Revision Question",
             description: 'Review questions sorted by topics',
-            icon: <ReviewIcon />
+            icon: <ReviewIcon />,
+            link: 'revision-question'
         },
         {
             id: 3,
@@ -45,7 +47,7 @@ const TheoryTestScreen = ({ }) => {
     ])
     const [selectedItem, setSelectedItem] = useState({})
 
-    const snapPoints = useMemo(() => ['55%'], []);
+    const snapPoints = useMemo(() => ['95%'], []);
 
     // callbacks
     const handleSheetChanges = useCallback((index) => {
@@ -73,6 +75,10 @@ const TheoryTestScreen = ({ }) => {
 
 
     const onClick = (el) => {
+        if (el.link) {
+            navigation.navigate(el.link)
+            return
+        }
         setSelectedItem(el)
         handleSnapPress(0)
     }
@@ -85,7 +91,7 @@ const TheoryTestScreen = ({ }) => {
                     <TouchableOpacity
                         style={[styles.row, { ...el?.css }]}
                         key={index}
-                        activeOpacity={0.8}
+                        activeOpacity={0.95}
                         onPress={() => onClick(el)}>
                         <View style={styles.imgView}>
                             {el.icon}
@@ -98,6 +104,9 @@ const TheoryTestScreen = ({ }) => {
                                 {el.description}
                             </Text>
                         </View>
+                        <View style={styles.icon}>
+                            <ForwardEnIcon />
+                        </View>
                     </TouchableOpacity>
                 ))}
             </View>
@@ -107,7 +116,7 @@ const TheoryTestScreen = ({ }) => {
                 backdropComponent={renderBackdrop}
                 snapPoints={snapPoints}
                 onChange={handleSheetChanges}>
-                <TheoryTestBottomSheet selectedItem={selectedItem} />
+                    <TheoryTestBottomSheet selectedItem={selectedItem} onCancel={handleClosePress} />
             </BottomSheet>
         </WrapperContainer1>
     )
@@ -128,11 +137,20 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        borderWidth: 2,
-        borderColor: theme.skyBlue,
+        backgroundColor: theme.white,
         marginBottom: 15,
         borderRadius: 8,
-        padding: 10
+        paddingVertical: 15,
+        paddingHorizontal: 10,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        },
+        shadowOpacity: 0.29,
+        shadowRadius: 4.65,
+
+        elevation: 7,
     },
     textView: {
         flex: 1,
@@ -152,5 +170,9 @@ const styles = StyleSheet.create({
         fontFamily: Fonts.medium,
         fontSize: 12,
         color: theme.grayShade1
+    },
+    icon: {
+        height: 35,
+        width: 35
     }
 })

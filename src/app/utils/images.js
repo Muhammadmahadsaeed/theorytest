@@ -76,7 +76,7 @@ import Eye from '../../assets/app-images/eye.svg'
 import PlusCircle from '../../assets/app-images/plus-circle.svg'
 import Visa from '../../assets/app-images/visa.svg'
 import Voucher from '../../assets/app-images/voucher.svg'
-import ForwardEn from '../../assets/app-images/forward_en.svg'
+
 import Back from '../../assets/app-images/back.svg'
 import BackIconAr from '../../assets/app-images/back_icon_ar.svg'
 
@@ -93,7 +93,31 @@ import Review from '../../assets/images/review.svg'
 import Question from '../../assets/images/question.svg'
 import BackLeft from '../../assets/images/back-left.svg'
 import SearchFile from '../../assets/images/search-file.svg'
+import ForwardEn from '../../assets/images/forward_en.svg'
+import Timer from '../../assets/images/timer.svg'
+import ReviewFile from '../../assets/images/review-file.svg'
+import Smile from '../../assets/images/smile.svg'
 
+export const SmileIcon = ({ svgStyle }) => (
+     <View style={{ ...svgStyle }}>
+          <Smile width="100%" height="100%"/>
+     </View>
+)
+export const ReviewFileIcon = ({ svgStyle }) => (
+     <View style={{ ...svgStyle }}>
+          <ReviewFile width="100%" height="100%" />
+     </View>
+)
+export const TimerIcon = ({ svgStyle }) => (
+     <View style={{ ...svgStyle }}>
+          <Timer width="100%" height="100%" />
+     </View>
+)
+export const ForwardEnIcon = ({ svgStyle }) => (
+     <View style={{ ...svgStyle }}>
+          <ForwardEn width="100%" height="100%"/>
+     </View>
+)
 export const SearchFileIcon = ({ svgStyle }) => (
      <View style={{ ...svgStyle }}>
           <SearchFile width="100%" height="100%" />
@@ -172,11 +196,7 @@ export const BackIconArIcon = ({ svgStyle }) => (
           <BackIconAr width="100%" height="100%" fill="#000" />
      </View>
 )
-export const ForwardEnIcon = ({ svgStyle }) => (
-     <View style={{ ...svgStyle }}>
-          <ForwardEn width="100%" height="100%" fill="#000" />
-     </View>
-)
+
 
 export const VoucherIcon = ({ svgStyle }) => (
      <View style={{ ...svgStyle }}>

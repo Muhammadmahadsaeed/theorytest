@@ -1,35 +1,202 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     View,
     Text,
     StyleSheet,
-    TouchableOpacity
+    TouchableOpacity,
+    ScrollView
 } from 'react-native';
+import { BottomSheetScrollView } from '@gorhom/bottom-sheet';
+import ToggleSwitch from 'toggle-switch-react-native'
+import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import { theme, } from '../../utils/colors';
 import Button from '../Buttons/Button';
 import { Fonts } from '../../utils/fonts';
 import { isObjEmpty } from '../../helper/helper';
+import { ReviewFileIcon, SmileIcon, TimerIcon } from '../../utils/images';
+import DropDownComponent from '../DropDownComponent/DropDownComponent';
 
 const TheoryTestBottomSheet = ({ selectedItem, onCancel }) => {
+
+    const [countries, setCountries] = useState([
+        {
+            id: 1,
+            name: 'GB',
+            icon: ''
+        },
+        {
+            id: 2,
+            name: 'IN',
+            icon: ''
+        }
+    ])
+    const [selectedTab, setSelectedTab] = useState('GB')
+    const [toggles, setToggles] = useState({
+        "autoSkip": false,
+        "newQuestion": false,
+        "incorrectQuestion": false,
+        "showAnswer": false
+    })
+
+    const onTabChange = (el) => {
+        setSelectedTab(el.name)
+    }
 
     return (
         <View style={styles.container}>
             <View style={styles.headingView}>
-                <Text />
+                <Text style={styles.hidden}>
+                    say
+                </Text>
                 <Text style={styles.heading}>
                     {selectedItem?.name}
                 </Text>
                 <TouchableOpacity
                     activeOpacity={0.8}
+                    style={styles.paraView}
                     onPress={onCancel}>
                     <Text style={styles.para}>
                         Cancel
                     </Text>
                 </TouchableOpacity>
             </View>
-            <View style={styles.upper}>
-                <View style={styles.seperator} />
-            </View>
+            <BottomSheetScrollView showsVerticalScrollIndicator={false}>
+                <View style={styles.upper}>
+                    <View style={styles.circleView}>
+                        <AnimatedCircularProgress
+                            size={100}
+                            width={5}
+                            fill={15}
+                            rotation={180}
+                            // arcSweepAngle={300}
+                            tintColor={theme.skyBlue}
+                            tintTransparency
+                            onAnimationComplete={() => console.log('onAnimationComplete')}
+                            backgroundColor={theme.lightBorderGrey}>
+                            {
+                                (fill) => (
+                                    <Text style={styles.fillText}>
+                                        1/800
+                                    </Text>
+                                )
+                            }
+                        </AnimatedCircularProgress>
+                    </View>
+                    <View style={styles.descriptionView}>
+                        <View style={styles.imgView}>
+                            <TimerIcon svgStyle={styles.svgStyle} />
+                            <Text style={styles.time}>
+                                57 min
+                            </Text>
+                        </View>
+                        <View style={styles.imgView}>
+                            <ReviewFileIcon svgStyle={styles.svgStyle} />
+                            <Text style={styles.time}>
+                                43/50 to pass
+                            </Text>
+                        </View>
+                        <View style={styles.imgView}>
+                            <SmileIcon svgStyle={styles.svgStyle} />
+                            <Text style={styles.time}>
+                                50 questions
+                            </Text>
+                        </View>
+                    </View>
+                    <View style={styles.tabView}>
+                        <Text style={styles.heading0}>
+                            Where are you taking your theory test?
+                        </Text>
+                        <View style={styles.row}>
+                            {countries.map((el, index) => (
+                                <TouchableOpacity
+                                    key={index}
+                                    activeOpacity={0.8}
+                                    style={styles.tab(selectedTab == el.name)}
+                                    onPress={() => onTabChange(el)}>
+                                    <Text style={styles.tabText}>
+                                        {el.name}
+                                    </Text>
+                                </TouchableOpacity>
+                            ))}
+                        </View>
+                    </View>
+                    <View style={[styles.row, styles.row0]}>
+                        <View style={styles.textView0}>
+                            <Text style={styles.heading0}>
+                                Auto Skip
+                            </Text>
+                            <Text style={styles.time}>
+                                Enables automatic skipping to the next question upon anwering
+                            </Text>
+                        </View>
+                        <ToggleSwitch
+                            isOn={toggles["autoSkip"]}
+                            onColor="green"
+                            offColor={theme.lightBorderGrey}
+                            size="medium"
+                            onToggle={isOn => setToggles({ ...toggles, autoSkip: isOn })}
+                        />
+                    </View>
+                    <View style={[styles.row, styles.row0]}>
+                        <View style={styles.textView0}>
+                            <Text style={styles.heading0}>
+                                New Questions
+                            </Text>
+                            <Text style={styles.time}>
+                                Show more questions you haven't seen before 
+                            </Text>
+                        </View>
+                        <ToggleSwitch
+                            isOn={toggles["newQuestion"]}
+                            onColor="green"
+                            offColor={theme.lightBorderGrey}
+                            size="medium"
+                            onToggle={isOn => setToggles({ ...toggles, newQuestion: isOn })}
+                        />
+                    </View>
+                    <View style={[styles.row, styles.row0]}>
+                        <View style={styles.textView0}>
+                            <Text style={styles.heading0}>
+                                Incorrect Answers
+                            </Text>
+                            <Text style={styles.time}>
+                                Show more question you've previously answered incorrectly
+                            </Text>
+                        </View>
+                        <ToggleSwitch
+                            isOn={toggles["incorrectQuestion"]}
+                            onColor="green"
+                            offColor={theme.lightBorderGrey}
+                            size="medium"
+                            onToggle={isOn => setToggles({ ...toggles, incorrectQuestion: isOn })}
+                        />
+                    </View>
+                    <View style={[styles.row, styles.row0]}>
+                        <View style={styles.textView0}>
+                            <Text style={styles.heading0}>
+                                Show Answers
+                            </Text>
+                            <Text style={styles.time}>
+                                Display correct answers after you've answered a question
+                            </Text>
+                        </View>
+                        <ToggleSwitch
+                            isOn={toggles["showAnswer"]}
+                            onColor="green"
+                            offColor={theme.lightBorderGrey}
+                            size="medium"
+                            onToggle={isOn => setToggles({ ...toggles, showAnswer: isOn })}
+                        />
+                    </View>
+                    <View style={styles.textView}>
+                        <Text style={styles.text}>
+                            You will have 57 minutes to anwser 50 questions. You need to correctly anwser 43 or more in order to achieve a pass
+                        </Text>
+                    </View>
+                    <View style={styles.seperator} />
+                </View>
+            </BottomSheetScrollView>
+            <Button title={"Continue"} />
         </View>
     )
 }
@@ -47,14 +214,29 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginBottom: 20
+        marginBottom: 20,
+
     },
-    heading: {
+    hidden: {
+        flex: 1,
         fontFamily: Fonts.bold,
         fontSize: 20,
-        color: theme.textBlack
+        color: theme.textBlack,
+        opacity: 0
+    },
+    heading: {
+        flex: 1,
+        fontFamily: Fonts.bold,
+        fontSize: 20,
+        textAlign: 'center',
+        color: theme.textBlack,
+    },
+    paraView: {
+        flex: 1,
+        alignItems: 'flex-end'
     },
     para: {
+
         fontFamily: Fonts.medium,
         fontSize: 14,
         color: theme.darkGrey
@@ -80,5 +262,77 @@ const styles = StyleSheet.create({
     icon: {
         height: 24,
         width: 24
+    },
+    circleView: {
+        alignItems: 'center'
+    },
+    fillText: {
+        fontFamily: Fonts.medium,
+        fontSize: 14,
+        color: theme.black
+    },
+    descriptionView: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        marginTop: 20
+    },
+    imgView: {
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    svgStyle: {
+        height: 50,
+        width: 50
+    },
+    time: {
+        fontFamily: Fonts.medium,
+        fontSize: 12,
+        color: theme.black,
+        marginTop: 5
+    },
+    textView: {
+        marginTop: 20
+    },
+    text: {
+        fontFamily: Fonts.medium,
+        fontSize: 14,
+        color: theme.black,
+        textAlign: 'center'
+    },
+    tabView: {
+        marginTop: 20
+    },
+    heading0: {
+        fontFamily: Fonts.bold,
+        fontSize: 16,
+        color: theme.black
+    },
+    row: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginTop: 10
+    },
+    row0: {
+        marginTop: 20
+    },
+    tab: (is) => ({
+        width: '48%',
+        borderWidth: is ? 1.5 : 1,
+        borderColor: is ? theme.skyBlue : theme.lightBorderGrey,
+        paddingHorizontal: 40,
+        paddingVertical: 10,
+        borderRadius: 8
+    }),
+    tabText: {
+        fontFamily: Fonts.medium,
+        fontSize: 14,
+        color: theme.black,
+        textAlign: 'center'
+    },
+    textView0: {
+        flex: 1,
+        marginRight: 20
     }
 })
