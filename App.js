@@ -21,12 +21,11 @@ const { persistor, store } = configureStore();
 export default function App() {
 
   const [fontsLoaded] = useFonts({
-    'Montserrat-Bold': require('./assets/fonts/Montserrat-Bold.ttf'),
-    'Montserrat-Light': require('./assets/fonts/Montserrat-Light.ttf'),
-    'Montserrat-Regular': require('./assets/fonts/Montserrat-Regular.ttf'),
-    'Montserrat-ExtraBold': require('./assets/fonts/Montserrat-ExtraBold.ttf'),
-    'Montserrat-Thin': require('./assets/fonts/Montserrat-Thin.ttf'),
-    'Montserrat-Medium': require('./assets/fonts/Montserrat-Medium.ttf'),
+    'EuclidCircularABold': require('./assets/fonts/EuclidCircularABold.ttf'),
+    'EuclidCircularALight': require('./assets/fonts/EuclidCircularALight.ttf'),
+    'EuclidCircularAMedium': require('./assets/fonts/EuclidCircularAMedium.ttf'),
+    'EuclidCircularARegular': require('./assets/fonts/EuclidCircularARegular.ttf'),
+    'EuclidCircularASemiBold': require('./assets/fonts/EuclidCircularASemiBold.ttf'),
   });
 
   const onLayoutRootView = useCallback(async () => {

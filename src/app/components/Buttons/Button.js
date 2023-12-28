@@ -30,9 +30,9 @@ export default Button
 const styles = StyleSheet.create({
     btn: (is) => ({
         backgroundColor: theme.skyBlue,
-        height: 44,
+        height: 50,
         width: '100%',
-        borderRadius: 16,
+        borderRadius: 8,
         justifyContent: 'center',
         alignItems: 'center',
         zIndex: 500,

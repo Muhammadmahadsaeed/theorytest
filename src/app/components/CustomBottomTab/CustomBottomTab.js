@@ -114,7 +114,7 @@ const styles = ({
     },
     btnText: (tab) => ({
         fontSize: 16,
-        color: theme.textWhite,
+        color: theme.white,
         fontFamily: Fonts.medium,
         marginLeft: 5
     })

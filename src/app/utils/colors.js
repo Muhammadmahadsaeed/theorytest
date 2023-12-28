@@ -13,7 +13,7 @@ export const theme = {
     lighterGrey: '#F8F8F8',
     grey: '#F5F6F7',
     dropShadow: '#7090B029',
-    skyBlue: "#00aee3",
+    skyBlue: "#1DA49E",
     lightSkyBlue: '#eafaff',
     recommended: "#ffbe00",
     buttonBorderGrey: "#f1f1f1",
@@ -30,5 +30,6 @@ export const theme = {
     green: '#47b01a',
     lightGreen: '#74E8AE',
     lightPurple: '#E7E5FF',
-    purple: '#7065E4'
+    purple: '#7065E4',
+    buttonBg: '#1DA49E',
 }

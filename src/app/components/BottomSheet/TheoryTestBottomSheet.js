@@ -16,7 +16,7 @@ import { isObjEmpty } from '../../helper/helper';
 import { ReviewFileIcon, SmileIcon, TimerIcon } from '../../utils/images';
 import DropDownComponent from '../DropDownComponent/DropDownComponent';
 
-const TheoryTestBottomSheet = ({ selectedItem, onCancel }) => {
+const TheoryTestBottomSheet = ({navigation, selectedItem, onCancel }) => {
 
     const [countries, setCountries] = useState([
         {
@@ -40,6 +40,10 @@ const TheoryTestBottomSheet = ({ selectedItem, onCancel }) => {
 
     const onTabChange = (el) => {
         setSelectedTab(el.name)
+    }
+
+    const onContinue = () => {
+        navigation.navigate('question')
     }
 
     return (
@@ -113,7 +117,7 @@ const TheoryTestBottomSheet = ({ selectedItem, onCancel }) => {
                                     activeOpacity={0.8}
                                     style={styles.tab(selectedTab == el.name)}
                                     onPress={() => onTabChange(el)}>
-                                    <Text style={styles.tabText}>
+                                    <Text style={styles.tabText(selectedTab == el.name)}>
                                         {el.name}
                                     </Text>
                                 </TouchableOpacity>
@@ -196,7 +200,7 @@ const TheoryTestBottomSheet = ({ selectedItem, onCancel }) => {
                     <View style={styles.seperator} />
                 </View>
             </BottomSheetScrollView>
-            <Button title={"Continue"} />
+            <Button title={"Continue"} onPress={onContinue} />
         </View>
     )
 }
@@ -288,7 +292,7 @@ const styles = StyleSheet.create({
     time: {
         fontFamily: Fonts.medium,
         fontSize: 12,
-        color: theme.black,
+        color: theme.lightGrey,
         marginTop: 5
     },
     textView: {
@@ -297,15 +301,15 @@ const styles = StyleSheet.create({
     text: {
         fontFamily: Fonts.medium,
         fontSize: 14,
-        color: theme.black,
+        color: theme.lightGrey,
         textAlign: 'center'
     },
     tabView: {
         marginTop: 20
     },
     heading0: {
-        fontFamily: Fonts.bold,
-        fontSize: 16,
+        fontFamily: Fonts.medium,
+        fontSize: 18,
         color: theme.black
     },
     row: {
@@ -325,12 +329,12 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         borderRadius: 8
     }),
-    tabText: {
+    tabText: (is) => ({
         fontFamily: Fonts.medium,
         fontSize: 14,
-        color: theme.black,
+        color: is ? theme.skyBlue : theme.lightGrey,
         textAlign: 'center'
-    },
+    }),
     textView0: {
         flex: 1,
         marginRight: 20

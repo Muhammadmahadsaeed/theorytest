@@ -10,6 +10,7 @@ import { Loading } from '../../components/Loading/Loading';
 import { theme } from '../../utils/colors';
 import TheoryTestScreen from '../../screens/theory-test/TheoryTestScreen';
 import RevisionQuestion from '../../screens/revision-question/RevisionQuestion';
+import QuestionScreen from '../../screens/questions/QuestionScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -51,6 +52,7 @@ const RootNavigation = () => {
             <Stack.Screen name="bottom-tab" component={BottomTabNavigator} />
             <Stack.Screen name="theory-test" component={TheoryTestScreen} />
             <Stack.Screen name="revision-question" component={RevisionQuestion} />
+            <Stack.Screen name="question" component={QuestionScreen} />
             <Stack.Screen name="auth-stack" component={AuthStackNavigator} />
         </Stack.Navigator>
     )

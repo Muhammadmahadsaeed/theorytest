@@ -1,8 +1,7 @@
 export const Fonts = {
-    bold: 'Montserrat-Bold',
-    medium: 'Montserrat-Medium',
-    regular: 'Montserrat-Regular',
-    extraBold: 'Montserrat-ExtraBold',
-    light: 'Montserrat-Light',
-    thin: 'Montserrat-Thin'
+    bold: 'EuclidCircularABold',
+    light: 'EuclidCircularALight',
+    medium: 'EuclidCircularAMedium',
+    regular: 'EuclidCircularARegular',
+    semiBold: 'EuclidCircularAsemiBold',
 }

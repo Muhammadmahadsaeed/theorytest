@@ -116,7 +116,10 @@ const TheoryTestScreen = ({ navigation }) => {
                 backdropComponent={renderBackdrop}
                 snapPoints={snapPoints}
                 onChange={handleSheetChanges}>
-                    <TheoryTestBottomSheet selectedItem={selectedItem} onCancel={handleClosePress} />
+                <TheoryTestBottomSheet
+                    navigation={navigation}
+                    selectedItem={selectedItem}
+                    onCancel={handleClosePress} />
             </BottomSheet>
         </WrapperContainer1>
     )
@@ -163,7 +166,7 @@ const styles = StyleSheet.create({
     },
     text: {
         fontFamily: Fonts.bold,
-        fontSize: 16,
+        fontSize: 18,
         color: theme.skyBlue
     },
     description: {
