@@ -97,7 +97,19 @@ import ForwardEn from '../../assets/images/forward_en.svg'
 import Timer from '../../assets/images/timer.svg'
 import ReviewFile from '../../assets/images/review-file.svg'
 import Smile from '../../assets/images/smile.svg'
+import ForwardEnWhite from '../../assets/images/forward_en_white.svg'
+import BackWardArrow from '../../assets/images/backward-arrow.svg'
 
+export const BackWardArrowIcon = ({ svgStyle }) => (
+     <View style={{ ...svgStyle }}>
+          <BackWardArrow width="100%" height="100%"/>
+     </View>
+)
+export const ForwardEnWhiteIcon = ({ svgStyle }) => (
+     <View style={{ ...svgStyle }}>
+          <ForwardEnWhite width="100%" height="100%"/>
+     </View>
+)
 export const SmileIcon = ({ svgStyle }) => (
      <View style={{ ...svgStyle }}>
           <Smile width="100%" height="100%"/>
