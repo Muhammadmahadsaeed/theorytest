@@ -99,7 +99,19 @@ import ReviewFile from '../../assets/images/review-file.svg'
 import Smile from '../../assets/images/smile.svg'
 import ForwardEnWhite from '../../assets/images/forward_en_white.svg'
 import BackWardArrow from '../../assets/images/backward-arrow.svg'
+import Video from '../../assets/images/video.svg'
+import VideoPlayer from '../../assets/images/video-player.svg'
 
+export const VideoPlayerIcon = ({ svgStyle }) => (
+     <View style={{ ...svgStyle }}>
+          <VideoPlayer width="100%" height="100%"/>
+     </View>
+)
+export const VideoIcon = ({ svgStyle }) => (
+     <View style={{ ...svgStyle }}>
+          <Video width="100%" height="100%"/>
+     </View>
+)
 export const BackWardArrowIcon = ({ svgStyle }) => (
      <View style={{ ...svgStyle }}>
           <BackWardArrow width="100%" height="100%"/>

@@ -46,7 +46,8 @@ const HomeScreen = ({ navigation }) => {
             css: {
                 borderColor: theme.red
             },
-            icon: <AlertIcon />
+            icon: <AlertIcon />,
+            link: 'hazard'
         },
         {
             id: 4,

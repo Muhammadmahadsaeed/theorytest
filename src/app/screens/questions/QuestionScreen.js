@@ -4,6 +4,8 @@ import {
     Text,
     Image,
     ScrollView,
+    Alert,
+    BackHandler,
     StyleSheet,
     TouchableOpacity
 } from 'react-native';
@@ -33,6 +35,29 @@ const QuestionScreen = ({ navigation }) => {
 
         return () => clearInterval(interval);
     }, [timeRemaining, totalTimeInMinutes]);
+
+
+    useEffect(() => {
+        const backAction = () => {
+          Alert.alert('Hold on!', 'Are you sure you want to go back?', [
+            {
+              text: 'Cancel',
+              onPress: () => null,
+              style: 'cancel',
+            },
+            {text: 'YES', onPress: () => BackHandler.exitApp()},
+          ]);
+          return true;
+        };
+    
+        const backHandler = BackHandler.addEventListener(
+          'hardwareBackPress',
+          backAction,
+        );
+    
+        return () => backHandler.remove();
+      }, []);
+    
 
     const formatTime = (seconds) => {
         const mins = Math.floor(seconds / 60);

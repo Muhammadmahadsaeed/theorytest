@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View } from 'react-native'
 import { theme } from '../../utils/colors';
-import { BackLeftIcon, ClockRectIcon, InfoCircleIcon, SearchFillIcon, ShareIcon } from '../../utils/images';
+import { BackLeftIcon } from '../../utils/images';
 import { Fonts } from '../../utils/fonts';
 import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native';
@@ -14,12 +14,6 @@ const HeaderWithBackButton = ({ text, rightIcon, onPress }) => {
 
     const goToBack = () => {
         navigation.goBack()
-    }
-
-    const getIcon = (icon) => {
-        if (icon == 'search') return <SearchFillIcon />
-        else if (icon == 'share') return <ShareIcon />
-        else if (icon == 'info') return <InfoCircleIcon />
     }
 
     return (
@@ -36,16 +30,7 @@ const HeaderWithBackButton = ({ text, rightIcon, onPress }) => {
                         {text}
                     </Text>
                 </View>
-                {rightIcon ?
-                    <TouchableOpacity
-                        style={styles.right}
-                        activeOpacity={0.8}
-                        onPress={onPress}>
-                        {getIcon(rightIcon)}
-                    </TouchableOpacity>
-                    :
-                    <View style={styles.right} />
-                }
+                <View style={styles.right} />
             </View>
         </View>
     )
