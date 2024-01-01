@@ -12,6 +12,7 @@ import TheoryTestScreen from '../../screens/theory-test/TheoryTestScreen';
 import RevisionQuestion from '../../screens/revision-question/RevisionQuestion';
 import QuestionScreen from '../../screens/questions/QuestionScreen';
 import HazardPerception from '../../screens/hazard-perception/HazardPerception';
+import ReviewAllClips from '../../screens/review-all-clips/ReviewAllClips';
 
 
 const Stack = createNativeStackNavigator();
@@ -55,6 +56,7 @@ const RootNavigation = () => {
             <Stack.Screen name="revision-question" component={RevisionQuestion} />
             <Stack.Screen name="question" component={QuestionScreen} />
             <Stack.Screen name="hazard" component={HazardPerception} />
+            <Stack.Screen name="review-clips" component={ReviewAllClips} />
             <Stack.Screen name="auth-stack" component={AuthStackNavigator} />
         </Stack.Navigator>
     )

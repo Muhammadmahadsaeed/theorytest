@@ -101,7 +101,13 @@ import ForwardEnWhite from '../../assets/images/forward_en_white.svg'
 import BackWardArrow from '../../assets/images/backward-arrow.svg'
 import Video from '../../assets/images/video.svg'
 import VideoPlayer from '../../assets/images/video-player.svg'
+import VideoWhite from '../../assets/images/video-white.svg'
 
+export const VideoWhiteIcon = ({ svgStyle }) => (
+     <View style={{ ...svgStyle }}>
+          <VideoWhite width="100%" height="100%"/>
+     </View>
+)
 export const VideoPlayerIcon = ({ svgStyle }) => (
      <View style={{ ...svgStyle }}>
           <VideoPlayer width="100%" height="100%"/>

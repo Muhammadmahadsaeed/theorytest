@@ -11,13 +11,17 @@ import HeaderWithBackButton from '../../components/Headers/HeaderWithBackButton'
 import { ForwardEnIcon, VideoIcon, VideoPlayerIcon } from '../../utils/images';
 import { Fonts } from '../../utils/fonts';
 import { theme } from '../../utils/colors';
+import VideoModal from '../../components/Modal/VideoModal';
 
 const HazardPerception = ({ navigation }) => {
+
+    const videoModalRef = useRef()
 
     const [list, setList] = useState([
         {
             id: 1,
             name: "Start Test",
+            short_name: "mock_test",
             description: "Take a mock test to how you score",
             icon: <VideoIcon />
         },
@@ -25,7 +29,9 @@ const HazardPerception = ({ navigation }) => {
             id: 1,
             name: "Review All Clips",
             description: "Review all the clips and see your score",
-            icon: <VideoIcon />
+            short_name: 'review_clips',
+            icon: <VideoIcon />,
+            link: "review-clips"
         },
         {
             id: 1,
@@ -35,11 +41,19 @@ const HazardPerception = ({ navigation }) => {
         }
     ])
 
+    const onClick = (item) => {
+        if(item.short_name == 'mock_test'){
+            videoModalRef.current.isOpen()
+        }else{
+            navigation.navigate(item.link)
+        }
+    }
+
     return (
         <WrapperContainer1>
             <HeaderWithBackButton text={"Hazard Perception"} />
             <View style={styles.innerContainer}>
-            {list.map((el, index) => (
+                {list.map((el, index) => (
                     <TouchableOpacity
                         style={[styles.row, { ...el?.css }]}
                         key={index}
@@ -62,6 +76,7 @@ const HazardPerception = ({ navigation }) => {
                     </TouchableOpacity>
                 ))}
             </View>
+            <VideoModal ref={videoModalRef} />
         </WrapperContainer1>
     )
 }
