@@ -16,7 +16,7 @@ import { isObjEmpty } from '../../helper/helper';
 import { ReviewFileIcon, SmileIcon, TimerIcon } from '../../utils/images';
 import DropDownComponent from '../DropDownComponent/DropDownComponent';
 
-const TheoryTestBottomSheet = ({navigation, selectedItem, onCancel }) => {
+const TheoryTestBottomSheet = ({navigation, selectedItem, onCancel, onContinue }) => {
 
     const [countries, setCountries] = useState([
         {
@@ -40,10 +40,6 @@ const TheoryTestBottomSheet = ({navigation, selectedItem, onCancel }) => {
 
     const onTabChange = (el) => {
         setSelectedTab(el.name)
-    }
-
-    const onContinue = () => {
-        navigation.navigate('question')
     }
 
     return (

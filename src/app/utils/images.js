@@ -53,7 +53,6 @@ import Time from '../../assets/app-images/time.svg'
 import InfoCircle from '../../assets/app-images/info-circle.svg'
 import Camera from '../../assets/app-images/ar-camera.svg'
 import Send from '../../assets/app-images/send.svg'
-import Flag from '../../assets/app-images/flag.svg'
 import BackCircleWhite from '../../assets/app-images/back-circle-white.svg'
 import CameraBlack from '../../assets/app-images/ar-camera-black.svg'
 import CalenderBlue from '../../assets/app-images/calendar-blue.svg'
@@ -102,7 +101,49 @@ import BackWardArrow from '../../assets/images/backward-arrow.svg'
 import Video from '../../assets/images/video.svg'
 import VideoPlayer from '../../assets/images/video-player.svg'
 import VideoWhite from '../../assets/images/video-white.svg'
+import Exclamation from '../../assets/images/exclamation.svg'
+import Certificate from '../../assets/images/certificate.svg'
+import ReviewQuestion from '../../assets/images/review-question.svg'
+import Flag from '../../assets/images/flag.svg'
+import RedFlag from '../../assets/images/red-flag.svg'
+import Heart from '../../assets/images/heart.svg'
+import RedHeart from '../../assets/images/heart-red.svg'
 
+export const RedHeartIcon = ({ svgStyle }) => (
+     <View style={{ ...svgStyle }}>
+          <RedHeart width="100%" height="100%"/>
+     </View>
+)
+export const HeartIcon = ({ svgStyle }) => (
+     <View style={{ ...svgStyle }}>
+          <Heart width="100%" height="100%"/>
+     </View>
+)
+export const RedFlagIcon = ({ svgStyle }) => (
+     <View style={{ ...svgStyle }}>
+          <RedFlag width="100%" height="100%"/>
+     </View>
+)
+export const FlagIcon = ({ svgStyle }) => (
+     <View style={{ ...svgStyle }}>
+          <Flag width="100%" height="100%"/>
+     </View>
+)
+export const ReviewQuestionIcon = ({ svgStyle }) => (
+     <View style={{ ...svgStyle }}>
+          <ReviewQuestion width="100%" height="100%"/>
+     </View>
+)
+export const CertificateIcon = ({ svgStyle }) => (
+     <View style={{ ...svgStyle }}>
+          <Certificate width="100%" height="100%"/>
+     </View>
+)
+export const ExclamationIcon = ({ svgStyle }) => (
+     <View style={{ ...svgStyle }}>
+          <Exclamation width="100%" height="100%"/>
+     </View>
+)
 export const VideoWhiteIcon = ({ svgStyle }) => (
      <View style={{ ...svgStyle }}>
           <VideoWhite width="100%" height="100%"/>
@@ -338,11 +379,7 @@ export const BackCircleWhiteIcon = ({ svgStyle }) => (
           <BackCircleWhite width="100%" height="100%" />
      </View>
 )
-export const FlagIcon = ({ svgStyle }) => (
-     <View style={{ ...svgStyle }}>
-          <Flag width="100%" height="100%" />
-     </View>
-)
+
 export const SendIcon = ({ svgStyle }) => (
      <View style={{ ...svgStyle }}>
           <Send width="100%" height="100%" />

@@ -79,10 +79,15 @@
       "favicon": "./assets/favicon.png"
     },
     "extra": {
-      
+      "eas": {
+        "projectId": "dab08dbc-9a84-480c-9637-485a61efa840"
+      }
     },
     "runtimeVersion": {
       "policy": "sdkVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/dab08dbc-9a84-480c-9637-485a61efa840"
     }
   }
 }

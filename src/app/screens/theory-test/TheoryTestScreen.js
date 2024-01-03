@@ -83,6 +83,11 @@ const TheoryTestScreen = ({ navigation }) => {
         handleSnapPress(0)
     }
 
+    const onContinue = () => {
+        bottomSheetRef.current?.close();
+        navigation.navigate('question')
+    }
+
     return (
         <WrapperContainer1>
             <HeaderWithBackButton text={"Theory Test"} />
@@ -119,7 +124,8 @@ const TheoryTestScreen = ({ navigation }) => {
                 <TheoryTestBottomSheet
                     navigation={navigation}
                     selectedItem={selectedItem}
-                    onCancel={handleClosePress} />
+                    onCancel={handleClosePress}
+                    onContinue={onContinue} />
             </BottomSheet>
         </WrapperContainer1>
     )

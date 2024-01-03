@@ -4,7 +4,9 @@ export const mapStateToProps = (state) => {
     return {
         userData: store.userData, 
         token: store.token,
-        isAppIntro: store.isAppIntro
+        isAppIntro: store.isAppIntro,
+        userFlag: store.userFlag,
+        userFavourite: store.userFavourite
     }
 };
 //data set

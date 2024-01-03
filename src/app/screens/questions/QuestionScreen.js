@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useMemo, useCallback } from 'react';
 import {
     View,
     Text,
@@ -9,11 +9,14 @@ import {
     StyleSheet,
     TouchableOpacity
 } from 'react-native';
+import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import WrapperContainer1 from '../../components/Wrapper/WrapperContainer1';
-import { BackLeftIcon, BackWardArrowIcon, ForwardEnWhiteIcon, TimeIcon } from '../../utils/images';
+import { BackLeftIcon, BackWardArrowIcon, FlagIcon, ForwardEnWhiteIcon, HeartIcon, RedFlagIcon, RedHeartIcon, TimeIcon } from '../../utils/images';
 import { theme } from '../../utils/colors';
 import { Fonts } from '../../utils/fonts';
 import questionArray from '../../services/section.json'
+import AlertBottomSheetComponent from '../../components/BottomSheet/AlertBottomSheetComponent';
+import { useDispatch, useSelector } from 'react-redux';
 
 let totalTimeInMinutes = 57
 
@@ -22,6 +25,35 @@ const QuestionScreen = ({ navigation }) => {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [timeRemaining, setTimeRemaining] = useState(totalTimeInMinutes * 60);
     const [questions, setQuestions] = useState(questionArray);
+
+    const bottomSheetRef = useRef(null);
+    const dispatch = useDispatch();
+    const { userFlag, userFavourite } = useSelector(state => state.userReducer)
+
+    const mapDispatchToProps = (value) => {
+        dispatch({ type: 'update_redux', payload: value });
+    };
+
+    const snapPoints = useMemo(() => ['40%'], []);
+
+    // callbacks
+    const handleSheetChanges = useCallback((index) => {
+        // console.log('handleSheetChanges', index);
+    }, []);
+
+    const handleClosePress = useCallback(() => {
+        bottomSheetRef.current?.close();
+    }, []);
+
+    const renderBackdrop = useCallback(props => (
+        <BottomSheetBackdrop
+            {...props}
+            disappearsOnIndex={-1}
+            appearsOnIndex={0}
+            pressBehavior={"close"}
+            enableTouchThrough
+        />
+    ), []);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -39,25 +71,25 @@ const QuestionScreen = ({ navigation }) => {
 
     useEffect(() => {
         const backAction = () => {
-          Alert.alert('Hold on!', 'Are you sure you want to go back?', [
-            {
-              text: 'Cancel',
-              onPress: () => null,
-              style: 'cancel',
-            },
-            {text: 'YES', onPress: () => BackHandler.exitApp()},
-          ]);
-          return true;
+            Alert.alert('Hold on!', 'Are you sure you want to go back?', [
+                {
+                    text: 'Cancel',
+                    onPress: () => null,
+                    style: 'cancel',
+                },
+                { text: 'YES', onPress: () => BackHandler.exitApp() },
+            ]);
+            return true;
         };
-    
+
         const backHandler = BackHandler.addEventListener(
-          'hardwareBackPress',
-          backAction,
+            'hardwareBackPress',
+            backAction,
         );
-    
+
         return () => backHandler.remove();
-      }, []);
-    
+    }, []);
+
 
     const formatTime = (seconds) => {
         const mins = Math.floor(seconds / 60);
@@ -66,11 +98,16 @@ const QuestionScreen = ({ navigation }) => {
     };
 
 
-    const goToBack = () => {
-
+    const goToBack = (index) => {
+        bottomSheetRef.current?.snapToIndex(index);
     }
 
     const onNext = () => {
+        let index = currentQuestionIndex + 1
+        if (index >= questions.length) {
+            navigation.replace('mock-result', { result: questions })
+            return
+        }
         setCurrentQuestionIndex(currentQuestionIndex + 1)
     }
 
@@ -80,17 +117,75 @@ const QuestionScreen = ({ navigation }) => {
 
     const onSelectOption = (item) => {
         const updatedQuestions = [...questions];
+        const currentQuestion = updatedQuestions[currentQuestionIndex];
+
+        if (currentQuestion.type === 'radio') {
+            currentQuestion.user_answer = item.option;
+        } else if (currentQuestion.type === 'checkbox') {
+            const existingIndex = currentQuestion.user_answer.findIndex(el => el.id === item.id);
+
+            if (existingIndex === -1) {
+                currentQuestion.user_answer.push(item);
+            } else {
+                currentQuestion.user_answer.splice(existingIndex, 1);
+            }
+        }
+
+        setQuestions(updatedQuestions);
+    };
+
+
+    const onFlag = (item) => {
+        const isItemInFlags = userFlag.some((el) => el.id === item.id);
+
+        const updatedFlag = isItemInFlags
+            ? userFlag.filter((el) => el.id !== item.id)
+            : [...userFlag, item];
+
+        mapDispatchToProps({ userFlag: updatedFlag });
+
+        const updatedQuestions = [...questions];
         updatedQuestions[currentQuestionIndex] = {
             ...updatedQuestions[currentQuestionIndex],
-            user_answer: item.option,
+            is_flag: !questions[currentQuestionIndex]?.is_flag,
         };
-        setQuestions(updatedQuestions);
 
-    }
+        setQuestions(updatedQuestions);
+    };
+
 
     const highlighOption = (el) => {
         return questions[currentQuestionIndex]?.user_answer && questions[currentQuestionIndex]?.user_answer == el.option ? true : false
     }
+
+    const onConfirm = () => {
+        let find = questions.some(el => el.user_answer)
+        if (find) {
+            navigation.navigate('mock-result', { result: questions })
+        } else {
+            navigation.goBack()
+        }
+    }
+
+    const onFavoriteClick = async (item) => {
+        const isItemInFavorites = userFavourite.some((el) => el.id === item.id);
+        const updatedQuestions = [...questions];
+
+        const updatedFavorite = isItemInFavorites
+            ? userFavourite.filter((el) => el.id !== item.id)
+            : [...userFavourite, item];
+
+        mapDispatchToProps({ userFavourite: updatedFavorite });
+
+        updatedQuestions[currentQuestionIndex] = {
+            ...updatedQuestions[currentQuestionIndex],
+            is_favorite: !questions[currentQuestionIndex]?.is_favorite,
+        };
+
+        setQuestions(updatedQuestions);
+    };
+
+    let currentQuestion = questions[currentQuestionIndex]
 
     return (
         <WrapperContainer1>
@@ -98,9 +193,31 @@ const QuestionScreen = ({ navigation }) => {
                 <TouchableOpacity
                     style={styles.left}
                     activeOpacity={0.95}
-                    onPress={() => goToBack()}>
+                    onPress={() => goToBack(0)}>
                     <BackLeftIcon />
                 </TouchableOpacity>
+                <View style={styles.right}>
+                    <TouchableOpacity
+                        style={[styles.flagIcon, { alignItems: 'center' }]}
+                        activeOpacity={0.8}
+                        onPress={() => onFlag(currentQuestion)}>
+                        {currentQuestion?.is_flag ?
+                            <RedFlagIcon svgStyle={styles.flagIconSvg} />
+                            :
+                            <FlagIcon svgStyle={styles.flagIconSvg} />
+                        }
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={[styles.flagIcon, { marginLeft: 5, alignItems: 'flex-end' }]}
+                        activeOpacity={0.8}
+                        onPress={() => onFavoriteClick(currentQuestion)}>
+                        {currentQuestion?.is_favorite ?
+                            <RedHeartIcon svgStyle={styles.flagIconSvg} />
+                            :
+                            <HeartIcon svgStyle={styles.flagIconSvg} />
+                        }
+                    </TouchableOpacity>
+                </View>
             </View>
             <View style={styles.container}>
                 <View style={styles.progressView}>
@@ -121,11 +238,13 @@ const QuestionScreen = ({ navigation }) => {
                 </View>
                 <View style={styles.questionView}>
                     <Text style={styles.text}>
-                        {questions[currentQuestionIndex].question}
+                        {currentQuestion?.question}
                     </Text>
                     <View style={styles.optionView}>
-                        {questions[currentQuestionIndex].options?.map((el, index) => (
-
+                        <Text style={styles.text01}>
+                            {currentQuestion?.type == 'radio' ? "Please select one answer" : "Please select one or more answer"}
+                        </Text>
+                        {currentQuestion?.options?.map((el, index) => (
                             <TouchableOpacity
                                 activeOpacity={0.8}
                                 key={index}
@@ -154,16 +273,26 @@ const QuestionScreen = ({ navigation }) => {
                     <View />
                 }
                 <TouchableOpacity
-                    style={styles.btn2(questions[currentQuestionIndex]?.user_answer ? true : false)}
-                    disabled={questions[currentQuestionIndex]?.user_answer ? false : true}
+                    style={styles.btn2(currentQuestion?.user_answer ? true : false)}
+                    disabled={currentQuestion?.user_answer ? false : true}
                     activeOpacity={0.8}
                     onPress={() => onNext()}>
                     <Text style={styles.btn2Text}>
-                        Next
+                        {currentQuestionIndex == questions.length - 1 ? "Finish" : "Next"}
                     </Text>
                     <ForwardEnWhiteIcon svgStyle={styles.arrowSvg} />
                 </TouchableOpacity>
             </View>
+            <BottomSheet
+                ref={bottomSheetRef}
+                index={-1}
+                backdropComponent={renderBackdrop}
+                snapPoints={snapPoints}
+                onChange={handleSheetChanges}>
+                <AlertBottomSheetComponent
+                    onCancel={handleClosePress}
+                    onConfirm={onConfirm} />
+            </BottomSheet>
         </WrapperContainer1>
     )
 }
@@ -185,6 +314,20 @@ const styles = StyleSheet.create({
     left: {
         height: 40,
         width: 40
+    },
+    right: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    flagIcon: {
+        height: 50,
+        width: 50,
+        justifyContent: 'center'
+    },
+    flagIconSvg: {
+        height: 25,
+        width: 25
     },
     progressView: {
         marginTop: 20,
@@ -236,7 +379,13 @@ const styles = StyleSheet.create({
         color: theme.black
     },
     optionView: {
-        marginTop: 20
+        marginTop: 40
+    },
+    text01: {
+        fontFamily: Fonts.medium,
+        fontSize: 14,
+        color: theme.grayShade1,
+        marginBottom: 5
     },
     option: (is) => ({
         borderColor: theme.skyBlue,
@@ -274,9 +423,11 @@ const styles = StyleSheet.create({
         elevation: 5,
     },
     btn1: {
-        flexDirection:'row',
+        flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
+        width: '32%',
+        height: 47,
         backgroundColor: theme.buttonBg,
         paddingHorizontal: 20,
         paddingVertical: 10,
@@ -288,12 +439,12 @@ const styles = StyleSheet.create({
         fontSize: 16
     },
     btn2: (is) => ({
-        flexDirection:'row',
+        width: '32%',
+        height: 47,
+        flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: theme.buttonBg,
-        paddingHorizontal: 20,
-        paddingVertical: 10,
         borderRadius: 7,
         opacity: is ? 1 : 0.5
     }),
@@ -307,8 +458,8 @@ const styles = StyleSheet.create({
         width: 25
     },
     arrowSvg1: {
-        height: 15,
-        width: 15,
+        height: 12,
+        width: 12,
         marginRight: 5
     }
 })

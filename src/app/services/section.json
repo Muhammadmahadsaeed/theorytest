@@ -58,13 +58,16 @@
         "question": "What driving licence do you need to have in order to apply for PHV Driver’s Licence? (2 correct answers)",
         "type": "checkbox",
         "options": [
-            {
+            {   
+                "id": 1,
                 "option": "Full DVLA or Northern Ireland"
             },
             {
+                "id": 2,
                 "option": "Doesn't matter as long as it's valid (issued anywhere in the world)"
             },
             {
+                "id": 3,
                 "option": "European Union or European Economic Area"
             }
         ],
@@ -78,7 +81,7 @@
         ]
     },
     {
-        "id": 3,
+        "id": 5,
         "question": "Do you need a British passport to apply for PHV Driver’s Licence?",
         "type": "radio",
         "options": [
