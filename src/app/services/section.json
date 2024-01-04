@@ -14,8 +14,8 @@
                 "option": "25"
             }
         ],
-        "correct_answer": "21",
-        "correct_answer_index": 2
+        "correct_answer": ["21"],
+        "correct_answer_index": [2]
     },
     {
         "id": 2,
@@ -32,8 +32,8 @@
                 "option": "Yes-70"
             }
         ],
-        "correct_answer": "No",
-        "correct_answer_index": 2
+        "correct_answer": ["No"],
+        "correct_answer_index": [2]
     },
     {
         "id": 3,
@@ -47,11 +47,11 @@
                 "option": "5"
             },
             {
-                "option": "There is no limit"
+                "option": "There is no limit" 
             }
         ],
-        "correct_answer": "3",
-        "correct_answer_index": 1
+        "correct_answer": ["3"],
+        "correct_answer_index": [1]
     },
     {
         "id": 4,
@@ -95,7 +95,7 @@
                 "option": "TOnly British or European Union passports are accepted"
             }
         ],
-        "correct_answer": "No, but you must have the right to live and work in the UK",
-        "correct_answer_index": 2
+        "correct_answer": ["No, but you must have the right to live and work in the UK"],
+        "correct_answer_index": [2]
     }
 ]

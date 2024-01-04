@@ -24,37 +24,43 @@ function arraysEqual(arr1, arr2) {
 
 const MockTestResult = ({ navigation, route }) => {
 
-    const { result } = route?.params || []
+    const { result: questions } = route?.params || []
 
     const { userFlag, userFavourite } = useSelector(state => state.userReducer)
 
     const getPercentage = useMemo(() => {
-        if (result.length) {
-            let correctAnswers = 0;
 
-            result.forEach((question) => {
-                if (question.type == 'radio') {
-                    if (question.correct_answer == question.user_answer) {
-                        correctAnswers++;
+        const initial = { correctCount: 0, wrongCount: 0 }
+        if (questions.length) {
+            const result = questions.reduce((acc, curr, index, array) => {
+                const isRadio = curr.type === 'radio';
+                const userAnswer = curr.user_answer || [];
+
+                if (isRadio) {
+                    const isRightAnswer = userAnswer[0] === curr.correct_answer[0];
+                    return {
+                        correctCount: isRightAnswer ? acc.correctCount + 1 : acc.correctCount,
+                        wrongCount: isRightAnswer ? acc.wrongCount : acc.wrongCount + 1,
+                    }
+                } else {
+                    const alCorrectAreChecked = userAnswer.every(el => curr.correct_answer.includes(el));
+
+                    return {
+                        correctCount: alCorrectAreChecked ? acc.correctCount + 1 : acc.correctCount,
+                        wrongCount: alCorrectAreChecked ? acc.wrongCount : acc.wrongCount + 1,
                     }
                 }
-                //  else if (question.type === 'checkbox') {
-                //     // For checkbox questions, compare arrays of correct_answer_index with user_answer
-                //     if (arraysEqual(question.correct_answer, question.user_answer)) {
-                //         correctAnswers++;
-                //     }
-                // }
-            });
+            }, initial)
 
             // Calculate the percentage
-            const totalQuestions = result.length;
-            const percentage = (correctAnswers / totalQuestions) * 100;
+            const totalQuestions = questions.length;
+            const percentage = (result.correctCount / totalQuestions) * 100;
 
             return percentage;
         }
 
         return 0;
-    }, [result]);
+    }, [questions]);
 
     console.log(getPercentage);
 
@@ -124,13 +130,14 @@ const MockTestResult = ({ navigation, route }) => {
                     <View style={styles.bottom}>
                         <TouchableOpacity
                             style={styles.btn}
-                            activeOpacity={0.8}>
+                            activeOpacity={0.8}
+                            onPress={() => navigation.navigate('review-question', { result: questions })}>
                             <ReviewQuestionIcon svgStyle={styles.svgStyle1} />
                             <Text style={styles.btnText}>
                                 Review Your Answers
                             </Text>
                         </TouchableOpacity>
-                        <Button title={"Start a Mock Test"} />
+                        <Button title={"Start a Mock Test"} onPress={() => navigation.replace('theory-test')} />
                     </View>
                 </View>
             </View>

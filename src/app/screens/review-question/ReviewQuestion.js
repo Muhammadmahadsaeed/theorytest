@@ -9,24 +9,19 @@ import {
     StyleSheet,
     TouchableOpacity
 } from 'react-native';
-import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import WrapperContainer1 from '../../components/Wrapper/WrapperContainer1';
 import { BackLeftIcon, BackWardArrowIcon, FlagIcon, ForwardEnWhiteIcon, HeartIcon, RedFlagIcon, RedHeartIcon, TimeIcon } from '../../utils/images';
 import { theme } from '../../utils/colors';
 import { Fonts } from '../../utils/fonts';
-import questionArray from '../../services/section.json'
-import AlertBottomSheetComponent from '../../components/BottomSheet/AlertBottomSheetComponent';
 import { useDispatch, useSelector } from 'react-redux';
 
-let totalTimeInMinutes = 57
 
-const QuestionScreen = ({ navigation }) => {
+const ReviewQuestionScreen = ({ navigation, route }) => {
+
+    const { result: questions } = route?.params || []
 
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-    const [timeRemaining, setTimeRemaining] = useState(totalTimeInMinutes * 60);
-    const [questions, setQuestions] = useState(questionArray);
 
-    const bottomSheetRef = useRef(null);
     const dispatch = useDispatch();
     const { userFlag, userFavourite } = useSelector(state => state.userReducer)
 
@@ -34,37 +29,34 @@ const QuestionScreen = ({ navigation }) => {
         dispatch({ type: 'update_redux', payload: value });
     };
 
-    const snapPoints = useMemo(() => ['40%'], []);
 
-    const handleSheetChanges = useCallback((index) => {
-    }, []);
+    const questionsWithResult = useMemo(() => {
 
-    const handleClosePress = useCallback(() => {
-        bottomSheetRef.current?.close();
-    }, []);
+        const array = questions.map(q => {
 
-    const renderBackdrop = useCallback(props => (
-        <BottomSheetBackdrop
-            {...props}
-            disappearsOnIndex={-1}
-            appearsOnIndex={0}
-            pressBehavior={"close"}
-            enableTouchThrough
-        />
-    ), []);
+            const userAnswer = q.user_answer || [];
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            if (timeRemaining === 0) {
-                clearInterval(interval);
-                // Timer has reached 00:00, you can handle the completion here
-                return;
+            const options = q.options.map(o => {
+                const isCorrectAnswer = q.correct_answer.includes(o.option);
+
+                const userGotItRight = isCorrectAnswer && !userAnswer.includes(o.option);
+                const userGotItWrong = !isCorrectAnswer && userAnswer.includes(o.option);
+
+                return {
+                    ...o,
+                    isCorrectAnswer,
+                    userGotItRight,
+                    userGotItWrong
+                }
+            })
+
+            return {
+                ...q,
+                options,
             }
-            setTimeRemaining(prevTime => prevTime - 1);
-        }, 1000);
-
-        return () => clearInterval(interval);
-    }, [timeRemaining, totalTimeInMinutes]);
+        })
+        return array
+    }, [questions])
 
 
     useEffect(() => {
@@ -89,21 +81,16 @@ const QuestionScreen = ({ navigation }) => {
     }, []);
 
 
-    const formatTime = (seconds) => {
-        const mins = Math.floor(seconds / 60);
-        const secs = seconds % 60;
-        return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-    };
 
 
     const goToBack = (index) => {
-        bottomSheetRef.current?.snapToIndex(index);
+
     }
 
     const onNext = () => {
         let index = currentQuestionIndex + 1
         if (index >= questions.length) {
-            navigation.replace('mock-result', { result: questions })
+
             return
         }
         setCurrentQuestionIndex(currentQuestionIndex + 1)
@@ -112,31 +99,6 @@ const QuestionScreen = ({ navigation }) => {
     const onPrev = () => {
         setCurrentQuestionIndex(currentQuestionIndex - 1)
     }
-
-    const onSelectOption = (item) => {
-
-        const updatedQuestions = [...questions];
-        const currentQuestion = updatedQuestions[currentQuestionIndex];
-        const updatedQuestions2 = [...questions].map(q => {
-            if (q.id === currentQuestion.id) {
-                const alreadySelected = q.user_answer?.length ? !!q.user_answer.find(el => el === item.option) : false;
-                if (alreadySelected) {
-                    return {
-                        ...q,
-                        user_answer: q.type === 'redio' ? [] : q.user_answer.filter(el => el !== item.option)
-                    }
-                }
-                return {
-                    ...q,
-                    user_answer: (q.user_answer?.length && q.type === 'checkbox') ? [...q.user_answer, item.option] : [item.option]
-                }
-            }
-            return q
-        })
-
-
-        setQuestions(updatedQuestions2);
-    };
 
     const onFlag = (item) => {
         const isItemInFlags = userFlag.some((el) => el.id === item.id);
@@ -153,26 +115,12 @@ const QuestionScreen = ({ navigation }) => {
             is_flag: !questions[currentQuestionIndex]?.is_flag,
         };
 
-        setQuestions(updatedQuestions);
+        // setQuestions(updatedQuestions);
     };
-
-    const highlighOption = (el) => {
-        return questions[currentQuestionIndex]?.user_answer?.length && questions[currentQuestionIndex].user_answer.includes(el.option) ? true : false
-    }
-
-    const onConfirm = () => {
-        let find = questions.some(el => el.user_answer)
-        if (find) {
-            navigation.navigate('mock-result', { result: questions })
-        } else {
-            navigation.goBack()
-        }
-    }
 
     const onFavoriteClick = async (item) => {
         const isItemInFavorites = userFavourite.some((el) => el.id === item.id);
         const updatedQuestions = [...questions];
-
         const updatedFavorite = isItemInFavorites
             ? userFavourite.filter((el) => el.id !== item.id)
             : [...userFavourite, item];
@@ -184,10 +132,10 @@ const QuestionScreen = ({ navigation }) => {
             is_favorite: !questions[currentQuestionIndex]?.is_favorite,
         };
 
-        setQuestions(updatedQuestions);
+        // setQuestions(updatedQuestions);
     };
 
-    let currentQuestion = questions[currentQuestionIndex]
+    let currentQuestion = questionsWithResult[currentQuestionIndex]
 
     return (
         <WrapperContainer1>
@@ -229,30 +177,19 @@ const QuestionScreen = ({ navigation }) => {
                     <Text style={styles.heading}>
                         Question {currentQuestionIndex + 1} / 50
                     </Text>
-                    <View style={styles.timeView}>
-                        <View style={styles.clockIcon}>
-                            <TimeIcon />
-                        </View>
-                        <Text style={styles.time}>
-                            {formatTime(timeRemaining)}
-                        </Text>
-                    </View>
+
                 </View>
                 <View style={styles.questionView}>
                     <Text style={styles.text}>
                         {currentQuestion?.question}
                     </Text>
                     <View style={styles.optionView}>
-                        <Text style={styles.text01}>
-                            {currentQuestion?.type == 'radio' ? "Please select one answer" : "Please select one or more answer"}
-                        </Text>
-
                         {currentQuestion?.options?.map((el, index) => (
                             <TouchableOpacity
                                 activeOpacity={0.8}
                                 key={index}
-                                style={styles.option(highlighOption(el))}
-                                onPress={() => onSelectOption(el)}>
+                                disabled={true}
+                                style={[styles.option(el), styles.option1]}>
                                 <Text style={styles.optionText}>
                                     {el.option}
                                 </Text>
@@ -286,21 +223,11 @@ const QuestionScreen = ({ navigation }) => {
                     <ForwardEnWhiteIcon svgStyle={styles.arrowSvg} />
                 </TouchableOpacity>
             </View>
-            <BottomSheet
-                ref={bottomSheetRef}
-                index={-1}
-                backdropComponent={renderBackdrop}
-                snapPoints={snapPoints}
-                onChange={handleSheetChanges}>
-                <AlertBottomSheetComponent
-                    onCancel={handleClosePress}
-                    onConfirm={onConfirm} />
-            </BottomSheet>
         </WrapperContainer1>
     )
 }
 
-export default QuestionScreen
+export default ReviewQuestionScreen
 
 const styles = StyleSheet.create({
     container: {
@@ -390,15 +317,23 @@ const styles = StyleSheet.create({
         color: theme.grayShade1,
         marginBottom: 5
     },
-    option: (is) => ({
-        borderColor: theme.skyBlue,
-        borderWidth: is ? 1.5 : 0,
-        backgroundColor: theme.greenish,
+    option1: {
         paddingVertical: 15,
         marginBottom: 20,
         paddingHorizontal: 20,
         borderRadius: 7
-    }),
+    },
+    option: (is) => {
+        if (is.isCorrectAnswer && is.userGotItRight) {
+            return { backgroundColor: theme.green }
+        }
+        if (!is.isCorrectAnswer && is.userGotItWrong) {
+            return { backgroundColor: theme.red }
+        } 
+        return {
+            backgroundColor: theme.greenish
+        }
+    },
     optionText: {
         fontFamily: Fonts.medium,
         fontSize: 14,
