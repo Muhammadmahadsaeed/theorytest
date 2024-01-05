@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     },
     text: {
         fontFamily: Fonts.medium,
-        fontSize: 16,
+        fontSize: 15,
         color: theme.skyBlue
     },
     icon: {

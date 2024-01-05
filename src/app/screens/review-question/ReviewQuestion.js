@@ -10,7 +10,7 @@ import {
     TouchableOpacity
 } from 'react-native';
 import WrapperContainer1 from '../../components/Wrapper/WrapperContainer1';
-import { BackLeftIcon, BackWardArrowIcon, CrossRoundIcon, FlagIcon, ForwardEnWhiteIcon, HeartIcon, RedFlagIcon, RedHeartIcon, TickBoxIcon, TimeIcon } from '../../utils/images';
+import { BackLeftIcon, BackWardArrowIcon, CrossRoundIcon, FlagIcon, ForwardEnWhiteIcon, HeartIcon, InfoCircleIcon, RedFlagIcon, RedHeartIcon, TickBoxIcon, TimeIcon } from '../../utils/images';
 import { theme } from '../../utils/colors';
 import { Fonts } from '../../utils/fonts';
 import { useDispatch, useSelector } from 'react-redux';
@@ -158,13 +158,20 @@ const ReviewQuestionScreen = ({ navigation, route }) => {
             </View>
             <View style={styles.container}>
                 <View style={styles.progressView}>
-                    <View style={[styles.progressBar, { width: ((currentQuestionIndex / questions.length) * 100) + '%' }]} />
+                    <View style={[styles.progressBar, { width: (((currentQuestionIndex + 1) / questions.length) * 100) + '%' }]} />
                 </View>
                 <View style={styles.row}>
                     <Text style={styles.heading}>
                         Question {currentQuestionIndex + 1} / {questions.length}
                     </Text>
-
+                    <View style={styles.timeView}>
+                        <View style={styles.clockIcon}>
+                            <InfoCircleIcon />
+                        </View>
+                        <Text style={styles.time}>
+                            Explain
+                        </Text>
+                    </View>
                 </View>
                 <View style={styles.questionView}>
                     <Text style={styles.text}>
@@ -177,9 +184,11 @@ const ReviewQuestionScreen = ({ navigation, route }) => {
                                 key={index}
                                 disabled={true}
                                 style={[styles.option(el), styles.option1]}>
-                                <Text style={styles.optionText}>
-                                    {el.option}
-                                </Text>
+                                <View style={styles.textView}>
+                                    <Text style={styles.optionText}>
+                                        {el.option}
+                                    </Text>
+                                </View>
                                 <View style={styles.icon01}>
                                     {getIcon(el)}
                                 </View>
@@ -274,11 +283,11 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        borderWidth: 1,
-        borderColor: theme.skyBlue,
-        paddingVertical: 8,
-        paddingHorizontal: 12,
-        borderRadius: 10
+        // borderBottomWidth: 1,
+        // borderBottomColor: theme.skyBlue,
+        // paddingTop: 8,
+        // paddingBottom: 2,
+        // paddingHorizontal: 12,
     },
     clockIcon: {
         height: 20,
@@ -288,7 +297,7 @@ const styles = StyleSheet.create({
         fontFamily: Fonts.medium,
         fontSize: 14,
         color: theme.black,
-        marginLeft: 10
+        marginLeft: 5
     },
     questionView: {
         marginTop: 30
@@ -315,6 +324,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center'
+    },
+    textView: {
+        flex: 1,
+        marginRight: 10
     },
     option: (is) => {
         // if (is.isCorrectAnswer && is.userGotItRight) {

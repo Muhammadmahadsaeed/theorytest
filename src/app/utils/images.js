@@ -50,7 +50,7 @@ import ForwardArrow from '../../assets/app-images/forward-arrow.svg'
 import AddProfile from '../../assets/app-images/add-profile.svg'
 import ChatQuestion from '../../assets/app-images/chat-question.svg'
 import Time from '../../assets/app-images/time.svg'
-import InfoCircle from '../../assets/app-images/info-circle.svg'
+// import InfoCircle from '../../assets/app-images/info-circle.svg'
 import Camera from '../../assets/app-images/ar-camera.svg'
 import Send from '../../assets/app-images/send.svg'
 import BackCircleWhite from '../../assets/app-images/back-circle-white.svg'
@@ -110,7 +110,13 @@ import Heart from '../../assets/images/heart.svg'
 import RedHeart from '../../assets/images/heart-red.svg'
 import TickBox from '../../assets/images/tick-box.svg'
 import CrossRound from '../../assets/images/cross-round.svg'
+import InfoCircle from '../../assets/images/info-circle.svg'
 
+export const InfoCircleIcon = ({ svgStyle }) => (
+     <View style={{ ...svgStyle }}>
+          <InfoCircle width="100%" height="100%"/>
+     </View>
+)
 export const CrossRoundIcon = ({ svgStyle }) => (
      <View style={{ ...svgStyle }}>
           <CrossRound width="100%" height="100%"/>
@@ -402,11 +408,11 @@ export const CameraIcon = ({ svgStyle }) => (
           <Camera width="100%" height="100%" />
      </View>
 )
-export const InfoCircleIcon = ({ svgStyle }) => (
-     <View style={{ ...svgStyle }}>
-          <InfoCircle width="100%" height="100%" />
-     </View>
-)
+// export const InfoCircleIcon = ({ svgStyle }) => (
+//      <View style={{ ...svgStyle }}>
+//           <InfoCircle width="100%" height="100%" />
+//      </View>
+// )
 export const TimeIcon = ({ svgStyle }) => (
      <View style={{ ...svgStyle }}>
           <Time width="100%" height="100%" />

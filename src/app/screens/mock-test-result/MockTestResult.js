@@ -135,7 +135,9 @@ const MockTestResult = ({ navigation, route }) => {
                                 Review Your Answers
                             </Text>
                         </TouchableOpacity>
-                        <Button title={"Start a Mock Test"} onPress={() => navigation.replace('theory-test')} />
+                        <Button
+                            title={"Start a Mock Test"}
+                            onPress={() => navigation.replace('theory-test')} />
                     </View>
                 </View>
             </View>

@@ -161,9 +161,10 @@ const QuestionScreen = ({ navigation }) => {
     }
 
     const onConfirm = () => {
+        handleClosePress()
         let find = questions.some(el => el.user_answer)
         if (find) {
-            navigation.navigate('mock-result', { result: questions })
+            navigation.replace('mock-result', { result: questions })
         } else {
             navigation.goBack()
         }
@@ -223,7 +224,7 @@ const QuestionScreen = ({ navigation }) => {
             </View>
             <View style={styles.container}>
                 <View style={styles.progressView}>
-                    <View style={[styles.progressBar, { width: ((currentQuestionIndex / questions.length) * 100) + '%' }]} />
+                    <View style={[styles.progressBar, { width: (((currentQuestionIndex + 1) / questions.length) * 100) + '%' }]} />
                 </View>
                 <View style={styles.row}>
                     <Text style={styles.heading}>

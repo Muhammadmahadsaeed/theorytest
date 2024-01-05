@@ -135,7 +135,9 @@ const styles = StyleSheet.create({
         borderWidth: is ? 0 : 1,
         borderColor: theme.skyBlue,
         backgroundColor: is ? theme.skyBlue : 'transparent',
-        paddingHorizontal: 30,
+        // paddingHorizontal: 30,
+        width: '30%',
+        alignItems: 'center',
         paddingVertical: 10,
         borderRadius: 7
     }),

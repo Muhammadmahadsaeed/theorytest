@@ -85,7 +85,7 @@ const TheoryTestScreen = ({ navigation }) => {
 
     const onContinue = () => {
         bottomSheetRef.current?.close();
-        navigation.navigate('question')
+        navigation.replace('question')
     }
 
     return (
