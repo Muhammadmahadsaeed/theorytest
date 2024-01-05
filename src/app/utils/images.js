@@ -108,7 +108,19 @@ import Flag from '../../assets/images/flag.svg'
 import RedFlag from '../../assets/images/red-flag.svg'
 import Heart from '../../assets/images/heart.svg'
 import RedHeart from '../../assets/images/heart-red.svg'
+import TickBox from '../../assets/images/tick-box.svg'
+import CrossRound from '../../assets/images/cross-round.svg'
 
+export const CrossRoundIcon = ({ svgStyle }) => (
+     <View style={{ ...svgStyle }}>
+          <CrossRound width="100%" height="100%"/>
+     </View>
+)
+export const TickBoxIcon = ({ svgStyle }) => (
+     <View style={{ ...svgStyle }}>
+          <TickBox width="100%" height="100%"/>
+     </View>
+)
 export const RedHeartIcon = ({ svgStyle }) => (
      <View style={{ ...svgStyle }}>
           <RedHeart width="100%" height="100%"/>

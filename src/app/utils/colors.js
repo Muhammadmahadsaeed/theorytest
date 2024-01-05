@@ -19,6 +19,7 @@ export const theme = {
     buttonBorderGrey: "#f1f1f1",
     yellow: "#ffdb04",
     red: '#F22929',
+    lightRed:'#E23D28',
     bgGray: '#f8f9fa',
     grayShade: '#14142b',
     yellowLight: '#FFC046',

@@ -10,7 +10,7 @@ import {
     TouchableOpacity
 } from 'react-native';
 import WrapperContainer1 from '../../components/Wrapper/WrapperContainer1';
-import { BackLeftIcon, BackWardArrowIcon, FlagIcon, ForwardEnWhiteIcon, HeartIcon, RedFlagIcon, RedHeartIcon, TimeIcon } from '../../utils/images';
+import { BackLeftIcon, BackWardArrowIcon, CrossRoundIcon, FlagIcon, ForwardEnWhiteIcon, HeartIcon, RedFlagIcon, RedHeartIcon, TickBoxIcon, TimeIcon } from '../../utils/images';
 import { theme } from '../../utils/colors';
 import { Fonts } from '../../utils/fonts';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,9 +18,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const ReviewQuestionScreen = ({ navigation, route }) => {
 
-    const { result: questions } = route?.params || []
+    const { result: questions, index } = route?.params || []
 
-    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(index || 0);
 
     const dispatch = useDispatch();
     const { userFlag, userFavourite } = useSelector(state => state.userReducer)
@@ -38,15 +38,15 @@ const ReviewQuestionScreen = ({ navigation, route }) => {
 
             const options = q.options.map(o => {
                 const isCorrectAnswer = q.correct_answer.includes(o.option);
-
                 const userGotItRight = isCorrectAnswer && !userAnswer.includes(o.option);
                 const userGotItWrong = !isCorrectAnswer && userAnswer.includes(o.option);
-
+                const isRightAnswer = isCorrectAnswer && userAnswer.includes(o.option);
                 return {
                     ...o,
                     isCorrectAnswer,
                     userGotItRight,
-                    userGotItWrong
+                    userGotItWrong,
+                    isRightAnswer
                 }
             })
 
@@ -58,33 +58,8 @@ const ReviewQuestionScreen = ({ navigation, route }) => {
         return array
     }, [questions])
 
-
-    useEffect(() => {
-        const backAction = () => {
-            Alert.alert('Hold on!', 'Are you sure you want to go back?', [
-                {
-                    text: 'Cancel',
-                    onPress: () => null,
-                    style: 'cancel',
-                },
-                { text: 'YES', onPress: () => BackHandler.exitApp() },
-            ]);
-            return true;
-        };
-
-        const backHandler = BackHandler.addEventListener(
-            'hardwareBackPress',
-            backAction,
-        );
-
-        return () => backHandler.remove();
-    }, []);
-
-
-
-
-    const goToBack = (index) => {
-
+    const goToBack = () => {
+        navigation.goBack()
     }
 
     const onNext = () => {
@@ -135,6 +110,18 @@ const ReviewQuestionScreen = ({ navigation, route }) => {
         // setQuestions(updatedQuestions);
     };
 
+    const getIcon = (item) => {
+        if (item.isCorrectAnswer && item.userGotItRight) {
+            return <TickBoxIcon />
+        }
+        if (!item.isCorrectAnswer && item.userGotItWrong) {
+            return <CrossRoundIcon />
+        }
+        if (item.isCorrectAnswer && item.isRightAnswer) {
+            return <TickBoxIcon />
+        }
+    }
+
     let currentQuestion = questionsWithResult[currentQuestionIndex]
 
     return (
@@ -175,7 +162,7 @@ const ReviewQuestionScreen = ({ navigation, route }) => {
                 </View>
                 <View style={styles.row}>
                     <Text style={styles.heading}>
-                        Question {currentQuestionIndex + 1} / 50
+                        Question {currentQuestionIndex + 1} / {questions.length}
                     </Text>
 
                 </View>
@@ -193,6 +180,9 @@ const ReviewQuestionScreen = ({ navigation, route }) => {
                                 <Text style={styles.optionText}>
                                     {el.option}
                                 </Text>
+                                <View style={styles.icon01}>
+                                    {getIcon(el)}
+                                </View>
                             </TouchableOpacity>
                         ))}
                     </View>
@@ -321,18 +311,25 @@ const styles = StyleSheet.create({
         paddingVertical: 15,
         marginBottom: 20,
         paddingHorizontal: 20,
-        borderRadius: 7
+        borderRadius: 7,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
     },
     option: (is) => {
-        if (is.isCorrectAnswer && is.userGotItRight) {
-            return { backgroundColor: theme.green }
-        }
-        if (!is.isCorrectAnswer && is.userGotItWrong) {
-            return { backgroundColor: theme.red }
-        } 
+        // if (is.isCorrectAnswer && is.userGotItRight) {
+        //     return { backgroundColor: theme.green }
+        // }
+        // if (!is.isCorrectAnswer && is.userGotItWrong) {
+        //     // return { backgroundColor: theme.lightRed }
+        // } 
         return {
             backgroundColor: theme.greenish
         }
+    },
+    icon01: {
+        height: 25,
+        width: 25,
     },
     optionText: {
         fontFamily: Fonts.medium,

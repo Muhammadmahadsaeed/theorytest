@@ -62,8 +62,6 @@ const MockTestResult = ({ navigation, route }) => {
         return 0;
     }, [questions]);
 
-    console.log(getPercentage);
-
 
     return (
         <WrapperContainer1>
@@ -73,7 +71,7 @@ const MockTestResult = ({ navigation, route }) => {
                     <AnimatedCircularProgress
                         size={120}
                         width={8}
-                        fill={15}
+                        fill={getPercentage}
                         rotation={180}
                         // arcSweepAngle={300}
                         tintColor={theme.skyBlue}
@@ -131,7 +129,7 @@ const MockTestResult = ({ navigation, route }) => {
                         <TouchableOpacity
                             style={styles.btn}
                             activeOpacity={0.8}
-                            onPress={() => navigation.navigate('review-question', { result: questions })}>
+                            onPress={() => navigation.navigate('review-mock-test', { result: questions })}>
                             <ReviewQuestionIcon svgStyle={styles.svgStyle1} />
                             <Text style={styles.btnText}>
                                 Review Your Answers
