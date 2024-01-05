@@ -14,6 +14,7 @@ import { BackLeftIcon, BackWardArrowIcon, CrossRoundIcon, FlagIcon, ForwardEnWhi
 import { theme } from '../../utils/colors';
 import { Fonts } from '../../utils/fonts';
 import { useDispatch, useSelector } from 'react-redux';
+import TextModal from '../../components/Modal/TextModal';
 
 
 const ReviewQuestionScreen = ({ navigation, route }) => {
@@ -24,6 +25,8 @@ const ReviewQuestionScreen = ({ navigation, route }) => {
 
     const dispatch = useDispatch();
     const { userFlag, userFavourite } = useSelector(state => state.userReducer)
+
+    const textModalRef = useRef()
 
     const mapDispatchToProps = (value) => {
         dispatch({ type: 'update_redux', payload: value });
@@ -122,6 +125,10 @@ const ReviewQuestionScreen = ({ navigation, route }) => {
         }
     }
 
+    const openModal = () => {
+        textModalRef.current.isOpen()
+    }
+
     let currentQuestion = questionsWithResult[currentQuestionIndex]
 
     return (
@@ -164,14 +171,17 @@ const ReviewQuestionScreen = ({ navigation, route }) => {
                     <Text style={styles.heading}>
                         Question {currentQuestionIndex + 1} / {questions.length}
                     </Text>
-                    <View style={styles.timeView}>
+                    <TouchableOpacity
+                        style={styles.timeView}
+                        activeOpacity={0.8}
+                        onPress={() => openModal()}>
                         <View style={styles.clockIcon}>
                             <InfoCircleIcon />
                         </View>
                         <Text style={styles.time}>
                             Explain
                         </Text>
-                    </View>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.questionView}>
                     <Text style={styles.text}>
@@ -222,6 +232,7 @@ const ReviewQuestionScreen = ({ navigation, route }) => {
                     <ForwardEnWhiteIcon svgStyle={styles.arrowSvg} />
                 </TouchableOpacity>
             </View>
+            <TextModal ref={textModalRef} />
         </WrapperContainer1>
     )
 }
@@ -283,11 +294,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        // borderBottomWidth: 1,
-        // borderBottomColor: theme.skyBlue,
-        // paddingTop: 8,
-        // paddingBottom: 2,
-        // paddingHorizontal: 12,
     },
     clockIcon: {
         height: 20,

@@ -39,10 +39,12 @@ const TextModal = React.forwardRef((props, ref) => {
                 <View style={styles.main}>
                     <ScrollView showsVerticalScrollIndicator={false}>
                         <View style={styles.descriptionView}>
-                            <RenderHtml
-                                contentWidth={width}
-                                source={{ html: description?.description }}
-                            />
+                            <Text style={styles.description}>
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                            </Text>
                         </View>
                     </ScrollView>
                     <View style={styles.footer}>
@@ -72,7 +74,7 @@ const styles = StyleSheet.create({
     },
     main: {
         // flex: 1,
-        height: '80%',
+        height: '50%',
         backgroundColor: theme.bg,
         borderRadius: 16,
         paddingVertical: 15,
@@ -87,33 +89,16 @@ const styles = StyleSheet.create({
 
         elevation: 5,
     },
-    headingView: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginBottom: 20
-    },
-    heading: {
-        fontFamily: Fonts.bold,
-        fontSize: 20,
-        color: theme.text
-    },
+    
     descriptionView: {
         margin: 20
     },
     description: {
         fontFamily: Fonts.medium,
         fontSize: 16,
-        color: theme.textBlack
+        color: theme.black
     },
-    imgView: {
-        height: 300,
-        width: '90%',
-        alignSelf: 'center',
-    },
-    img: {
-        height: '100%',
-        width: '100%'
-    },
+   
     footer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -122,17 +107,16 @@ const styles = StyleSheet.create({
         marginTop: 30
     },
     btn1: {
-        width: '100%',
-        backgroundColor: theme.bg,
-        borderColor: theme.borderPurple,
         borderWidth: 1,
-        borderRadius: 16,
+        borderColor: theme.skyBlue,
+        height: 50,
+        width: '100%',
+        borderRadius: 8,
         justifyContent: 'center',
         alignItems: 'center',
-        paddingVertical: 10
     },
     btn1Text: {
-        color: theme.buttonBgDark,
+        color: theme.skyBlue,
         fontSize: 16,
         fontFamily: Fonts.medium
     },
