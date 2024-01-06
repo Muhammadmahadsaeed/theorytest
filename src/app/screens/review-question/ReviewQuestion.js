@@ -41,15 +41,15 @@ const ReviewQuestionScreen = ({ navigation, route }) => {
 
             const options = q.options.map(o => {
                 const isCorrectAnswer = q.correct_answer.includes(o.option);
-                const userGotItRight = isCorrectAnswer && !userAnswer.includes(o.option);
+                const userGotItRight = isCorrectAnswer && userAnswer.includes(o.option);
                 const userGotItWrong = !isCorrectAnswer && userAnswer.includes(o.option);
-                const isRightAnswer = isCorrectAnswer && userAnswer.includes(o.option);
+                const userSelectedAnswer = isCorrectAnswer && !userAnswer.includes(o.option);
                 return {
                     ...o,
                     isCorrectAnswer,
                     userGotItRight,
                     userGotItWrong,
-                    isRightAnswer
+                    userSelectedAnswer
                 }
             })
 
@@ -120,7 +120,7 @@ const ReviewQuestionScreen = ({ navigation, route }) => {
         if (!item.isCorrectAnswer && item.userGotItWrong) {
             return <CrossRoundIcon />
         }
-        if (item.isCorrectAnswer && item.isRightAnswer) {
+        if (item.isCorrectAnswer && item.userSelectedAnswer) {
             return <TickBoxIcon />
         }
     }

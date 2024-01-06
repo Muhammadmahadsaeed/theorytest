@@ -12,11 +12,9 @@ import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import { theme, } from '../../utils/colors';
 import Button from '../Buttons/Button';
 import { Fonts } from '../../utils/fonts';
-import { isObjEmpty } from '../../helper/helper';
 import { ReviewFileIcon, SmileIcon, TimerIcon } from '../../utils/images';
-import DropDownComponent from '../DropDownComponent/DropDownComponent';
 
-const TheoryTestBottomSheet = ({navigation, selectedItem, onCancel, onContinue }) => {
+const TheoryTestBottomSheet = ({ navigation, selectedItem, onCancel, onContinue, type }) => {
 
     const [countries, setCountries] = useState([
         {
@@ -35,11 +33,39 @@ const TheoryTestBottomSheet = ({navigation, selectedItem, onCancel, onContinue }
         "autoSkip": false,
         "newQuestion": false,
         "incorrectQuestion": false,
-        "showAnswer": false
+        "showAnswer": type !== 'mock-test' ? true : false
     })
+    const [numOfQues, setNumOfQues] = useState([
+        {
+            id: 1,
+            name: 'All',
+            length: 'all'
+        },
+        {
+            id: 1,
+            name: '10',
+            length: '10'
+        },
+        {
+            id: 1,
+            name: '20',
+            length: '20'
+        },
+        {
+            id: 1,
+            name: '50',
+            length: '50'
+        },
+
+    ])
+    const [quesLen, setQuesLen] = useState('10')
 
     const onTabChange = (el) => {
         setSelectedTab(el.name)
+    }
+
+    const onChangeTab = (item) => {
+        setQuesLen(item.length)
     }
 
     return (
@@ -62,46 +88,50 @@ const TheoryTestBottomSheet = ({navigation, selectedItem, onCancel, onContinue }
             </View>
             <BottomSheetScrollView showsVerticalScrollIndicator={false}>
                 <View style={styles.upper}>
-                    <View style={styles.circleView}>
-                        <AnimatedCircularProgress
-                            size={100}
-                            width={5}
-                            fill={15}
-                            rotation={180}
-                            // arcSweepAngle={300}
-                            tintColor={theme.skyBlue}
-                            tintTransparency
-                            onAnimationComplete={() => console.log('onAnimationComplete')}
-                            backgroundColor={theme.lightBorderGrey}>
-                            {
-                                (fill) => (
-                                    <Text style={styles.fillText}>
-                                        1/800
+                    {type == 'mock-test' &&
+                        <>
+                            <View style={styles.circleView}>
+                                <AnimatedCircularProgress
+                                    size={100}
+                                    width={5}
+                                    fill={15}
+                                    rotation={180}
+                                    // arcSweepAngle={300}
+                                    tintColor={theme.skyBlue}
+                                    tintTransparency
+                                    onAnimationComplete={() => console.log('onAnimationComplete')}
+                                    backgroundColor={theme.lightBorderGrey}>
+                                    {
+                                        (fill) => (
+                                            <Text style={styles.fillText}>
+                                                1/800
+                                            </Text>
+                                        )
+                                    }
+                                </AnimatedCircularProgress>
+                            </View>
+                            <View style={styles.descriptionView}>
+                                <View style={styles.imgView}>
+                                    <TimerIcon svgStyle={styles.svgStyle} />
+                                    <Text style={styles.time}>
+                                        57 min
                                     </Text>
-                                )
-                            }
-                        </AnimatedCircularProgress>
-                    </View>
-                    <View style={styles.descriptionView}>
-                        <View style={styles.imgView}>
-                            <TimerIcon svgStyle={styles.svgStyle} />
-                            <Text style={styles.time}>
-                                57 min
-                            </Text>
-                        </View>
-                        <View style={styles.imgView}>
-                            <ReviewFileIcon svgStyle={styles.svgStyle} />
-                            <Text style={styles.time}>
-                                43/50 to pass
-                            </Text>
-                        </View>
-                        <View style={styles.imgView}>
-                            <SmileIcon svgStyle={styles.svgStyle} />
-                            <Text style={styles.time}>
-                                50 questions
-                            </Text>
-                        </View>
-                    </View>
+                                </View>
+                                <View style={styles.imgView}>
+                                    <ReviewFileIcon svgStyle={styles.svgStyle} />
+                                    <Text style={styles.time}>
+                                        43/50 to pass
+                                    </Text>
+                                </View>
+                                <View style={styles.imgView}>
+                                    <SmileIcon svgStyle={styles.svgStyle} />
+                                    <Text style={styles.time}>
+                                        50 questions
+                                    </Text>
+                                </View>
+                            </View>
+                        </>
+                    }
                     <View style={styles.tabView}>
                         <Text style={styles.heading0}>
                             Where are you taking your theory test?
@@ -120,6 +150,26 @@ const TheoryTestBottomSheet = ({navigation, selectedItem, onCancel, onContinue }
                             ))}
                         </View>
                     </View>
+                    {type !== 'mock-test' &&
+                        <View style={[styles.col]}>
+                            <Text style={styles.heading01}>
+                                No of Questions
+                            </Text>
+                            <View style={[styles.tabView01]}>
+                                {numOfQues.map((el, index) => (
+                                    <TouchableOpacity
+                                        key={index}
+                                        activeOpacity={0.8}
+                                        onPress={() => onChangeTab(el)}
+                                        style={styles.tab01(quesLen == el.length)}>
+                                        <Text style={styles.tabText01(quesLen == el.length)}>
+                                            {el.name}
+                                        </Text>
+                                    </TouchableOpacity>
+                                ))}
+                            </View>
+                        </View>
+                    }
                     <View style={[styles.row, styles.row0]}>
                         <View style={styles.textView0}>
                             <Text style={styles.heading0}>
@@ -143,7 +193,7 @@ const TheoryTestBottomSheet = ({navigation, selectedItem, onCancel, onContinue }
                                 New Questions
                             </Text>
                             <Text style={styles.time}>
-                                Show more questions you haven't seen before 
+                                Show more questions you haven't seen before
                             </Text>
                         </View>
                         <ToggleSwitch
@@ -171,28 +221,32 @@ const TheoryTestBottomSheet = ({navigation, selectedItem, onCancel, onContinue }
                             onToggle={isOn => setToggles({ ...toggles, incorrectQuestion: isOn })}
                         />
                     </View>
-                    <View style={[styles.row, styles.row0]}>
-                        <View style={styles.textView0}>
-                            <Text style={styles.heading0}>
-                                Show Answers
-                            </Text>
-                            <Text style={styles.time}>
-                                Display correct answers after you've answered a question
+                    {type !== 'mock-test' &&
+                        <View style={[styles.row, styles.row0]}>
+                            <View style={styles.textView0}>
+                                <Text style={styles.heading0}>
+                                    Show Answers
+                                </Text>
+                                <Text style={styles.time}>
+                                    Display correct answers after you've answered a question
+                                </Text>
+                            </View>
+                            <ToggleSwitch
+                                isOn={toggles["showAnswer"]}
+                                onColor="green"
+                                offColor={theme.lightBorderGrey}
+                                size="medium"
+                                onToggle={isOn => setToggles({ ...toggles, showAnswer: isOn })}
+                            />
+                        </View>
+                    }
+                    {type == 'mock-test' &&
+                        <View style={styles.textView}>
+                            <Text style={styles.text}>
+                                You will have 57 minutes to anwser 50 questions. You need to correctly anwser 43 or more in order to achieve a pass
                             </Text>
                         </View>
-                        <ToggleSwitch
-                            isOn={toggles["showAnswer"]}
-                            onColor="green"
-                            offColor={theme.lightBorderGrey}
-                            size="medium"
-                            onToggle={isOn => setToggles({ ...toggles, showAnswer: isOn })}
-                        />
-                    </View>
-                    <View style={styles.textView}>
-                        <Text style={styles.text}>
-                            You will have 57 minutes to anwser 50 questions. You need to correctly anwser 43 or more in order to achieve a pass
-                        </Text>
-                    </View>
+                    }
                     <View style={styles.seperator} />
                 </View>
             </BottomSheetScrollView>
@@ -218,7 +272,6 @@ const styles = StyleSheet.create({
 
     },
     hidden: {
-        flex: 1,
         fontFamily: Fonts.bold,
         fontSize: 20,
         color: theme.textBlack,
@@ -232,7 +285,6 @@ const styles = StyleSheet.create({
         color: theme.textBlack,
     },
     paraView: {
-        flex: 1,
         alignItems: 'flex-end'
     },
     para: {
@@ -303,6 +355,12 @@ const styles = StyleSheet.create({
     tabView: {
         marginTop: 20
     },
+    tabView01: {
+        marginTop: 10,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
     heading0: {
         fontFamily: Fonts.medium,
         fontSize: 18,
@@ -331,8 +389,30 @@ const styles = StyleSheet.create({
         color: is ? theme.skyBlue : theme.lightGrey,
         textAlign: 'center'
     }),
+    tab01: (is) => ({
+        width: '23%',
+        borderWidth: is ? 0 : 1,
+        borderColor: is ? 'transparent' : theme.skyBlue,
+        backgroundColor: is ? theme.skyBlue : 'transparent',
+        paddingVertical: 10,
+        borderRadius: 8
+    }),
+    tabText01: (is) => ({
+        fontFamily: Fonts.medium,
+        fontSize: 14,
+        color: is ? theme.white : theme.skyBlue,
+        textAlign: 'center'
+    }),
     textView0: {
         flex: 1,
         marginRight: 20
+    },
+    col: {
+        marginTop: 20,
+    },
+    heading01: {
+        fontFamily: Fonts.medium,
+        fontSize: 18,
+        color: theme.black
     }
 })

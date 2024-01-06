@@ -6,13 +6,16 @@ import {
     StyleSheet,
     ScrollView
 } from 'react-native';
+import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import WrapperContainer1 from '../../components/Wrapper/WrapperContainer1';
 import HeaderWithBackButton from '../../components/Headers/HeaderWithBackButton';
 import { theme } from '../../utils/colors';
 import { Fonts } from '../../utils/fonts';
+import RevisionQuestionList from './RevisionQuestionList';
+import TheoryTestBottomSheet from '../../components/BottomSheet/TheoryTestBottomSheet';
 
-const RevisionQuestion = ({ }) => {
+const RevisionQuestion = ({ navigation }) => {
 
     const [list, setList] = useState([
         {
@@ -87,6 +90,43 @@ const RevisionQuestion = ({ }) => {
             // icon: <SearchFileIcon />
         }
     ])
+    const [selectedItem, setSelectedItem] = useState({})
+
+    const bottomSheetRef = useRef(null);
+
+    const snapPoints = useMemo(() => ['95%'], []);
+
+    const handleSnapPress = useCallback((index) => {
+        bottomSheetRef.current?.snapToIndex(index);
+    }, []);
+
+    const handleClosePress = useCallback(() => {
+        bottomSheetRef.current?.close();
+    }, []);
+
+    const renderBackdrop = useCallback(props => (
+        <BottomSheetBackdrop
+            {...props}
+            disappearsOnIndex={-1}
+            appearsOnIndex={0}
+            pressBehavior={"close"}
+            enableTouchThrough
+        />
+    ), []);
+
+    const onClick = (el) => {
+        setSelectedItem(el)
+        if (el.link) {
+            navigation.navigate(el.link)
+            return
+        }
+        handleSnapPress(0)
+    }
+
+    const onContinue = () => {
+        bottomSheetRef.current?.close();
+        // navigation.replace('question')
+    }
 
     return (
         <WrapperContainer1>
@@ -94,52 +134,22 @@ const RevisionQuestion = ({ }) => {
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={styles.innerContainer}>
                     {list.map((el, index) => (
-                        <TouchableOpacity
-                            style={[styles.row, { ...el?.css }]}
-                            key={index}
-                            activeOpacity={0.8}
-                            onPress={() => onClick(el)}>
-                            <View style={styles.imgView}>
-                                {el.icon}
-                            </View>
-                            <View style={styles.textView}>
-                                <Text style={styles.text}>
-                                    {el.name}
-                                </Text>
-                                <View style={styles.progressView}>
-                                    <View style={[styles.progressBar, { width: ((5 / 27) * 100) + '%' }]} />
-                                </View>
-                                <View style={styles.row1}>
-                                    <Text style={styles.text1}>
-                                        Answered: 1/20
-                                    </Text>
-                                    <Text style={styles.text1}>
-                                        Correctly: 1/20
-                                    </Text>
-                                </View>
-                            </View>
-                            <AnimatedCircularProgress
-                                size={40}
-                                width={3}
-                                fill={15}
-                                rotation={180}
-                                // arcSweepAngle={300}
-                                tintColor={theme.skyBlue}
-                                tintTransparency
-                                onAnimationComplete={() => console.log('onAnimationComplete')}
-                                backgroundColor={theme.lightBorderGrey}>
-                                {
-                                    (fill) => (
-                                        <Text style={styles.fillText}>
-                                            10%
-                                        </Text>
-                                    )
-                                }
-                            </AnimatedCircularProgress>
-                        </TouchableOpacity>
+                        <RevisionQuestionList key={index} data={el} onClick={onClick} />
                     ))}
                 </View>
             </ScrollView>
+            <BottomSheet
+                ref={bottomSheetRef}
+                index={-1}
+                backdropComponent={renderBackdrop}
+                snapPoints={snapPoints}>
+                <TheoryTestBottomSheet
+                    navigation={navigation}
+                    selectedItem={selectedItem}
+                    onCancel={handleClosePress}
+                    onContinue={onContinue}
+                    type={'revision'} />
+            </BottomSheet>
         </WrapperContainer1>
     )
 }

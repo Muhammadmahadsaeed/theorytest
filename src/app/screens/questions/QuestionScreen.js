@@ -128,7 +128,7 @@ const QuestionScreen = ({ navigation }) => {
                 }
                 return {
                     ...q,
-                    user_answer: (q.user_answer?.length && q.type === 'checkbox') ? [...q.user_answer, item.option] : [item.option]
+                    user_answer: (q.user_answer?.length && q.user_answer?.length < 2 && q.type === 'checkbox') ? [...q.user_answer, item.option] : [item.option]
                 }
             }
             return q
@@ -156,9 +156,11 @@ const QuestionScreen = ({ navigation }) => {
         setQuestions(updatedQuestions);
     };
 
-    const highlighOption = (el) => {
-        return questions[currentQuestionIndex]?.user_answer?.length && questions[currentQuestionIndex].user_answer.includes(el.option) ? true : false
+    const highLightOption = (el) => {
+        let user_answer = questions[currentQuestionIndex]?.user_answer
+        return user_answer?.length && user_answer.includes(el.option) ? true : false
     }
+
 
     const onConfirm = () => {
         handleClosePress()
@@ -187,6 +189,16 @@ const QuestionScreen = ({ navigation }) => {
 
         setQuestions(updatedQuestions);
     };
+
+    const checkBtn = () => {
+        let type = questions[currentQuestionIndex]?.type
+        let user_answer = questions[currentQuestionIndex]?.user_answer
+
+        if (type == 'radio') {
+            return user_answer?.length ? true : false
+        }
+        return user_answer?.length && user_answer?.length == 2 ? true : false
+    }
 
     let currentQuestion = questions[currentQuestionIndex]
 
@@ -252,7 +264,7 @@ const QuestionScreen = ({ navigation }) => {
                             <TouchableOpacity
                                 activeOpacity={0.8}
                                 key={index}
-                                style={styles.option(highlighOption(el))}
+                                style={styles.option(highLightOption(el))}
                                 onPress={() => onSelectOption(el)}>
                                 <Text style={styles.optionText}>
                                     {el.option}
@@ -277,8 +289,8 @@ const QuestionScreen = ({ navigation }) => {
                     <View />
                 }
                 <TouchableOpacity
-                    style={styles.btn2(currentQuestion?.user_answer ? true : false)}
-                    disabled={currentQuestion?.user_answer ? false : true}
+                    style={styles.btn2(checkBtn())}
+                    disabled={checkBtn() ? false : true}
                     activeOpacity={0.8}
                     onPress={() => onNext()}>
                     <Text style={styles.btn2Text}>

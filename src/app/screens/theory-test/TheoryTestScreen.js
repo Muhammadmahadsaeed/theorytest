@@ -1,8 +1,6 @@
 import React, { useState, useRef, useCallback, useMemo } from 'react';
 import {
     View,
-    TouchableOpacity,
-    Text,
     StyleSheet
 } from 'react-native';
 import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
@@ -10,8 +8,9 @@ import HeaderWithBackButton from '../../components/Headers/HeaderWithBackButton'
 import WrapperContainer1 from '../../components/Wrapper/WrapperContainer1';
 import { theme } from '../../utils/colors';
 import { Fonts } from '../../utils/fonts';
-import { ClockWatchIcon, ForwardEnIcon, QuestionIcon, ReviewIcon, SearchFileIcon } from '../../utils/images';
+import { ClockWatchIcon,  QuestionIcon, ReviewIcon, SearchFileIcon } from '../../utils/images';
 import TheoryTestBottomSheet from '../../components/BottomSheet/TheoryTestBottomSheet';
+import TheoryTestList from './TheoryTestList';
 
 const TheoryTestScreen = ({ navigation }) => {
 
@@ -48,12 +47,6 @@ const TheoryTestScreen = ({ navigation }) => {
     const [selectedItem, setSelectedItem] = useState({})
 
     const snapPoints = useMemo(() => ['95%'], []);
-
-    // callbacks
-    const handleSheetChanges = useCallback((index) => {
-        // console.log('handleSheetChanges', index);
-    }, []);
-
 
     const handleSnapPress = useCallback((index) => {
         bottomSheetRef.current?.snapToIndex(index);
@@ -93,39 +86,20 @@ const TheoryTestScreen = ({ navigation }) => {
             <HeaderWithBackButton text={"Theory Test"} />
             <View style={styles.innerContainer}>
                 {list.map((el, index) => (
-                    <TouchableOpacity
-                        style={[styles.row, { ...el?.css }]}
-                        key={index}
-                        activeOpacity={0.95}
-                        onPress={() => onClick(el)}>
-                        <View style={styles.imgView}>
-                            {el.icon}
-                        </View>
-                        <View style={styles.textView}>
-                            <Text style={styles.text}>
-                                {el.name}
-                            </Text>
-                            <Text style={styles.description}>
-                                {el.description}
-                            </Text>
-                        </View>
-                        <View style={styles.icon}>
-                            <ForwardEnIcon />
-                        </View>
-                    </TouchableOpacity>
+                  <TheoryTestList key={index} data={el} onClick={onClick} />
                 ))}
             </View>
             <BottomSheet
                 ref={bottomSheetRef}
                 index={-1}
                 backdropComponent={renderBackdrop}
-                snapPoints={snapPoints}
-                onChange={handleSheetChanges}>
+                snapPoints={snapPoints}>
                 <TheoryTestBottomSheet
                     navigation={navigation}
                     selectedItem={selectedItem}
                     onCancel={handleClosePress}
-                    onContinue={onContinue} />
+                    onContinue={onContinue}
+                    type={'mock-test'} />
             </BottomSheet>
         </WrapperContainer1>
     )
