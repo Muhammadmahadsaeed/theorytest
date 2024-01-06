@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import SplashScreen from '../../screens/auth/Splash';
 import GettingStartedScreen from '../../screens/getting-started/GettingStartedScreen';
-import LocationScreen from '../../screens/location/LocationScreen';
 import BottomTabNavigator from '../BottomTab/BottomTabNavigator';
 import AuthStackNavigator from '../AuthStack/AuthStackNavigator';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,9 +12,9 @@ import QuestionScreen from '../../screens/questions/QuestionScreen';
 import HazardPerception from '../../screens/hazard-perception/HazardPerception';
 import ReviewAllClips from '../../screens/review-all-clips/ReviewAllClips';
 import MockTestResult from '../../screens/mock-test-result/MockTestResult';
-import ReviewQuestionScreen from '../../screens/review-question/ReviewQuestion';
 import ReviewMockTest from '../../screens/review-mock-test/ReviewMockTest';
 import AllMockTestTopic from '../../screens/all-mock-test-topics/AllMockTestTopics';
+import RevisionQuestionByTopic from '../../screens/revision-question-by-topic/RevisionQuestionByTopic';
 
 
 const Stack = createNativeStackNavigator();
@@ -63,6 +61,7 @@ const RootNavigation = () => {
             <Stack.Screen name="review-clips" component={ReviewAllClips} />
             <Stack.Screen name="mock-result" component={MockTestResult} />
             <Stack.Screen name="all-mock-test-topics" component={AllMockTestTopic} />
+            <Stack.Screen name="revision-question-by-topic" component={RevisionQuestionByTopic} />
             <Stack.Screen name="review-mock-test" component={ReviewMockTest} />
             <Stack.Screen name="auth-stack" component={AuthStackNavigator} />
         </Stack.Navigator>

@@ -124,7 +124,7 @@ const AllMockTestTopic = ({ navigation }) => {
 
     const onContinue = () => {
         bottomSheetRef.current?.close();
-        // navigation.replace('question')
+        navigation.replace('revision-question-by-topic')
     }
 
     return (
