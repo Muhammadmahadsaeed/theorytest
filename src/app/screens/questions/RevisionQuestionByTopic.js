@@ -2,8 +2,6 @@ import React, { useRef, useState, useEffect, useMemo, useCallback } from 'react'
 import {
     View,
     Text,
-    Image,
-    ScrollView,
     Alert,
     BackHandler,
     StyleSheet,
@@ -11,15 +9,17 @@ import {
 } from 'react-native';
 import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import WrapperContainer1 from '../../components/Wrapper/WrapperContainer1';
-import { BackLeftIcon, BackWardArrowIcon, CrossRoundIcon, FlagIcon, ForwardEnWhiteIcon, HeartIcon, InfoCircleIcon, RedFlagIcon, RedHeartIcon, TickBoxIcon, TimeIcon } from '../../utils/images';
+import { CrossRoundIcon, InfoCircleIcon, TickBoxIcon } from '../../utils/images';
 import { theme } from '../../utils/colors';
 import { Fonts } from '../../utils/fonts';
 import questionArray from '../../services/section.json'
 import AlertBottomSheetComponent from '../../components/BottomSheet/AlertBottomSheetComponent';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import TextModal from '../../components/Modal/TextModal';
+import QuestionFooter from './QuestionFooter';
+import QuestionHeader from './QuestionHeader';
+import QuestionProgress from './QuestionProgress';
 
-let totalTimeInMinutes = 57
 
 const RevisionQuestionByTopic = ({ navigation }) => {
 
@@ -29,7 +29,6 @@ const RevisionQuestionByTopic = ({ navigation }) => {
     const bottomSheetRef = useRef(null);
     const textModalRef = useRef()
     const dispatch = useDispatch();
-    const { userFlag, userFavourite } = useSelector(state => state.userReducer)
 
     const mapDispatchToProps = (value) => {
         dispatch({ type: 'update_redux', payload: value });
@@ -92,7 +91,7 @@ const RevisionQuestionByTopic = ({ navigation }) => {
     const onCheck = () => {
         let currentQuestion = questions[currentQuestionIndex]
         const updatedQuestions = [...questions];
-       
+
         const userAnswer = currentQuestion.user_answer || [];
 
         const options = currentQuestion.options.map(o => {
@@ -111,8 +110,8 @@ const RevisionQuestionByTopic = ({ navigation }) => {
         updatedQuestions[currentQuestionIndex] = { ...currentQuestion, options: options, isCheck: true }
 
         setQuestions(updatedQuestions);
-     
-        
+
+
     }
 
     const onPrev = () => {
@@ -142,24 +141,6 @@ const RevisionQuestionByTopic = ({ navigation }) => {
         setQuestions(updatedQuestions2);
     };
 
-    const onFlag = (item) => {
-        const isItemInFlags = userFlag.some((el) => el.id === item.id);
-
-        const updatedFlag = isItemInFlags
-            ? userFlag.filter((el) => el.id !== item.id)
-            : [...userFlag, item];
-
-        mapDispatchToProps({ userFlag: updatedFlag });
-
-        const updatedQuestions = [...questions];
-        updatedQuestions[currentQuestionIndex] = {
-            ...updatedQuestions[currentQuestionIndex],
-            is_flag: !questions[currentQuestionIndex]?.is_flag,
-        };
-
-        setQuestions(updatedQuestions);
-    };
-
     const highLightOption = (el) => {
         let user_answer = questions[currentQuestionIndex]?.user_answer
         return user_answer?.length && user_answer.includes(el.option) ? true : false
@@ -174,34 +155,6 @@ const RevisionQuestionByTopic = ({ navigation }) => {
         } else {
             navigation.goBack()
         }
-    }
-
-    const onFavoriteClick = async (item) => {
-        const isItemInFavorites = userFavourite.some((el) => el.id === item.id);
-        const updatedQuestions = [...questions];
-
-        const updatedFavorite = isItemInFavorites
-            ? userFavourite.filter((el) => el.id !== item.id)
-            : [...userFavourite, item];
-
-        mapDispatchToProps({ userFavourite: updatedFavorite });
-
-        updatedQuestions[currentQuestionIndex] = {
-            ...updatedQuestions[currentQuestionIndex],
-            is_favorite: !questions[currentQuestionIndex]?.is_favorite,
-        };
-
-        setQuestions(updatedQuestions);
-    };
-
-    const checkBtn = () => {
-        let type = questions[currentQuestionIndex]?.type
-        let user_answer = questions[currentQuestionIndex]?.user_answer
-
-        if (type == 'radio') {
-            return user_answer?.length ? true : false
-        }
-        return user_answer?.length && user_answer?.length == 2 ? true : false
     }
 
     const openModal = () => {
@@ -224,55 +177,32 @@ const RevisionQuestionByTopic = ({ navigation }) => {
 
     return (
         <WrapperContainer1>
-            <View style={styles.headerTop}>
-                <TouchableOpacity
-                    style={styles.left}
-                    activeOpacity={0.95}
-                    onPress={() => goToBack(0)}>
-                    <BackLeftIcon />
-                </TouchableOpacity>
-                <View style={styles.right}>
-                    <TouchableOpacity
-                        style={[styles.flagIcon, { alignItems: 'center' }]}
-                        activeOpacity={0.8}
-                        onPress={() => onFlag(currentQuestion)}>
-                        {currentQuestion?.is_flag ?
-                            <RedFlagIcon svgStyle={styles.flagIconSvg} />
-                            :
-                            <FlagIcon svgStyle={styles.flagIconSvg} />
-                        }
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={[styles.flagIcon, { marginLeft: 5, alignItems: 'flex-end' }]}
-                        activeOpacity={0.8}
-                        onPress={() => onFavoriteClick(currentQuestion)}>
-                        {currentQuestion?.is_favorite ?
-                            <RedHeartIcon svgStyle={styles.flagIconSvg} />
-                            :
-                            <HeartIcon svgStyle={styles.flagIconSvg} />
-                        }
-                    </TouchableOpacity>
-                </View>
-            </View>
+            <QuestionHeader
+                currentQuestion={currentQuestion}
+                setQuestions={setQuestions}
+                questions={questions}
+                currentQuestionIndex={currentQuestionIndex} />
             <View style={styles.container}>
-                <View style={styles.progressView}>
-                    <View style={[styles.progressBar, { width: (((currentQuestionIndex + 1) / questions.length) * 100) + '%' }]} />
-                </View>
+                <QuestionProgress currentQuestionIndex={currentQuestionIndex} questions={questions} />
                 <View style={styles.row}>
                     <Text style={styles.heading}>
                         Question {currentQuestionIndex + 1} / 50
                     </Text>
-                    <TouchableOpacity
-                        style={styles.timeView}
-                        activeOpacity={0.8}
-                        onPress={() => openModal()}>
-                        <View style={styles.clockIcon}>
-                            <InfoCircleIcon />
-                        </View>
-                        <Text style={styles.time}>
-                            Explain
-                        </Text>
-                    </TouchableOpacity>
+                    {currentQuestion?.isCheck ?
+                        <TouchableOpacity
+                            style={styles.timeView}
+                            activeOpacity={0.8}
+                            onPress={() => openModal()}>
+                            <View style={styles.clockIcon}>
+                                <InfoCircleIcon />
+                            </View>
+                            <Text style={styles.time}>
+                                Explain
+                            </Text>
+                        </TouchableOpacity>
+                        :
+                        null
+                    }
                 </View>
                 <View style={styles.questionView}>
                     <Text style={styles.text}>
@@ -302,44 +232,14 @@ const RevisionQuestionByTopic = ({ navigation }) => {
                     </View>
                 </View>
             </View>
-            <View style={styles.footer}>
-                {currentQuestionIndex !== 0 ?
-                    <TouchableOpacity
-                        style={styles.btn1}
-                        activeOpacity={0.8}
-                        onPress={() => onPrev()}>
-                        <BackWardArrowIcon svgStyle={styles.arrowSvg1} />
-                        <Text style={styles.btn1Text}>
-                            Previous
-                        </Text>
-                    </TouchableOpacity>
-                    :
-                    <View />
-                }
-                {currentQuestion?.isCheck ?
-                    <TouchableOpacity
-                        style={styles.btn2(true)}
-                        // disabled={checkBtn() ? false : true}
-                        activeOpacity={0.8}
-                        onPress={() => onNext()}>
-                        <Text style={styles.btn2Text}>
-                            {currentQuestionIndex == questions.length - 1 ? "Finish" : "Next"}
-                        </Text>
-                        <ForwardEnWhiteIcon svgStyle={styles.arrowSvg} />
-                    </TouchableOpacity>
-                    :
-                    <TouchableOpacity
-                        style={styles.btn2(checkBtn())}
-                        disabled={checkBtn() ? false : true}
-                        activeOpacity={0.8}
-                        onPress={() => onCheck()}>
-                        <Text style={styles.btn2Text}>
-                            Check
-                        </Text>
-                        <ForwardEnWhiteIcon svgStyle={styles.arrowSvg} />
-                    </TouchableOpacity>
-                }
-            </View>
+            <QuestionFooter
+                questions={questions}
+                isMock={false}
+                currentQuestion={currentQuestion}
+                currentQuestionIndex={currentQuestionIndex}
+                onNext={onNext}
+                onCheck={onCheck}
+                onPrev={onPrev} />
             <BottomSheet
                 ref={bottomSheetRef}
                 index={-1}
@@ -361,41 +261,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingHorizontal: 15,
-    },
-    headerTop: {
-        paddingHorizontal: 15,
-        height: 70,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-    },
-    left: {
-        height: 40,
-        width: 40
-    },
-    right: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    flagIcon: {
-        height: 50,
-        width: 50,
-        justifyContent: 'center'
-    },
-    flagIconSvg: {
-        height: 25,
-        width: 25
-    },
-    progressView: {
-        marginTop: 20,
-        height: 5,
-        width: '100%',
-        backgroundColor: theme.grey
-    },
-    progressBar: {
-        height: 5,
-        backgroundColor: theme.skyBlue
     },
     row: {
         flexDirection: 'row',
@@ -461,7 +326,7 @@ const styles = StyleSheet.create({
     option: (is) => ({
         borderColor: theme.skyBlue,
         borderWidth: is ? 1.5 : 0,
-       
+
         // paddingVertical: 15,
         // marginBottom: 20,
         // paddingHorizontal: 20,

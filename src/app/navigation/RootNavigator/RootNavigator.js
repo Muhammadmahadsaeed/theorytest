@@ -13,8 +13,8 @@ import ReviewAllClips from '../../screens/review-all-clips/ReviewAllClips';
 import MockTestResult from '../../screens/mock-test-result/MockTestResult';
 import ReviewMockTest from '../../screens/review-mock-test/ReviewMockTest';
 import AllMockTestTopic from '../../screens/all-mock-test-topics/AllMockTestTopics';
-import RevisionQuestionByTopic from '../../screens/revision-question-by-topic/RevisionQuestionByTopic';
-import ReviewQuestionScreen from '../../screens/review-question/ReviewQuestion';
+import RevisionQuestionByTopic from '../../screens/questions/RevisionQuestionByTopic';
+import ReviewQuestionScreen from '../../screens/questions/ReviewQuestion';
 
 
 const Stack = createNativeStackNavigator();
