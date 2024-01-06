@@ -170,23 +170,25 @@ const TheoryTestBottomSheet = ({ navigation, selectedItem, onCancel, onContinue,
                             </View>
                         </View>
                     }
-                    <View style={[styles.row, styles.row0]}>
-                        <View style={styles.textView0}>
-                            <Text style={styles.heading0}>
-                                Auto Skip
-                            </Text>
-                            <Text style={styles.time}>
-                                Enables automatic skipping to the next question upon anwering
-                            </Text>
+                    {type == 'mock-test' &&
+                        <View style={[styles.row, styles.row0]}>
+                            <View style={styles.textView0}>
+                                <Text style={styles.heading0}>
+                                    Auto Skip
+                                </Text>
+                                <Text style={styles.time}>
+                                    Enables automatic skipping to the next question upon anwering
+                                </Text>
+                            </View>
+                            <ToggleSwitch
+                                isOn={toggles["autoSkip"]}
+                                onColor="green"
+                                offColor={theme.lightBorderGrey}
+                                size="medium"
+                                onToggle={isOn => setToggles({ ...toggles, autoSkip: isOn })}
+                            />
                         </View>
-                        <ToggleSwitch
-                            isOn={toggles["autoSkip"]}
-                            onColor="green"
-                            offColor={theme.lightBorderGrey}
-                            size="medium"
-                            onToggle={isOn => setToggles({ ...toggles, autoSkip: isOn })}
-                        />
-                    </View>
+                    }
                     <View style={[styles.row, styles.row0]}>
                         <View style={styles.textView0}>
                             <Text style={styles.heading0}>
@@ -236,7 +238,7 @@ const TheoryTestBottomSheet = ({ navigation, selectedItem, onCancel, onContinue,
                                 onColor="green"
                                 offColor={theme.lightBorderGrey}
                                 size="medium"
-                                onToggle={isOn => setToggles({ ...toggles, showAnswer: isOn })}
+                                onToggle={isOn => setToggles({ ...toggles, showAnswer: true })}
                             />
                         </View>
                     }
@@ -250,7 +252,7 @@ const TheoryTestBottomSheet = ({ navigation, selectedItem, onCancel, onContinue,
                     <View style={styles.seperator} />
                 </View>
             </BottomSheetScrollView>
-            <Button title={"Continue"} onPress={onContinue} />
+            <Button title={"Continue"} onPress={() => onContinue(toggles)} />
         </View>
     )
 }

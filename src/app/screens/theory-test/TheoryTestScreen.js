@@ -8,7 +8,7 @@ import HeaderWithBackButton from '../../components/Headers/HeaderWithBackButton'
 import WrapperContainer1 from '../../components/Wrapper/WrapperContainer1';
 import { theme } from '../../utils/colors';
 import { Fonts } from '../../utils/fonts';
-import { ClockWatchIcon,  QuestionIcon, ReviewIcon, SearchFileIcon } from '../../utils/images';
+import { ClockWatchIcon, QuestionIcon, ReviewIcon, SearchFileIcon } from '../../utils/images';
 import TheoryTestBottomSheet from '../../components/BottomSheet/TheoryTestBottomSheet';
 import TheoryTestList from './TheoryTestList';
 
@@ -76,9 +76,9 @@ const TheoryTestScreen = ({ navigation }) => {
         handleSnapPress(0)
     }
 
-    const onContinue = () => {
+    const onContinue = (data) => {
         bottomSheetRef.current?.close();
-        navigation.replace('question')
+        navigation.replace('question', { config: data })
     }
 
     return (
@@ -86,7 +86,7 @@ const TheoryTestScreen = ({ navigation }) => {
             <HeaderWithBackButton text={"Theory Test"} />
             <View style={styles.innerContainer}>
                 {list.map((el, index) => (
-                  <TheoryTestList key={index} data={el} onClick={onClick} />
+                    <TheoryTestList key={index} data={el} onClick={onClick} />
                 ))}
             </View>
             <BottomSheet

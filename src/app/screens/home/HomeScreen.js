@@ -15,8 +15,6 @@ import { AddressBookIcon, AlertIcon } from '../../utils/images';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 import WrapperContainer1 from '../../components/Wrapper/WrapperContainer1';
-import { floatToTime, isObjEmpty } from '../../helper/helper';
-import { Loading } from '../../components/Loading/Loading';
 
 const today = moment().format('dddd, DD MMM YYYY');
 
@@ -26,11 +24,6 @@ const HomeScreen = ({ navigation }) => {
     const video = useRef(null);
 
     const [list, setList] = useState([
-        {
-            id: 1,
-            name: 'FREE Pass Guarantee',
-
-        },
         {
             id: 2,
             name: 'Theory Test',
@@ -48,10 +41,6 @@ const HomeScreen = ({ navigation }) => {
             },
             icon: <AlertIcon />,
             link: 'hazard'
-        },
-        {
-            id: 4,
-            name: 'Driving Lessons'
         },
         {
             id: 5,

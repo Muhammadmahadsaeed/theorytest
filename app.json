@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "800 Caregiver",
-    "scheme": "caregiver800",
-    "slug": "800-caregiver",
-    "currentFullName": "@pandoradesign/800-caregiver",
-    "originalFullName": "@pandoradesign/800-caregiver",
+    "name": "Theory Test UK",
+    "scheme": "theorytest2024",
+    "slug": "theorytest2024",
+    "currentFullName": "@mahadsaeed/theorytest2024",
+    "originalFullName": "@mahadsaeed/theorytest2024",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -18,17 +18,16 @@
       "**/*"
     ],
     "ios": {
-      "bundleIdentifier": "com.800caregiver",
-      "buildNumber": "9",
+      "bundleIdentifier": "com.theorytest2024",
+      "buildNumber": "1",
       "supportsTablet": true,
-      "config": {
-        "googleMapsApiKey": "AIzaSyBbPxeSz0RpKOe33IUL1-Dm6CYAVSW-i3w"
-      },
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "$(PRODUCT_NAME) uses your location for features like finding saloon nearby to you.",
         "CFBundleURLTypes": [
           {
-            "CFBundleURLSchemes": ["com.googleusercontent.apps.475752071681-b5al3lud4at2ejk2ccckasqr2q59vk2o"]
+            "CFBundleURLSchemes": [
+              "com.googleusercontent.apps.475752071681-b5al3lud4at2ejk2ccckasqr2q59vk2o"
+            ]
           }
         ],
         "UIBackgroundModes": []
@@ -45,12 +44,7 @@
         "android.permission.ACCESS_FINE_LOCATION",
         "android.permission.FOREGROUND_SERVICE"
       ],
-      "config": {
-        "googleMaps": {
-          "apiKey": "AIzaSyDw4rW4gyjYabq_OtKhqvLPvjTVx3pUCIY"
-        }
-      },
-      "package": "com.caregiver800.app",
+      "package": "com.theorytest2024.app",
       "versionCode": 1
     },
     "plugins": [
@@ -70,24 +64,26 @@
       [
         "expo-updates",
         {
-          "username": "pandoradesign"
+          "username": "mahadsaeed"
         }
       ],
-      ["@react-native-google-signin/google-signin"]
+      [
+        "@react-native-google-signin/google-signin"
+      ]
     ],
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "dab08dbc-9a84-480c-9637-485a61efa840"
+        "projectId": "332b9734-d278-4e69-9e90-5267006d4f21"
       }
     },
     "runtimeVersion": {
       "policy": "sdkVersion"
     },
     "updates": {
-      "url": "https://u.expo.dev/dab08dbc-9a84-480c-9637-485a61efa840"
+      "url": "https://u.expo.dev/332b9734-d278-4e69-9e90-5267006d4f21"
     }
   }
 }

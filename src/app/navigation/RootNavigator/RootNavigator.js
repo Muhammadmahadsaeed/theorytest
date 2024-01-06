@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Loading } from '../../components/Loading/Loading';
 import { theme } from '../../utils/colors';
 import TheoryTestScreen from '../../screens/theory-test/TheoryTestScreen';
-import RevisionQuestion from '../../screens/revision-question/RevisionQuestion';
 import QuestionScreen from '../../screens/questions/QuestionScreen';
 import HazardPerception from '../../screens/hazard-perception/HazardPerception';
 import ReviewAllClips from '../../screens/review-all-clips/ReviewAllClips';
@@ -15,6 +14,7 @@ import MockTestResult from '../../screens/mock-test-result/MockTestResult';
 import ReviewMockTest from '../../screens/review-mock-test/ReviewMockTest';
 import AllMockTestTopic from '../../screens/all-mock-test-topics/AllMockTestTopics';
 import RevisionQuestionByTopic from '../../screens/revision-question-by-topic/RevisionQuestionByTopic';
+import ReviewQuestionScreen from '../../screens/review-question/ReviewQuestion';
 
 
 const Stack = createNativeStackNavigator();
@@ -55,14 +55,14 @@ const RootNavigation = () => {
             <Stack.Screen name="getting" component={GettingStartedScreen} />
             <Stack.Screen name="bottom-tab" component={BottomTabNavigator} />
             <Stack.Screen name="theory-test" component={TheoryTestScreen} />
-            <Stack.Screen name="revision-question" component={RevisionQuestion} />
             <Stack.Screen name="question" component={QuestionScreen} />
             <Stack.Screen name="hazard" component={HazardPerception} />
             <Stack.Screen name="review-clips" component={ReviewAllClips} />
             <Stack.Screen name="mock-result" component={MockTestResult} />
+            <Stack.Screen name="review-mock-test" component={ReviewMockTest} />
+            <Stack.Screen name="review-question" component={ReviewQuestionScreen} />
             <Stack.Screen name="all-mock-test-topics" component={AllMockTestTopic} />
             <Stack.Screen name="revision-question-by-topic" component={RevisionQuestionByTopic} />
-            <Stack.Screen name="review-mock-test" component={ReviewMockTest} />
             <Stack.Screen name="auth-stack" component={AuthStackNavigator} />
         </Stack.Navigator>
     )

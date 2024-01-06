@@ -382,10 +382,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: '32%',
         height: 47,
-        backgroundColor: theme.buttonBg,
+        backgroundColor: theme.skyBlue,
         paddingHorizontal: 20,
         paddingVertical: 10,
-        borderRadius: 7
+        borderRadius: 100,
     },
     btn1Text: {
         color: theme.white,
@@ -398,8 +398,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: theme.buttonBg,
-        borderRadius: 7,
+        backgroundColor: theme.skyBlue,
+        borderRadius: 100,
         opacity: is ? 1 : 0.5
     }),
     btn2Text: {
