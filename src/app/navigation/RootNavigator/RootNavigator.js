@@ -16,6 +16,7 @@ import ReviewAllClips from '../../screens/review-all-clips/ReviewAllClips';
 import MockTestResult from '../../screens/mock-test-result/MockTestResult';
 import ReviewQuestionScreen from '../../screens/review-question/ReviewQuestion';
 import ReviewMockTest from '../../screens/review-mock-test/ReviewMockTest';
+import AllMockTestTopic from '../../screens/all-mock-test-topics/AllMockTestTopics';
 
 
 const Stack = createNativeStackNavigator();
@@ -61,7 +62,7 @@ const RootNavigation = () => {
             <Stack.Screen name="hazard" component={HazardPerception} />
             <Stack.Screen name="review-clips" component={ReviewAllClips} />
             <Stack.Screen name="mock-result" component={MockTestResult} />
-            <Stack.Screen name="review-question" component={ReviewQuestionScreen} />
+            <Stack.Screen name="all-mock-test-topics" component={AllMockTestTopic} />
             <Stack.Screen name="review-mock-test" component={ReviewMockTest} />
             <Stack.Screen name="auth-stack" component={AuthStackNavigator} />
         </Stack.Navigator>

@@ -12,7 +12,7 @@ import HeaderWithBackButton from '../../components/Headers/HeaderWithBackButton'
 import { theme } from '../../utils/colors';
 import { Fonts } from '../../utils/fonts';
 
-const RevisionQuestionList = ({ data, onClick }) => {
+const AllMockTestTopicList = ({ data, onClick }) => {
 
     return (
         <TouchableOpacity
@@ -60,7 +60,7 @@ const RevisionQuestionList = ({ data, onClick }) => {
     )
 }
 
-export default RevisionQuestionList
+export default AllMockTestTopicList
 
 const styles = StyleSheet.create({
     row: {

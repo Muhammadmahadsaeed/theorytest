@@ -29,7 +29,7 @@ const TheoryTestScreen = ({ navigation }) => {
             name: "Practive Revision Question",
             description: 'Review questions sorted by topics',
             icon: <ReviewIcon />,
-            link: 'revision-question'
+            link: 'all-mock-test-topics'
         },
         {
             id: 3,

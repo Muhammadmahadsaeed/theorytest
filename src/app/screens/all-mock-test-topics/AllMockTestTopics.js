@@ -7,15 +7,14 @@ import {
     ScrollView
 } from 'react-native';
 import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
-import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import WrapperContainer1 from '../../components/Wrapper/WrapperContainer1';
 import HeaderWithBackButton from '../../components/Headers/HeaderWithBackButton';
 import { theme } from '../../utils/colors';
 import { Fonts } from '../../utils/fonts';
-import RevisionQuestionList from './RevisionQuestionList';
+import AllMockTestTopicList from './AllMockTestTopicsList';
 import TheoryTestBottomSheet from '../../components/BottomSheet/TheoryTestBottomSheet';
 
-const RevisionQuestion = ({ navigation }) => {
+const AllMockTestTopic = ({ navigation }) => {
 
     const [list, setList] = useState([
         {
@@ -134,7 +133,7 @@ const RevisionQuestion = ({ navigation }) => {
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={styles.innerContainer}>
                     {list.map((el, index) => (
-                        <RevisionQuestionList key={index} data={el} onClick={onClick} />
+                        <AllMockTestTopicList key={index} data={el} onClick={onClick} />
                     ))}
                 </View>
             </ScrollView>
@@ -154,7 +153,7 @@ const RevisionQuestion = ({ navigation }) => {
     )
 }
 
-export default RevisionQuestion
+export default AllMockTestTopic
 
 const styles = StyleSheet.create({
     innerContainer: {
