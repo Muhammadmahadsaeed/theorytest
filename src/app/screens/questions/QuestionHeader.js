@@ -7,7 +7,7 @@ import {
 import { BackLeftIcon, FlagIcon, HeartIcon, RedFlagIcon, RedHeartIcon } from '../../utils/images';
 import { useDispatch, useSelector } from 'react-redux';
 
-const QuestionHeader = ({ currentQuestion, currentQuestionIndex, questions, setQuestions }) => {
+const QuestionHeader = ({ currentQuestion, currentQuestionIndex, questions, setQuestions, goToBack }) => {
 
     const dispatch = useDispatch();
     const { userFlag, userFavourite } = useSelector(state => state.userReducer)

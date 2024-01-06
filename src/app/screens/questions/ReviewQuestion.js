@@ -9,7 +9,7 @@ import WrapperContainer1 from '../../components/Wrapper/WrapperContainer1';
 import { CrossRoundIcon, InfoCircleIcon, TickBoxIcon } from '../../utils/images';
 import { theme } from '../../utils/colors';
 import { Fonts } from '../../utils/fonts';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import TextModal from '../../components/Modal/TextModal';
 import QuestionHeader from './QuestionHeader';
 import QuestionFooter from './QuestionFooter';
@@ -24,7 +24,6 @@ const ReviewQuestionScreen = ({ navigation, route }) => {
     const [questArray, setQuestArray] = useState([])
 
     const dispatch = useDispatch();
-    const { userFlag, userFavourite } = useSelector(state => state.userReducer)
 
     const textModalRef = useRef()
 
@@ -78,8 +77,6 @@ const ReviewQuestionScreen = ({ navigation, route }) => {
         setCurrentQuestionIndex(currentQuestionIndex - 1)
     }
 
-
-
     const getIcon = (item) => {
         if (item.isCorrectAnswer && item.userGotItRight) {
             return <TickBoxIcon />
@@ -103,6 +100,7 @@ const ReviewQuestionScreen = ({ navigation, route }) => {
             <QuestionHeader
                 currentQuestion={currentQuestion}
                 setQuestions={setQuestArray}
+                goToBack={goToBack}
                 questions={questions}
                 currentQuestionIndex={currentQuestionIndex} />
             <View style={styles.container}>

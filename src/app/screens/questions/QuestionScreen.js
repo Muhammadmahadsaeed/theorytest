@@ -162,6 +162,7 @@ const QuestionScreen = ({ navigation }) => {
     return (
         <WrapperContainer1>
             <QuestionHeader
+            goToBack={goToBack}
                 currentQuestion={currentQuestion}
                 setQuestions={setQuestions}
                 questions={questions}

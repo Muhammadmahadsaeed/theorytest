@@ -181,6 +181,7 @@ const RevisionQuestionByTopic = ({ navigation }) => {
                 currentQuestion={currentQuestion}
                 setQuestions={setQuestions}
                 questions={questions}
+                goToBack={goToBack}
                 currentQuestionIndex={currentQuestionIndex} />
             <View style={styles.container}>
                 <QuestionProgress currentQuestionIndex={currentQuestionIndex} questions={questions} />
