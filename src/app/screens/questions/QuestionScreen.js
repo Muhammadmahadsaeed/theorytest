@@ -104,18 +104,14 @@ const QuestionScreen = ({ navigation, route }) => {
         bottomSheetRef.current?.snapToIndex(index);
     }
 
-    // const onNext = () => {
-    //     let index = currentQuestionIndex + 1
-    //     if (index >= questions.length) {
-    //         navigation.replace('mock-result', { result: questions })
-    //         return
-    //     }
-    //     setCurrentQuestionIndex(currentQuestionIndex + 1)
-    // }
-
-    // const onPrev = () => {
-    //     setCurrentQuestionIndex(currentQuestionIndex - 1)
-    // }
+    const onNext = (questions) => {
+        let index = currentQuestionIndex + 1
+        if (index >= questions.length) {
+            navigation.replace('mock-result', { result: questions })
+            return
+        }
+        setCurrentQuestionIndex(currentQuestionIndex + 1)
+    }
 
     const onSelectOption = (item) => {
 
@@ -138,7 +134,9 @@ const QuestionScreen = ({ navigation, route }) => {
             return q
         })
         setQuestions(updatedQuestions2);
-        if(config?.autoSkip) onNext()
+        if (config?.autoSkip) {
+            currentQuestion?.type == 'radio' ? onNext(updatedQuestions2) : currentQuestion?.user_answer?.length && currentQuestion?.user_answer?.length < 2 && onNext(updatedQuestions2)
+       }
     };
 
     const highLightOption = (el) => {
@@ -213,7 +211,7 @@ const QuestionScreen = ({ navigation, route }) => {
                 currentQuestionIndex={currentQuestionIndex}
                 config={config}
                 setCurrentQuestionIndex={setCurrentQuestionIndex}
-                navigation={navigation}/>
+                navigation={navigation} />
             <BottomSheet
                 ref={bottomSheetRef}
                 index={-1}

@@ -21,7 +21,9 @@ import QuestionHeader from './QuestionHeader';
 import QuestionProgress from './QuestionProgress';
 
 
-const RevisionQuestionByTopic = ({ navigation }) => {
+const RevisionQuestionByTopic = ({ navigation, route }) => {
+
+    const { config } = route?.params || {}
 
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [questions, setQuestions] = useState(questionArray);
@@ -223,6 +225,7 @@ const RevisionQuestionByTopic = ({ navigation }) => {
             <QuestionFooter
                 questions={questions}
                 isMock={true}
+                config={config}
                 currentQuestion={currentQuestion}
                 currentQuestionIndex={currentQuestionIndex}
                 setCurrentQuestionIndex={setCurrentQuestionIndex}

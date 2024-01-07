@@ -62,7 +62,7 @@ const QuestionFooter = ({
                 :
                 <View />
             }
-            {(showNext || currentQuestion?.isCheck) ?
+            {(showNext || currentQuestion?.isCheck) && !config?.autoSkip &&
                 <TouchableOpacity
                     style={styles.btn2(currentQuestion?.isCheck ? true : btnStatus())}
                     disabled={currentQuestion?.isCheck ? false : btnStatus() ? false : true}
@@ -73,7 +73,8 @@ const QuestionFooter = ({
                     </Text>
                     <ForwardEnWhiteIcon svgStyle={styles.arrowSvg} />
                 </TouchableOpacity>
-                :
+            }
+            {!(showNext || currentQuestion?.isCheck) &&
                 <TouchableOpacity
                     style={styles.btn2(btnStatus())}
                     disabled={btnStatus() ? false : true}
