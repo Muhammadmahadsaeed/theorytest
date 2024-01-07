@@ -23,7 +23,9 @@ import QuestionProgress from './QuestionProgress';
 
 let totalTimeInMinutes = 57
 
-const QuestionScreen = ({ navigation }) => {
+const QuestionScreen = ({ navigation, route }) => {
+
+    const { config } = route?.params || {}
 
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [timeRemaining, setTimeRemaining] = useState(totalTimeInMinutes * 60);
@@ -31,7 +33,6 @@ const QuestionScreen = ({ navigation }) => {
 
     const bottomSheetRef = useRef(null);
     const dispatch = useDispatch();
-    const { userFlag, userFavourite } = useSelector(state => state.userReducer)
 
     const mapDispatchToProps = (value) => {
         dispatch({ type: 'update_redux', payload: value });
@@ -103,18 +104,18 @@ const QuestionScreen = ({ navigation }) => {
         bottomSheetRef.current?.snapToIndex(index);
     }
 
-    const onNext = () => {
-        let index = currentQuestionIndex + 1
-        if (index >= questions.length) {
-            navigation.replace('mock-result', { result: questions })
-            return
-        }
-        setCurrentQuestionIndex(currentQuestionIndex + 1)
-    }
+    // const onNext = () => {
+    //     let index = currentQuestionIndex + 1
+    //     if (index >= questions.length) {
+    //         navigation.replace('mock-result', { result: questions })
+    //         return
+    //     }
+    //     setCurrentQuestionIndex(currentQuestionIndex + 1)
+    // }
 
-    const onPrev = () => {
-        setCurrentQuestionIndex(currentQuestionIndex - 1)
-    }
+    // const onPrev = () => {
+    //     setCurrentQuestionIndex(currentQuestionIndex - 1)
+    // }
 
     const onSelectOption = (item) => {
 
@@ -136,9 +137,8 @@ const QuestionScreen = ({ navigation }) => {
             }
             return q
         })
-
-
         setQuestions(updatedQuestions2);
+        if(config?.autoSkip) onNext()
     };
 
     const highLightOption = (el) => {
@@ -162,7 +162,7 @@ const QuestionScreen = ({ navigation }) => {
     return (
         <WrapperContainer1>
             <QuestionHeader
-            goToBack={goToBack}
+                goToBack={goToBack}
                 currentQuestion={currentQuestion}
                 setQuestions={setQuestions}
                 questions={questions}
@@ -208,10 +208,12 @@ const QuestionScreen = ({ navigation }) => {
             <QuestionFooter
                 questions={questions}
                 isMock={true}
+                showNext={true}
                 currentQuestion={currentQuestion}
                 currentQuestionIndex={currentQuestionIndex}
-                onNext={onNext}
-                onPrev={onPrev} />
+                config={config}
+                setCurrentQuestionIndex={setCurrentQuestionIndex}
+                navigation={navigation}/>
             <BottomSheet
                 ref={bottomSheetRef}
                 index={-1}

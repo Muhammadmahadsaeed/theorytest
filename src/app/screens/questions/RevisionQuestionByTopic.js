@@ -79,15 +79,6 @@ const RevisionQuestionByTopic = ({ navigation }) => {
         bottomSheetRef.current?.snapToIndex(index);
     }
 
-    const onNext = () => {
-        let index = currentQuestionIndex + 1
-        if (index >= questions.length) {
-            navigation.replace('mock-result', { result: questions })
-            return
-        }
-        setCurrentQuestionIndex(currentQuestionIndex + 1)
-    }
-
     const onCheck = () => {
         let currentQuestion = questions[currentQuestionIndex]
         const updatedQuestions = [...questions];
@@ -112,10 +103,6 @@ const RevisionQuestionByTopic = ({ navigation }) => {
         setQuestions(updatedQuestions);
 
 
-    }
-
-    const onPrev = () => {
-        setCurrentQuestionIndex(currentQuestionIndex - 1)
     }
 
     const onSelectOption = (item) => {
@@ -235,12 +222,12 @@ const RevisionQuestionByTopic = ({ navigation }) => {
             </View>
             <QuestionFooter
                 questions={questions}
-                isMock={false}
+                isMock={true}
                 currentQuestion={currentQuestion}
                 currentQuestionIndex={currentQuestionIndex}
-                onNext={onNext}
-                onCheck={onCheck}
-                onPrev={onPrev} />
+                setCurrentQuestionIndex={setCurrentQuestionIndex}
+                navigation={navigation}
+                onCheck={onCheck} />
             <BottomSheet
                 ref={bottomSheetRef}
                 index={-1}

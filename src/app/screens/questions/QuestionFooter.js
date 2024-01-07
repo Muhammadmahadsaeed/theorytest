@@ -13,13 +13,31 @@ const QuestionFooter = ({
     questions = [],
     currentQuestion,
     currentQuestionIndex,
-    onPrev,
     onCheck,
-    onNext,
-    isMock
+    isMock,
+    showNext,
+    config,
+    setCurrentQuestionIndex,
+    navigation
 }) => {
 
-    const checkBtn = () => {
+    const onNext = () => {
+        setCurrentQuestionIndex(currentQuestionIndex + 1)
+    }
+
+    const onFinish = () => {
+        if (isMock) {
+            navigation.replace('mock-result', { result: questions })
+        } else {
+            navigation.goBack()
+        }
+    }
+
+    const onPrev = () => {
+        setCurrentQuestionIndex(currentQuestionIndex - 1)
+    }
+
+    const btnStatus = () => {
         let type = questions[currentQuestionIndex]?.type
         let user_answer = questions[currentQuestionIndex]?.user_answer
 
@@ -44,12 +62,12 @@ const QuestionFooter = ({
                 :
                 <View />
             }
-            {(isMock || currentQuestion?.isCheck) ?
+            {(showNext || currentQuestion?.isCheck) ?
                 <TouchableOpacity
-                    style={styles.btn2(checkBtn())}
-                    disabled={checkBtn() ? false : true}
+                    style={styles.btn2(currentQuestion?.isCheck ? true : btnStatus())}
+                    disabled={currentQuestion?.isCheck ? false : btnStatus() ? false : true}
                     activeOpacity={0.8}
-                    onPress={() => onNext()}>
+                    onPress={() => currentQuestionIndex == questions.length - 1 ? onFinish() : onNext()}>
                     <Text style={styles.btn2Text}>
                         {currentQuestionIndex == questions.length - 1 ? "Finish" : "Next"}
                     </Text>
@@ -57,8 +75,8 @@ const QuestionFooter = ({
                 </TouchableOpacity>
                 :
                 <TouchableOpacity
-                    style={styles.btn2(checkBtn())}
-                    disabled={checkBtn() ? false : true}
+                    style={styles.btn2(btnStatus())}
+                    disabled={btnStatus() ? false : true}
                     activeOpacity={0.8}
                     onPress={() => onCheck()}>
                     <Text style={styles.btn2Text}>

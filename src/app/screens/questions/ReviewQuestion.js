@@ -64,19 +64,6 @@ const ReviewQuestionScreen = ({ navigation, route }) => {
         navigation.goBack()
     }
 
-    const onNext = () => {
-        let index = currentQuestionIndex + 1
-        if (index >= questions.length) {
-
-            return
-        }
-        setCurrentQuestionIndex(currentQuestionIndex + 1)
-    }
-
-    const onPrev = () => {
-        setCurrentQuestionIndex(currentQuestionIndex - 1)
-    }
-
     const getIcon = (item) => {
         if (item.isCorrectAnswer && item.userGotItRight) {
             return <TickBoxIcon />
@@ -147,11 +134,11 @@ const ReviewQuestionScreen = ({ navigation, route }) => {
             </View>
             <QuestionFooter
                 questions={questions}
-                isMock={true}
+                showNext={true}
                 currentQuestion={currentQuestion}
                 currentQuestionIndex={currentQuestionIndex}
-                onNext={onNext}
-                onPrev={onPrev} />
+                setCurrentQuestionIndex={setCurrentQuestionIndex}
+                navigation={navigation} />
             <TextModal ref={textModalRef} />
         </WrapperContainer1>
     )
