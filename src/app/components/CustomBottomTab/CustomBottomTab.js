@@ -106,7 +106,7 @@ const styles = ({
         paddingHorizontal: 10,
         borderRadius: 10,
         paddingVertical: 5,
-        backgroundColor: tab ? theme.buttonBg : theme.bg
+        backgroundColor: tab ? theme.skyBlue : theme.bg
     }),
     icon: {
         height: 25,

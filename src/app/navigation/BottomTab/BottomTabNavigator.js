@@ -58,17 +58,6 @@ const BottomTabNavigator = () => {
                         return
                     })(route),
                 })} />
-            <Tab.Screen name="Schedule" component={AppointmentNavigation}
-                options={({ route }) => ({
-                    tabBarStyle: ((route) => {
-                        const routeName = getFocusedRouteNameFromRoute(route) ?? ""
-                        if (Array1.includes(routeName)) {
-                            return { display: "none" }
-                        }
-                        return
-                    })(route),
-                })}
-            />
             <Tab.Screen name="Chat" component={ChatStackNavigator}
                 options={({ route }) => ({
                     tabBarStyle: ((route) => {

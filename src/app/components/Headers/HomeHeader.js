@@ -31,12 +31,12 @@ const HomeHeader = ({ }) => {
             </TouchableOpacity>
          
             <View style={styles.right}>
-                <TouchableOpacity
+                {/* <TouchableOpacity
                     style={styles.bellIcon}
                     activeOpacity={0.95}
                     onPress={() => navigation.navigate('notification')}>
                     <AlarmIcon />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                 <TouchableOpacity
                     style={styles.searchIcon}
                     activeOpacity={0.8}

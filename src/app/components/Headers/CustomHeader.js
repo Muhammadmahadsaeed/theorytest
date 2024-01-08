@@ -67,7 +67,7 @@ const styles = ({
     header: {
         height: 166,
         paddingHorizontal: 15,
-        backgroundColor: theme.buttonBgDark,
+        backgroundColor: theme.skyBlue,
         borderBottomLeftRadius: 36,
         borderBottomRightRadius: 36
     },
@@ -88,7 +88,7 @@ const styles = ({
     },
     centerText: {
         fontSize: 20,
-        color: theme.textWhite,
+        color: theme.white,
         fontFamily: Fonts.bold
     },
     right: {

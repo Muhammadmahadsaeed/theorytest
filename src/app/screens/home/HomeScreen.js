@@ -70,7 +70,7 @@ const HomeScreen = ({ navigation }) => {
                                 {today}
                             </Text>
                             <Text style={styles.name}>
-                                Hi, {userData?.name || "Guest"}
+                                Hi, {userData?.name || "Welcome"}
                             </Text>
                         </View>
                         <View style={styles.videoView}>

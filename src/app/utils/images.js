@@ -31,7 +31,7 @@ import AppointmentType from '../../assets/app-images/appointment-type.svg'
 import SearchFill from '../../assets/app-images/search-fill.svg'
 import Star from '../../assets/app-images/star.svg'
 import PinBlue from '../../assets/app-images/pin-blue.svg'
-import Share from '../../assets/app-images/share.svg'
+// import Share from '../../assets/app-images/share.svg'
 import Chat from '../../assets/app-images/chat.svg'
 import Line from '../../assets/app-images/line.svg'
 import StarCircle from '../../assets/app-images/star-circle.svg'
@@ -43,7 +43,6 @@ import Phone from '../../assets/app-images/phone.svg'
 import History from '../../assets/app-images/history.svg'
 import Pay from '../../assets/app-images/pay.svg'
 import HeadSet from '../../assets/app-images/headset.svg'
-import Help from '../../assets/app-images/help.svg'
 import Exit from '../../assets/app-images/exit.svg'
 import CustomPin from '../../assets/app-images/custom-pin.svg'
 import ForwardArrow from '../../assets/app-images/forward-arrow.svg'
@@ -111,7 +110,31 @@ import RedHeart from '../../assets/images/heart-red.svg'
 import TickBox from '../../assets/images/tick-box.svg'
 import CrossRound from '../../assets/images/cross-round.svg'
 import InfoCircle from '../../assets/images/info-circle.svg'
+import Help from '../../assets/images/help.svg'
+import Share from '../../assets/images/share.svg'
+import Support from '../../assets/images/support.svg'
+import Clear from '../../assets/images/clear.svg'
 
+export const ClearIcon = ({ svgStyle }) => (
+     <View style={{ ...svgStyle }}>
+          <Clear width="100%" height="100%" />
+     </View>
+)
+export const SupportIcon = ({ svgStyle }) => (
+     <View style={{ ...svgStyle }}>
+          <Support width="100%" height="100%" />
+     </View>
+)
+export const ShareIcon = ({ svgStyle }) => (
+     <View style={{ ...svgStyle }}>
+          <Share width="100%" height="100%" />
+     </View>
+)
+export const HelpIcon = ({ svgStyle }) => (
+     <View style={{ ...svgStyle }}>
+          <Help width="100%" height="100%" />
+     </View>
+)
 export const InfoCircleIcon = ({ svgStyle }) => (
      <View style={{ ...svgStyle }}>
           <InfoCircle width="100%" height="100%"/>
@@ -443,11 +466,7 @@ export const ExitIcon = ({ svgStyle }) => (
           <Exit width="100%" height="100%" />
      </View>
 )
-export const HelpIcon = ({ svgStyle }) => (
-     <View style={{ ...svgStyle }}>
-          <Help width="100%" height="100%" />
-     </View>
-)
+
 export const HeadSetIcon = ({ svgStyle }) => (
      <View style={{ ...svgStyle }}>
           <HeadSet width="100%" height="100%" />
@@ -503,11 +522,11 @@ export const ChatIcon = ({ svgStyle }) => (
           <Chat width="100%" height="100%" />
      </View>
 )
-export const ShareIcon = ({ svgStyle }) => (
-     <View style={{ ...svgStyle }}>
-          <Share width="100%" height="100%" />
-     </View>
-)
+// export const ShareIcon = ({ svgStyle }) => (
+//      <View style={{ ...svgStyle }}>
+//           <Share width="100%" height="100%" />
+//      </View>
+// )
 export const PinBlueIcon = ({ svgStyle }) => (
      <View style={{ ...svgStyle }}>
           <PinBlue width="100%" height="100%" />

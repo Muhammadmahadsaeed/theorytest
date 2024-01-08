@@ -62,7 +62,7 @@ const MockTestResult = ({ navigation, route }) => {
         return 0;
     }, [questions]);
 
-console.log(questions);
+
     return (
         <WrapperContainer1>
             <HeaderWithBackButton text={"Result"} />

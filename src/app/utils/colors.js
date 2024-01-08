@@ -3,6 +3,7 @@ export const theme = {
     white: '#fff',
     transparent: 'transparent',
     backgroundBlack: '#0A1629',
+    buttonBgDark: '#0C395B',
     black: '#000',
     dark: '#e3e7ea',
     borderGray: '#dfe3e8',
