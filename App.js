@@ -4,7 +4,7 @@ import { useCallback, useEffect } from 'react';
 import Toast from 'react-native-toast-message';
 import FlashMessage from "react-native-flash-message";
 import { useFonts } from 'expo-font';
-// import * as Updates from 'expo-updates';
+import * as Updates from 'expo-updates';
 import * as SplashScreen from 'expo-splash-screen';
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/es/integration/react";
@@ -35,22 +35,24 @@ export default function App() {
   }, [fontsLoaded]);
 
   useEffect(() => {
-    // onFetchUpdateAsync()
+    // eslint-disable-next-line no-undef
+    if (__DEV__) return;
+    (async () => {
+      const { isAvailable } = await Updates.checkForUpdateAsync()
+      if (isAvailable) {
+        try {
+          const { isNew } = await Updates.fetchUpdateAsync()
+          if (isNew) {
+            await Updates.reloadAsync()
+          }
+        } catch (error) {
+          console.log('error while updating app', JSON.stringify(error))
+        } finally {
+
+        }
+      }
+    })()
   }, [])
-
-
-  // const onFetchUpdateAsync = async () => {
-  //   try {
-  //     const update = await Updates.checkForUpdateAsync();
-  //     if (update.isAvailable) {
-  //       await Updates.fetchUpdateAsync();
-  //       await Updates.reloadAsync();
-  //     }
-  //   } catch (error) {
-  //     // You can also add an alert() to see the error message in case of an error when fetching updates.
-  //     alert(`Error fetching latest Expo update: ${error}`);
-  //   }
-  // }
 
   if (!fontsLoaded) {
     return null;
