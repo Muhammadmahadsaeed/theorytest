@@ -17,8 +17,12 @@ const FlagAndLikeQuestion = ({ navigation, route }) => {
 
     const [questions, setQuestions] = useState(fromRoute == 'flag' ? userFlag : userFavourite)
 
-    const onQuestionClick = () => {
-
+    const onQuestionClick = (index) => {
+        navigation.navigate('review-question', {
+            result: fromRoute == 'flag' ? userFlag : userFavourite,
+            index: index,
+            fromRoute: true
+        })
     }
 
     return (

@@ -18,7 +18,7 @@ import QuestionProgress from './QuestionProgress';
 
 const ReviewQuestionScreen = ({ navigation, route }) => {
 
-    const { result: questions, index } = route?.params || []
+    const { result: questions, index, fromRoute } = route?.params || {}
 
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(index || 0);
     const [questArray, setQuestArray] = useState([])
@@ -43,6 +43,12 @@ const ReviewQuestionScreen = ({ navigation, route }) => {
                 const userGotItRight = isCorrectAnswer && userAnswer.includes(o.option);
                 const userGotItWrong = !isCorrectAnswer && userAnswer.includes(o.option);
                 const userSelectedAnswer = isCorrectAnswer && !userAnswer.includes(o.option);
+                if (fromRoute) {
+                    return {
+                        ...o,
+                        isCorrectAnswer
+                    }
+                }
                 return {
                     ...o,
                     isCorrectAnswer,
@@ -65,6 +71,9 @@ const ReviewQuestionScreen = ({ navigation, route }) => {
     }
 
     const getIcon = (item) => {
+        if (item.isCorrectAnswer && fromRoute) {
+            return <TickBoxIcon />
+        }
         if (item.isCorrectAnswer && item.userGotItRight) {
             return <TickBoxIcon />
         }
@@ -135,6 +144,7 @@ const ReviewQuestionScreen = ({ navigation, route }) => {
             <QuestionFooter
                 questions={questions}
                 showNext={true}
+                fromRoute={fromRoute}
                 currentQuestion={currentQuestion}
                 currentQuestionIndex={currentQuestionIndex}
                 setCurrentQuestionIndex={setCurrentQuestionIndex}

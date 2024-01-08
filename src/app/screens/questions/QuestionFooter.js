@@ -18,7 +18,8 @@ const QuestionFooter = ({
     showNext,
     config,
     setCurrentQuestionIndex,
-    navigation
+    navigation,
+    fromRoute = false
 }) => {
 
     const onNext = () => {
@@ -42,9 +43,9 @@ const QuestionFooter = ({
         let user_answer = questions[currentQuestionIndex]?.user_answer
 
         if (type == 'radio') {
-            return user_answer?.length ? true : false
+            return fromRoute ? true : user_answer?.length ? true : false
         }
-        return user_answer?.length && user_answer?.length == 2 ? true : false
+        return fromRoute ? true : user_answer?.length && user_answer?.length == 2 ? true : false
     }
 
     return (
