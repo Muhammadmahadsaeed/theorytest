@@ -1,17 +1,18 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import {
     View,
     Text,
-    TextInput,
     ScrollView,
     TouchableOpacity,
-    StyleSheet
+    StyleSheet,
+    Image,
+    Linking
 } from 'react-native';
 import { Video, ResizeMode } from 'expo-av';
 import { theme } from '../../utils/colors';
 import HomeHeader from '../../components/Headers/HomeHeader';
 import { Fonts } from '../../utils/fonts';
-import { AddressBookIcon, AlertIcon, CrownIcon } from '../../utils/images';
+import { AddressBookIcon, AlertIcon, CrownIcon, govuk } from '../../utils/images';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 import WrapperContainer1 from '../../components/Wrapper/WrapperContainer1';
@@ -45,18 +46,26 @@ const HomeScreen = ({ navigation }) => {
         {
             id: 5,
             name: 'Highway Code',
-            icon: <CrownIcon svgStyle={{height: 50,
-            width: 50}} />,
+            icon: <CrownIcon />,
+            webLink: 'https://www.gov.uk/book-theory-test'
         },
         {
             id: 6,
-            name: 'Road Signs'
+            name: 'Book Theory Test',
+            icon: govuk,
+            type: 'png',
+            webLink: 'https://www.gov.uk/guidance/the-highway-code'
         },
     ])
     const [videoLoading, setVideoLoading] = useState(true)
 
     const onClick = (el) => {
-        navigation.navigate(el.link)
+        if (el?.link) {
+            navigation.navigate(el.link)
+            return
+        } else {
+            Linking.openURL(el.webLink)
+        }
     }
 
     return (
@@ -107,8 +116,8 @@ const HomeScreen = ({ navigation }) => {
                                     key={index}
                                     activeOpacity={0.8}
                                     onPress={() => onClick(el)}>
-                                    <View style={styles.imgView}>
-                                        {el.icon}
+                                    <View style={[styles.imgView]}>
+                                        {el.type == 'png' ? <Image source={el.icon} style={styles.img} /> : el.icon}
                                     </View>
                                     <View style={styles.textView}>
                                         <Text style={styles.text}>
@@ -189,6 +198,11 @@ const styles = StyleSheet.create({
         height: 45,
         width: 45,
         backgroundColor: theme.white
+    },
+    img: {
+        height: '100%',
+        width: '100%',
+        resizeMode: 'contain'
     },
     text: {
         fontFamily: Fonts.medium,

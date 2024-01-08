@@ -691,3 +691,6 @@ export const profile_placeholder = require('../../assets/app-images/profile_plac
 export const fb1 = require('../../assets/app-images/facebook.png')
 export const tw2 = require('../../assets/app-images/twitter.png')
 export const call18 = require('../../assets/app-images/telephone-call.png')
+
+
+export const govuk = require('../../assets/images/govuk.png')
