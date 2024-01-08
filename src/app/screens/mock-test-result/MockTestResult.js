@@ -1,11 +1,7 @@
-import React, { useRef, useState, useEffect, useMemo, useCallback } from 'react';
+import React, {  useMemo } from 'react';
 import {
     View,
     Text,
-    Image,
-    ScrollView,
-    Alert,
-    BackHandler,
     StyleSheet,
     TouchableOpacity
 } from 'react-native';
@@ -17,10 +13,6 @@ import { Fonts } from '../../utils/fonts';
 import { CertificateIcon, ReviewQuestionIcon } from '../../utils/images';
 import Button from '../../components/Buttons/Button';
 import { useSelector } from 'react-redux';
-
-function arraysEqual(arr1, arr2) {
-    return arr1.length === arr2.length && arr1.every((value, index) => value === arr2[index]);
-}
 
 const MockTestResult = ({ navigation, route }) => {
 

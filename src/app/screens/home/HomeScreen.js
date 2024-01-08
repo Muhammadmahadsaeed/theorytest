@@ -11,7 +11,7 @@ import { Video, ResizeMode } from 'expo-av';
 import { theme } from '../../utils/colors';
 import HomeHeader from '../../components/Headers/HomeHeader';
 import { Fonts } from '../../utils/fonts';
-import { AddressBookIcon, AlertIcon } from '../../utils/images';
+import { AddressBookIcon, AlertIcon, CrownIcon } from '../../utils/images';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 import WrapperContainer1 from '../../components/Wrapper/WrapperContainer1';
@@ -44,7 +44,9 @@ const HomeScreen = ({ navigation }) => {
         },
         {
             id: 5,
-            name: 'Highway Code'
+            name: 'Highway Code',
+            icon: <CrownIcon svgStyle={{height: 50,
+            width: 50}} />,
         },
         {
             id: 6,

@@ -114,7 +114,13 @@ import Help from '../../assets/images/help.svg'
 import Share from '../../assets/images/share.svg'
 import Support from '../../assets/images/support.svg'
 import Clear from '../../assets/images/clear.svg'
+import Crown from '../../assets/images/crown.svg'
 
+export const CrownIcon = ({ svgStyle }) => (
+     <View style={{ ...svgStyle }}>
+          <Crown width="100%" height="100%" />
+     </View>
+)
 export const ClearIcon = ({ svgStyle }) => (
      <View style={{ ...svgStyle }}>
           <Clear width="100%" height="100%" />

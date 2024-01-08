@@ -1,31 +1,31 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
     View,
     StyleSheet,
-    Image,
+    Share,
     Text,
     TouchableOpacity
 } from 'react-native';
+import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import WrapperContainer from '../../components/Wrapper/WrapperContainer';
 import CustomHeader from '../../components/Headers/CustomHeader';
 import { ScrollView } from 'react-native';
-import { ClearIcon, CustomPinIcon, ExitIcon, FlagIcon, ForwardArrowIcon, HeartIcon, HelpIcon, HistoryIcon, LoginIcon, PayIcon, PhoneIcon, ShareIcon, SupportIcon, UserDeactiveIcon, profile, profile_placeholder } from '../../utils/images';
+import { ClearIcon, FlagIcon, HeartIcon, HelpIcon, ShareIcon, SupportIcon } from '../../utils/images';
 import { theme } from '../../utils/colors';
 import { Fonts } from '../../utils/fonts';
-import { useSelector, useDispatch } from 'react-redux';
-import { showFlashMessage } from '../../utils/Toast';
+import { useDispatch } from 'react-redux';
+import DeleteModal from '../../components/Modal/DeleteModal';
 
 const svgStyle = {
     height: 24,
     width: 24
 }
 
-const loginPaths = ['edit-profile', 'Chat', 'address']
 
 const ProfileScreen = ({ navigation }) => {
 
-    const { userData } = useSelector(state => state.userReducer)
     const dispatch = useDispatch();
+    const deleteModal = useRef()
 
     const mapDispatchToProps = (value) => {
         dispatch({ type: 'update_redux', payload: value });
@@ -35,35 +35,34 @@ const ProfileScreen = ({ navigation }) => {
         id: 1,
         name: 'Flagged Questions',
         icon: <FlagIcon svgStyle={svgStyle} />,
-        route: 'edit-profile'
+        route: 'flag-nd-like',
+        short_name: 'flag'
     }, {
         id: 1,
         name: 'Liked Questions',
         icon: <HeartIcon svgStyle={svgStyle} />,
-        route: 'address'
+        route: 'flag-nd-like',
+        short_name: 'liked'
     }, {
         id: 1,
         name: 'Share App',
         icon: <ShareIcon svgStyle={svgStyle} />,
-        route: 'Profile'
+        route: 'share'
     }, {
         id: 1,
         name: 'Help Center',
         icon: <SupportIcon svgStyle={{ height: 28, width: 28 }} />,
         route: 'help-center',
-        css: {
-
-        }
     }, {
         id: 1,
         name: 'About Us',
         icon: <HelpIcon svgStyle={svgStyle} />,
-        route: 'Profile'
+        route: 'help-center',
     }, {
         id: 1,
         name: 'Clear Cache',
         icon: <ClearIcon svgStyle={svgStyle} />,
-        route: 'Chat'
+        route: 'cache'
     }]
     const [theory, setTheory] = useState([
         {
@@ -100,25 +99,43 @@ const ProfileScreen = ({ navigation }) => {
         }
     ])
 
-    const goToRoute = (path) => {
-        // if (path && path == 'logout') {
-        //     mapDispatchToProps({ userData: null, token: null, userFavourite: [] })
-        //     navigation.replace('auth-stack', { screen: 'login-screen' });
-        //     return
-        // } else if (!userData && loginPaths.includes(path)) {
-        //     showFlashMessage("error", 'Please login to explore')
-        // } else {
-        //     navigation.navigate(path)
-        // }
+    const goToRoute = (item) => {
+        if (item?.route == 'flag-nd-like') {
+            navigation.navigate(item?.route, { fromRoute: item?.short_name });
+            return
+        }
+        if (item?.route == 'share') {
+            onShare()
+        }
+        if (item?.route == 'cache') {
+            deleteModal.current.isOpen()
+        }
+        else {
+            navigation.navigate(item?.route)
+        }
     }
 
-    const goToProfile = () => {
-        // if(userData){
-        //     navigation.navigate('edit-profile')
-        // }else{
-        //     showFlashMessage("error", "Please login to explore")
-        // }
-    }
+
+    const onShare = async () => {
+        try {
+            const result = await Share.share({
+                message:
+                    'React Native | A framework for building native apps using React',
+            });
+            if (result.action === Share.sharedAction) {
+                if (result.activityType) {
+                    // shared with activity type of result.activityType
+                } else {
+                    // shared
+                }
+            } else if (result.action === Share.dismissedAction) {
+                // dismissed
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         <WrapperContainer>
             <CustomHeader text={"Profile"} />
@@ -127,22 +144,31 @@ const ProfileScreen = ({ navigation }) => {
                     style={styles.card}
                     activeOpacity={0.95}>
                     <Text style={styles.text}>
-                        Theory Test Stats
+                        Test Readiness Indicator
                     </Text>
-                    <View style={styles.row01}>
-                        {theory.map((el, index) => (
-                            <View style={styles.col} key={index}>
-                                <View style={styles.box}>
-                                    <Text style={styles.boxText}>
-                                        27
+                    <View style={styles.circleView}>
+                        <AnimatedCircularProgress
+                            size={80}
+                            width={8}
+                            fill={50}
+                            rotation={180}
+                            // arcSweepAngle={300}
+                            tintColor={theme.skyBlue}
+                            tintTransparency
+                            onAnimationComplete={() => console.log('onAnimationComplete')}
+                            backgroundColor={theme.lightBorderGrey}>
+                            {
+                                (fill) => (
+                                    <Text style={styles.fillText}>
+                                        Pass
                                     </Text>
-                                </View>
-                                <Text style={styles.text01}>
-                                    Taken
-                                </Text>
-                            </View>
-                        ))}
+                                )
+                            }
+                        </AnimatedCircularProgress>
                     </View>
+                    <Text style={styles.heading}>
+                        Just Starting Out
+                    </Text>
                 </TouchableOpacity>
                 <ScrollView
                     showsVerticalScrollIndicator={false}
@@ -151,10 +177,31 @@ const ProfileScreen = ({ navigation }) => {
                         style={styles.card01}
                         activeOpacity={0.95}>
                         <Text style={styles.text}>
-                            Hazard Perception Stats
+                            Theory Test Stats
                         </Text>
                         <View style={styles.row01}>
                             {theory.map((el, index) => (
+                                <View style={styles.col} key={index}>
+                                    <View style={styles.box}>
+                                        <Text style={styles.boxText}>
+                                            27
+                                        </Text>
+                                    </View>
+                                    <Text style={styles.text01}>
+                                        Taken
+                                    </Text>
+                                </View>
+                            ))}
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={[styles.card01, { marginTop: 20, }]}
+                        activeOpacity={0.95}>
+                        <Text style={styles.text}>
+                            Hazard Perception Stats
+                        </Text>
+                        <View style={styles.row01}>
+                            {hazardPerc.map((el, index) => (
                                 <View style={styles.col} key={index}>
                                     <View style={styles.box}>
                                         <Text style={styles.boxText}>
@@ -168,14 +215,13 @@ const ProfileScreen = ({ navigation }) => {
                             ))}
                         </View>
                     </TouchableOpacity>
-
                     <View style={styles.list}>
                         {list.map((el, index) => (
                             <TouchableOpacity
                                 key={index}
                                 style={styles.row}
                                 activeOpacity={0.95}
-                                onPress={() => goToRoute(el.route)}>
+                                onPress={() => goToRoute(el)}>
                                 <View style={styles.icon}>
                                     {el.icon}
                                 </View>
@@ -188,6 +234,7 @@ const ProfileScreen = ({ navigation }) => {
                     </View>
                 </ScrollView>
             </View>
+            <DeleteModal ref={deleteModal} />
         </WrapperContainer>
     )
 }
@@ -201,9 +248,11 @@ const styles = StyleSheet.create({
     },
     card: {
         alignSelf: 'center',
-        top: -70,
+        top: -90,
         position: 'absolute',
         padding: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
         zIndex: 100,
         width: '93%',
         borderRadius: 16,
@@ -218,9 +267,22 @@ const styles = StyleSheet.create({
 
         elevation: 5,
     },
-
+    circleView: {
+        alignItems: 'center',
+        marginVertical: 10
+    },
+    fillText: {
+        fontFamily: Fonts.medium,
+        fontSize: 14,
+        color: theme.black
+    },
+    heading: {
+        fontFamily: Fonts.medium,
+        fontSize: 18,
+        color: theme.black
+    },
     card01: {
-        marginTop: 60,
+        marginTop: 95,
         alignSelf: 'center',
         paddingVertical: 13,
         paddingHorizontal: 10,
@@ -271,12 +333,12 @@ const styles = StyleSheet.create({
         paddingBottom: 150
     },
     list: {
+        flex: 1,
         alignSelf: 'center',
         marginTop: 20,
         marginBottom: 20,
         borderRadius: 16,
         padding: 15,
-        flex: 1,
         width: '93%',
         backgroundColor: theme.bg,
         shadowColor: "#000",
