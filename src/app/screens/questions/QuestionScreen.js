@@ -2,8 +2,6 @@ import React, { useRef, useState, useEffect, useMemo, useCallback } from 'react'
 import {
     View,
     Text,
-    Image,
-    ScrollView,
     Alert,
     BackHandler,
     StyleSheet,
@@ -11,7 +9,7 @@ import {
 } from 'react-native';
 import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import WrapperContainer1 from '../../components/Wrapper/WrapperContainer1';
-import { BackLeftIcon, BackWardArrowIcon, FlagIcon, ForwardEnWhiteIcon, HeartIcon, RedFlagIcon, RedHeartIcon, TimeIcon } from '../../utils/images';
+import {  TimeIcon } from '../../utils/images';
 import { theme } from '../../utils/colors';
 import { Fonts } from '../../utils/fonts';
 import questionArray from '../../services/section.json'

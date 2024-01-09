@@ -92,7 +92,7 @@ const HomeScreen = ({ navigation }) => {
                                 ref={video}
                                 style={styles.video}
                                 source={{
-                                    uri: 'https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
+                                    uri: 'https://media.safedrivingforlife.info/media/intro.webm',
                                 }}
                                 useNativeControls={false}
                                 resizeMode={ResizeMode.COVER}

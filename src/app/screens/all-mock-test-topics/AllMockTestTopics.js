@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback, useMemo } from 'react';
+import React, { useState, useRef, useCallback, useMemo, useEffect } from 'react';
 import {
     View,
     TouchableOpacity,
@@ -13,6 +13,7 @@ import { theme } from '../../utils/colors';
 import { Fonts } from '../../utils/fonts';
 import AllMockTestTopicList from './AllMockTestTopicsList';
 import TheoryTestBottomSheet from '../../components/BottomSheet/TheoryTestBottomSheet';
+import { formatData } from '../../helper/helper';
 
 const AllMockTestTopic = ({ navigation }) => {
 
@@ -92,6 +93,10 @@ const AllMockTestTopic = ({ navigation }) => {
     const [selectedItem, setSelectedItem] = useState({})
 
     const bottomSheetRef = useRef(null);
+
+    useEffect(() => {
+        formatData()
+    },[])
 
     const snapPoints = useMemo(() => ['95%'], []);
 

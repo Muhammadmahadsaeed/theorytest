@@ -1,4 +1,20 @@
 import moment from "moment";
+import Alertness from '../services/alertness.json'
+
+export function formatData() {
+    let arr = Alertness.questions.map((el) => {
+        return {
+            id: el.uuid,
+            type: el.type == 'choice' ? 'radio' : 'checkbox',
+            question: el.config.text,
+            options: el.config.choices.map((elem) => ({ option: elem.label })),
+            correct_answer: el.config.choices.filter((elem) => elem.correct).map(({ label }) => label),
+            explanation: el.config.messages.correct.text,
+            audios: Object.values(el.assets)
+        }
+    })
+    console.log(arr);
+}
 
 export function isObjEmpty(obj) {
     if (obj) {
@@ -54,7 +70,7 @@ export function capitalizeFirstLetter(string, retVal = "") {
     return capitalized;
 }
 
-export const formatData = (dataList, numColumns) => {
+export const formatDataIntoTwoCol = (dataList, numColumns) => {
     const totalRows = Math.floor(dataList.length / numColumns);
     let totalLastRow = dataList.length - totalRows * numColumns;
 
