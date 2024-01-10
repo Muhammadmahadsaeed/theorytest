@@ -95,7 +95,7 @@ const AllMockTestTopic = ({ navigation }) => {
     const bottomSheetRef = useRef(null);
 
     useEffect(() => {
-        formatData()
+        // formatData()
     },[])
 
     const snapPoints = useMemo(() => ['95%'], []);

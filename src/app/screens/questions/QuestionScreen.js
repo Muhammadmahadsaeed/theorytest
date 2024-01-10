@@ -105,16 +105,6 @@ const QuestionScreen = ({ navigation, route }) => {
         bottomSheetRef.current?.snapToIndex(index);
     }
 
-    const onNext = (questions) => {
-        console.log("on next=========");
-        // let index = currentQuestionIndex + 1
-        // if (index >= questions.length) {
-        //     navigation.replace('mock-result', { result: questions })
-        //     return
-        // }
-        // setCurrentQuestionIndex(currentQuestionIndex + 1)
-    }
-
     const onSelectOption = (item) => {
 
         const updatedQuestions = [...questions];
@@ -136,9 +126,7 @@ const QuestionScreen = ({ navigation, route }) => {
             return q
         })
         setQuestions(updatedQuestions2);
-        if (config?.autoSkip) {
-            currentQuestion?.type == 'radio' ? onNext(updatedQuestions2) : currentQuestion?.user_answer?.length && currentQuestion?.user_answer?.length < 2 && onNext(updatedQuestions2)
-        }
+       
     };
 
     const highLightOption = (el) => {
@@ -151,7 +139,12 @@ const QuestionScreen = ({ navigation, route }) => {
         handleClosePress()
         let find = questions.some(el => el.user_answer)
         if (find) {
-            navigation.replace('mock-result', { result: questions })
+            navigation.replace('mock-result',
+            {
+                result:
+                    questions.slice(0, currentQuestionIndex),
+                isPractice: true
+            })
         } else {
             navigation.goBack()
         }

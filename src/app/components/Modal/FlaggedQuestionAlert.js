@@ -47,11 +47,23 @@ const FlaggedQuestionAlertModal = React.forwardRef((props, ref) => {
                         </Text>
                     </View>
                     <View style={styles.footer}>
-                        <Button title={"Yes"} onPress={onYessPress} />
+                        <Button
+                            title={"Yes"}
+                            onPress={() => {
+                                setIsVisible(false)
+                                setTimeout(() => {
+                                    onYessPress()
+                                }, 500)
+                            }} />
                         <TouchableOpacity
                             style={styles.btn1}
                             activeOpacity={0.8}
-                            onPress={onNoPress}>
+                            onPress={() => {
+                                setIsVisible(false)
+                                setTimeout(() => {
+                                    onNoPress()
+                                }, 500)
+                            }}>
                             <Text style={styles.btn1Text}>
                                 No
                             </Text>

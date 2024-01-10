@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import {
     View,
     Text,
@@ -30,12 +30,26 @@ const QuestionFooter = ({
     const flaggedModalRef = useRef(null)
 
     const onNext = () => {
+        if ((currentQuestionIndex + 1) >= questions.length) {
+            onFinish()
+            return
+        }
         setCurrentQuestionIndex(currentQuestionIndex + 1)
     }
 
+    useEffect(() => {
+        console.log("change question=======");
+        let len = currentQuestion?.user_answer?.length
+
+        if (config?.autoSkip && len) {
+            currentQuestion?.type == 'radio' ? onNext() : len && len < 2 && onNext()
+        }
+        
+    }, [currentQuestionIndex, currentQuestion])
+
     const onYessPress = () => {
 
-        flaggedModalRef.current.isClose()
+        // flaggedModalRef.current.isClose()
         if (!fromFlagScreen) {
             const newQuestion = flaggedQuestion.map((el) => {
                 let find = questions.find((elem, index) => el.originalIndex == index)
@@ -57,7 +71,7 @@ const QuestionFooter = ({
     }
 
     const onNoPress = () => {
-        flaggedModalRef.current?.isClose()
+        // flaggedModalRef.current?.isClose()
         if (fromFlagScreen) {
             const newQuestion = originalQuestion.map((el, index) => {
                 let find = questions.find((elem) => index == elem.originalIndex)
@@ -70,7 +84,6 @@ const QuestionFooter = ({
                     return {
                         ...el
                     }
-
                 }
             })
             goToResult(newQuestion)

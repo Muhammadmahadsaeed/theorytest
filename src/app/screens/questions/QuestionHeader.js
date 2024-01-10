@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import {
     View,
     StyleSheet,
@@ -25,7 +25,7 @@ const QuestionHeader = ({
         dispatch({ type: 'update_redux', payload: value });
     };
 
-    const onFavoriteClick = async (item) => {
+    const onFavoriteClick = useCallback((item) => {
         const isItemInFavorites = userFavourite.some((el) => el.id === item.id);
         const updatedQuestions = [...questions];
 
@@ -41,10 +41,9 @@ const QuestionHeader = ({
         };
 
         setQuestions(updatedQuestions);
-    };
+    }, [currentQuestion, currentQuestionIndex])
 
-    const onFlag = (item) => {
-
+    const onFlag = useCallback((item) => {
         let newFlaggedArr = [...flaggedQuestion]; //local flagged state
         const updatedQuestions = [...questions]; //local question state
 
@@ -75,7 +74,7 @@ const QuestionHeader = ({
         setQuestions(updatedQuestions); //local question state
         setFlaggedQuestion(newFlaggedArr)//local flagged state
         mapDispatchToProps({ userFlag: updatedFlag });//redux array
-    };
+    }, [currentQuestion, currentQuestionIndex])
 
     return (
         <View style={styles.headerTop}>

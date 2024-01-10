@@ -140,7 +140,12 @@ const RevisionQuestionByTopic = ({ navigation, route }) => {
         handleClosePress()
         let find = questions.some(el => el.user_answer)
         if (find) {
-            navigation.replace('mock-result', { result: questions })
+            navigation.replace('mock-result',
+                {
+                    result:
+                        questions.slice(0, currentQuestionIndex),
+                    isPractice: true
+                })
         } else {
             navigation.goBack()
         }
