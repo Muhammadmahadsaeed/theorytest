@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import WrapperContainer1 from '../../components/Wrapper/WrapperContainer1';
-import {  TimeIcon } from '../../utils/images';
+import { TimeIcon } from '../../utils/images';
 import { theme } from '../../utils/colors';
 import { Fonts } from '../../utils/fonts';
 import questionArray from '../../services/section.json'
@@ -138,7 +138,7 @@ const QuestionScreen = ({ navigation, route }) => {
         setQuestions(updatedQuestions2);
         if (config?.autoSkip) {
             currentQuestion?.type == 'radio' ? onNext(updatedQuestions2) : currentQuestion?.user_answer?.length && currentQuestion?.user_answer?.length < 2 && onNext(updatedQuestions2)
-       }
+        }
     };
 
     const highLightOption = (el) => {
@@ -174,7 +174,7 @@ const QuestionScreen = ({ navigation, route }) => {
                 <QuestionProgress currentQuestionIndex={currentQuestionIndex} questions={questions} />
                 <View style={styles.row}>
                     <Text style={styles.heading}>
-                        Question {currentQuestionIndex + 1} / 50
+                        Question {currentQuestionIndex + 1} / {questions.length}
                     </Text>
                     <View style={styles.timeView}>
                         <View style={styles.clockIcon}>
@@ -228,7 +228,7 @@ const QuestionScreen = ({ navigation, route }) => {
                     onCancel={handleClosePress}
                     onConfirm={onConfirm} />
             </BottomSheet>
-            
+
         </WrapperContainer1>
     )
 }

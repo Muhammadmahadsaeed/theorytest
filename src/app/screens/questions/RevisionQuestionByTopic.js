@@ -177,7 +177,7 @@ const RevisionQuestionByTopic = ({ navigation, route }) => {
                 <QuestionProgress currentQuestionIndex={currentQuestionIndex} questions={questions} />
                 <View style={styles.row}>
                     <Text style={styles.heading}>
-                        Question {currentQuestionIndex + 1} / 50
+                        Question {currentQuestionIndex + 1} / {questions.length}
                     </Text>
                     {currentQuestion?.isCheck ?
                         <TouchableOpacity
