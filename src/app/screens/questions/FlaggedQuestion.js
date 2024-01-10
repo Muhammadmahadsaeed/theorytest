@@ -21,23 +21,18 @@ import QuestionProgress from './QuestionProgress';
 
 let totalTimeInMinutes = 57
 
-const QuestionScreen = ({ navigation, route }) => {
+const FlaggedQuestionScreen = ({ navigation, route }) => {
 
-    const { config } = route?.params || {}
-
+    const { result = [], config, originalQuestion  } = route?.params || {}
+    
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [timeRemaining, setTimeRemaining] = useState(totalTimeInMinutes * 60);
-    const [questions, setQuestions] = useState(questionArray);
-    const [flaggedQuestion, setFlaggedQuestion] = useState([])
+    const [questions, setQuestions] = useState(result);
+    const [flaggedQuestion, setFlaggedQuestion] = useState(result)
 
+    let currentQuestion = questions[currentQuestionIndex]
 
     const bottomSheetRef = useRef(null);
-
-    const dispatch = useDispatch();
-
-    const mapDispatchToProps = (value) => {
-        dispatch({ type: 'update_redux', payload: value });
-    };
 
     const snapPoints = useMemo(() => ['40%'], []);
 
@@ -73,6 +68,7 @@ const QuestionScreen = ({ navigation, route }) => {
 
 
     useEffect(() => {
+       
         const backAction = () => {
             Alert.alert('Hold on!', 'Are you sure you want to go back?', [
                 {
@@ -104,15 +100,14 @@ const QuestionScreen = ({ navigation, route }) => {
     const goToBack = (index) => {
         bottomSheetRef.current?.snapToIndex(index);
     }
-
+    // for auto skip 
     const onNext = (questions) => {
-        console.log("on next=========");
-        // let index = currentQuestionIndex + 1
-        // if (index >= questions.length) {
-        //     navigation.replace('mock-result', { result: questions })
-        //     return
-        // }
-        // setCurrentQuestionIndex(currentQuestionIndex + 1)
+        let index = currentQuestionIndex + 1
+        if (index >= questions.length) {
+            navigation.replace('mock-result', { result: questions })
+            return
+        }
+        setCurrentQuestionIndex(currentQuestionIndex + 1)
     }
 
     const onSelectOption = (item) => {
@@ -143,6 +138,7 @@ const QuestionScreen = ({ navigation, route }) => {
 
     const highLightOption = (el) => {
         let user_answer = questions[currentQuestionIndex]?.user_answer
+        
         return user_answer?.length && user_answer.includes(el.option) ? true : false
     }
 
@@ -157,8 +153,7 @@ const QuestionScreen = ({ navigation, route }) => {
         }
     }
 
-    let currentQuestion = questions[currentQuestionIndex]
-
+   
     return (
         <WrapperContainer1>
             <QuestionHeader
@@ -166,15 +161,14 @@ const QuestionScreen = ({ navigation, route }) => {
                 currentQuestion={currentQuestion}
                 setQuestions={setQuestions}
                 questions={questions}
-                isMock={true}
                 flaggedQuestion={flaggedQuestion}
                 setFlaggedQuestion={setFlaggedQuestion}
                 currentQuestionIndex={currentQuestionIndex} />
-            <View style={styles.container}>
+             <View style={styles.container}>
                 <QuestionProgress currentQuestionIndex={currentQuestionIndex} questions={questions} />
                 <View style={styles.row}>
                     <Text style={styles.heading}>
-                        Question {currentQuestionIndex + 1} / 50
+                        Question {currentQuestion?.originalIndex + 1} / 50
                     </Text>
                     <View style={styles.timeView}>
                         <View style={styles.clockIcon}>
@@ -208,13 +202,15 @@ const QuestionScreen = ({ navigation, route }) => {
                     </View>
                 </View>
             </View>
-            <QuestionFooter
+           <QuestionFooter
                 questions={questions}
-                showResult={true}
                 showNext={true}
                 currentQuestion={currentQuestion}
                 currentQuestionIndex={currentQuestionIndex}
                 config={config}
+                fromFlagScreen={true}
+                showResult={true}
+                originalQuestion={originalQuestion}
                 flaggedQuestion={flaggedQuestion}
                 setCurrentQuestionIndex={setCurrentQuestionIndex}
                 navigation={navigation} />
@@ -228,12 +224,11 @@ const QuestionScreen = ({ navigation, route }) => {
                     onCancel={handleClosePress}
                     onConfirm={onConfirm} />
             </BottomSheet>
-            
         </WrapperContainer1>
     )
 }
 
-export default QuestionScreen
+export default FlaggedQuestionScreen
 
 const styles = StyleSheet.create({
     container: {

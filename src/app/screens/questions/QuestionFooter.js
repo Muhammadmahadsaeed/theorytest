@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
     View,
     Text,
@@ -8,30 +8,93 @@ import {
 import { BackWardArrowIcon, ForwardEnWhiteIcon } from '../../utils/images';
 import { theme } from '../../utils/colors';
 import { Fonts } from '../../utils/fonts';
+import FlaggedQuestionAlertModal from '../../components/Modal/FlaggedQuestionAlert';
 
 const QuestionFooter = ({
     questions = [],
+    originalQuestion = [],
     currentQuestion,
     currentQuestionIndex,
     onCheck,
-    isMock,
+    showResult = false,
     showNext,
     config,
     setCurrentQuestionIndex,
     navigation,
-    fromRoute = false
+    fromRoute = false,
+    flaggedQuestion,
+    fromFlagScreen = false,
+    isPractice = false
 }) => {
+
+    const flaggedModalRef = useRef(null)
 
     const onNext = () => {
         setCurrentQuestionIndex(currentQuestionIndex + 1)
     }
 
+    const onYessPress = () => {
+
+        flaggedModalRef.current.isClose()
+        if (!fromFlagScreen) {
+            const newQuestion = flaggedQuestion.map((el) => {
+                let find = questions.find((elem, index) => el.originalIndex == index)
+                if (find) {
+                    return {
+                        ...el,
+                        user_answer: find.user_answer
+                    }
+                } else {
+                    return {
+                        ...el
+                    }
+
+                }
+            })
+            navigation.replace('flagged-question', { result: newQuestion, originalQuestion: questions })
+
+        }
+    }
+
+    const onNoPress = () => {
+        flaggedModalRef.current?.isClose()
+        if (fromFlagScreen) {
+            const newQuestion = originalQuestion.map((el, index) => {
+                let find = questions.find((elem) => index == elem.originalIndex)
+                if (find) {
+                    return {
+                        ...el,
+                        user_answer: find.user_answer
+                    }
+                } else {
+                    return {
+                        ...el
+                    }
+
+                }
+            })
+            goToResult(newQuestion)
+        } else {
+            goToResult(questions)
+        }
+
+    }
+
     const onFinish = () => {
-        if (isMock) {
-            navigation.replace('mock-result', { result: questions })
+        if (showResult && flaggedQuestion?.length > 0) {
+            flaggedModalRef.current.isOpen()
+            return
+        }
+        if (showResult) {
+            goToResult(questions)
+            return
         } else {
             navigation.goBack()
         }
+    }
+
+    const goToResult = (questions) => {
+        navigation.replace('mock-result', { result: questions, isPractice })
     }
 
     const onPrev = () => {
@@ -87,6 +150,11 @@ const QuestionFooter = ({
                     <ForwardEnWhiteIcon svgStyle={styles.arrowSvg} />
                 </TouchableOpacity>
             }
+            <FlaggedQuestionAlertModal
+                ref={flaggedModalRef}
+                flaggedQuestion={flaggedQuestion}
+                onYessPress={onYessPress}
+                onNoPress={onNoPress} />
         </View>
     )
 }

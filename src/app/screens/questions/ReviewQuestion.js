@@ -98,6 +98,7 @@ const ReviewQuestionScreen = ({ navigation, route }) => {
                 setQuestions={setQuestArray}
                 goToBack={goToBack}
                 questions={questions}
+                showFlag={false}
                 currentQuestionIndex={currentQuestionIndex} />
             <View style={styles.container}>
                 <QuestionProgress currentQuestionIndex={currentQuestionIndex} questions={questions} />

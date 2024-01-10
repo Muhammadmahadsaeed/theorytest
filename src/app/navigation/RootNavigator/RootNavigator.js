@@ -15,6 +15,7 @@ import ReviewMockTest from '../../screens/review-mock-test/ReviewMockTest';
 import AllMockTestTopic from '../../screens/all-mock-test-topics/AllMockTestTopics';
 import RevisionQuestionByTopic from '../../screens/questions/RevisionQuestionByTopic';
 import ReviewQuestionScreen from '../../screens/questions/ReviewQuestion';
+import FlaggedQuestionScreen from '../../screens/questions/FlaggedQuestion';
 
 
 const Stack = createNativeStackNavigator();
@@ -58,6 +59,7 @@ const RootNavigation = () => {
             <Stack.Screen name="question" component={QuestionScreen} />
             <Stack.Screen name="hazard" component={HazardPerception} />
             <Stack.Screen name="review-clips" component={ReviewAllClips} />
+            <Stack.Screen name="flagged-question" component={FlaggedQuestionScreen} />
             <Stack.Screen name="mock-result" component={MockTestResult} />
             <Stack.Screen name="review-mock-test" component={ReviewMockTest} />
             <Stack.Screen name="review-question" component={ReviewQuestionScreen} />

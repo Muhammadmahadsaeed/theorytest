@@ -1,4 +1,4 @@
-import React, {  useMemo } from 'react';
+import React, { useMemo } from 'react';
 import {
     View,
     Text,
@@ -12,17 +12,15 @@ import { theme } from '../../utils/colors';
 import { Fonts } from '../../utils/fonts';
 import { CertificateIcon, ReviewQuestionIcon } from '../../utils/images';
 import Button from '../../components/Buttons/Button';
-import { useSelector } from 'react-redux';
 
 const MockTestResult = ({ navigation, route }) => {
 
-    const { result: questions } = route?.params || []
+    const { result: questions, isPractice } = route?.params || []
 
-    const { userFlag, userFavourite } = useSelector(state => state.userReducer)
-
-    const getPercentage = useMemo(() => {
+    const getResult = useMemo(() => {
 
         const initial = { correctCount: 0, wrongCount: 0 }
+
         if (questions.length) {
             const result = questions.reduce((acc, curr, index, array) => {
                 const isRadio = curr.type === 'radio';
@@ -48,12 +46,11 @@ const MockTestResult = ({ navigation, route }) => {
             const totalQuestions = questions.length;
             const percentage = (result.correctCount / totalQuestions) * 100;
 
-            return percentage;
+            return { percentage, result };
         }
 
         return 0;
     }, [questions]);
-
 
     return (
         <WrapperContainer1>
@@ -63,17 +60,16 @@ const MockTestResult = ({ navigation, route }) => {
                     <AnimatedCircularProgress
                         size={120}
                         width={8}
-                        fill={getPercentage}
+                        fill={getResult?.percentage}
                         rotation={180}
                         // arcSweepAngle={300}
-                        tintColor={theme.skyBlue}
+                        tintColor={getResult?.percentage >= 86 ? theme.green : theme.red}
                         tintTransparency
-                        onAnimationComplete={() => console.log('onAnimationComplete')}
                         backgroundColor={theme.lightBorderGrey}>
                         {
                             (fill) => (
-                                <Text style={styles.fillText}>
-                                    Pass
+                                <Text style={styles.fillText(getResult?.percentage >= 86)}>
+                                    {getResult?.percentage >= 86 ? "Pass" : "Fail"}
                                 </Text>
                             )
                         }
@@ -81,8 +77,8 @@ const MockTestResult = ({ navigation, route }) => {
                 </View>
                 <View style={styles.content}>
                     <View style={styles.textView}>
-                        <Text style={styles.highlightText}>
-                            You're fail this time. Keep trying!
+                        <Text style={styles.highlightText(getResult?.percentage >= 86)}>
+                            {getResult?.percentage >= 86 ? "Congratulation! You're pass" : "You're fail this time. Keep trying!"}
                         </Text>
                         <Text style={styles.para}>
                             The pass mark is 43 out of 50 (86%)
@@ -90,33 +86,35 @@ const MockTestResult = ({ navigation, route }) => {
                     </View>
                     <View style={styles.box}>
                         <Text style={styles.boxText}>
-                            1 out of 1
+                            {getResult?.result?.correctCount} out of {questions.length}
                         </Text>
                     </View>
-                    <View style={styles.row}>
-                        <View style={styles.box1}>
-                            <View style={styles.textView1}>
-                                <Text style={styles.text0}>
-                                    Best Category
+                    {!isPractice &&
+                        <View style={styles.row}>
+                            <View style={styles.box1}>
+                                <View style={styles.textView1}>
+                                    <Text style={styles.text0}>
+                                        Best Category
+                                    </Text>
+                                    <CertificateIcon svgStyle={styles.svgStyle} />
+                                </View>
+                                <Text style={styles.text1}>
+                                    Hazard Awareness
                                 </Text>
-                                <CertificateIcon svgStyle={styles.svgStyle} />
                             </View>
-                            <Text style={styles.text1}>
-                                Hazard Awareness
-                            </Text>
-                        </View>
-                        <View style={[styles.box1, { marginLeft: 10 }]}>
-                            <View style={styles.textView1}>
-                                <Text style={styles.text0}>
-                                    Worst Category
+                            <View style={[styles.box1, { marginLeft: 10 }]}>
+                                <View style={styles.textView1}>
+                                    <Text style={styles.text0}>
+                                        Worst Category
+                                    </Text>
+                                    <CertificateIcon svgStyle={styles.svgStyle} />
+                                </View>
+                                <Text style={styles.text1}>
+                                    None
                                 </Text>
-                                <CertificateIcon svgStyle={styles.svgStyle} />
                             </View>
-                            <Text style={styles.text1}>
-                                None
-                            </Text>
                         </View>
-                    </View>
+                    }
                     <View style={styles.bottom}>
                         <TouchableOpacity
                             style={styles.btn}
@@ -128,8 +126,8 @@ const MockTestResult = ({ navigation, route }) => {
                             </Text>
                         </TouchableOpacity>
                         <Button
-                            title={"Start a Mock Test"}
-                            onPress={() => navigation.replace('theory-test')} />
+                            title={isPractice ? "Start Practice Test" : "Start a Mock Test"}
+                            onPress={() => navigation.replace(isPractice ? 'all-mock-test-topics' : 'theory-test')} />
                     </View>
                 </View>
             </View>
@@ -148,11 +146,11 @@ const styles = StyleSheet.create({
     circleView: {
         alignItems: 'center'
     },
-    fillText: {
+    fillText: (is) => ({
         fontFamily: Fonts.medium,
-        fontSize: 14,
-        color: theme.black
-    },
+        fontSize: 16,
+        color: is ? theme.green : theme.red
+    }),
     content: {
         flex: 1,
         marginTop: 30,
@@ -160,12 +158,12 @@ const styles = StyleSheet.create({
     },
     textView: {
     },
-    highlightText: {
+    highlightText: (is) => ({
         fontFamily: Fonts.medium,
-        color: theme.red,
+        color: is ? theme.green : theme.red,
         fontSize: 18,
         textAlign: 'center'
-    },
+    }),
     para: {
         fontFamily: Fonts.medium,
         color: theme.grayShade1,

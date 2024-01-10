@@ -171,6 +171,7 @@ const RevisionQuestionByTopic = ({ navigation, route }) => {
                 setQuestions={setQuestions}
                 questions={questions}
                 goToBack={goToBack}
+                showFlag={false}
                 currentQuestionIndex={currentQuestionIndex} />
             <View style={styles.container}>
                 <QuestionProgress currentQuestionIndex={currentQuestionIndex} questions={questions} />
@@ -224,8 +225,9 @@ const RevisionQuestionByTopic = ({ navigation, route }) => {
             </View>
             <QuestionFooter
                 questions={questions}
-                isMock={true}
+                showResult={true}
                 config={config}
+                isPractice={true}
                 currentQuestion={currentQuestion}
                 currentQuestionIndex={currentQuestionIndex}
                 setCurrentQuestionIndex={setCurrentQuestionIndex}

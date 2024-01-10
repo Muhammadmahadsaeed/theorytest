@@ -694,3 +694,4 @@ export const call18 = require('../../assets/app-images/telephone-call.png')
 
 
 export const govuk = require('../../assets/images/govuk.png')
+export const info = require('../../assets/images/info.png')

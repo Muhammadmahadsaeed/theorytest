@@ -3,29 +3,27 @@ import {
     View,
     Text,
     StyleSheet,
-    Image,
     TouchableOpacity,
     Modal,
-    Dimensions,
-    ScrollView
+    Image,
 } from 'react-native';
 import { theme } from '../../utils/colors';
 import { Fonts } from '../../utils/fonts';
-import { imagegallery } from '../../utils/images';
+import Button from '../Buttons/Button';
+import { info } from '../../utils/images';
 
-const { width, height } = Dimensions.get('screen')
-
-const CareGiverModal = React.forwardRef((props, ref) => {
+const FlaggedQuestionAlertModal = React.forwardRef((props, ref) => {
 
     const [isVisible, setIsVisible] = useState(false)
-    const [caregiver, setCaregiver] = useState({})
 
-    const { } = props
+    const { onYessPress, onNoPress, flaggedQuestion = [] } = props
 
     useImperativeHandle(ref, () => ({
-        isOpen(data) {
-            setCaregiver(data)
+        isOpen() {
             setIsVisible(true)
+        },
+        isClose() {
+            setIsVisible(false)
         }
     }))
 
@@ -37,28 +35,25 @@ const CareGiverModal = React.forwardRef((props, ref) => {
             onRequestClose={() => setIsVisible(false)}>
             <View style={styles.container}>
                 <View style={styles.main}>
-                    <ScrollView showsVerticalScrollIndicator={false}>
-                        <View style={styles.headingView}>
-                            <Text style={styles.heading}>
-                                {caregiver?.name}
-                            </Text>
-                        </View>
+                    <View style={styles.headingView}>
                         <View style={styles.imgView}>
-                            <Image source={caregiver?.image ? { uri: caregiver?.image } : imagegallery} style={styles.img} />
+                            <Image source={info} style={styles.img} />
                         </View>
-                        <View style={styles.descriptionView}>
-                            <Text style={styles.description}>
-                                {caregiver?.description || "Description here..."}
-                            </Text>
-                        </View>
-                    </ScrollView>
+                        <Text style={styles.heading}>
+                            You flagged {flaggedQuestion.length} questions.
+                        </Text>
+                        <Text style={styles.description}>
+                            Do you want to review them?
+                        </Text>
+                    </View>
                     <View style={styles.footer}>
+                        <Button title={"Yes"} onPress={onYessPress} />
                         <TouchableOpacity
                             style={styles.btn1}
                             activeOpacity={0.8}
-                            onPress={() => setIsVisible(false)}>
+                            onPress={onNoPress}>
                             <Text style={styles.btn1Text}>
-                                Cancel
+                                No
                             </Text>
                         </TouchableOpacity>
                     </View>
@@ -68,7 +63,7 @@ const CareGiverModal = React.forwardRef((props, ref) => {
     )
 })
 
-export default CareGiverModal
+export default FlaggedQuestionAlertModal
 
 const styles = StyleSheet.create({
     container: {
@@ -79,7 +74,6 @@ const styles = StyleSheet.create({
     },
     main: {
         // flex: 1,
-        height: '60%',
         backgroundColor: theme.bg,
         borderRadius: 16,
         paddingVertical: 15,
@@ -104,17 +98,14 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: theme.text
     },
-    descriptionView: {
-        margin: 20
-    },
     description: {
         fontFamily: Fonts.medium,
         fontSize: 16,
         color: theme.textBlack
     },
     imgView: {
-        height: 300,
-        width: '90%',
+        height: 100,
+        width: 100,
         alignSelf: 'center',
     },
     img: {
@@ -122,24 +113,22 @@ const styles = StyleSheet.create({
         width: '100%'
     },
     footer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
         marginHorizontal: 15,
         marginTop: 30
     },
     btn1: {
+        height: 50,
         width: '100%',
+        borderRadius: 8,
         backgroundColor: theme.bg,
-        borderColor: theme.borderPurple,
-        borderWidth: 1,
-        borderRadius: 16,
+        borderColor: theme.skyBlue,
+        borderWidth: 1.5,
         justifyContent: 'center',
         alignItems: 'center',
-        paddingVertical: 10
+        marginTop: 15
     },
     btn1Text: {
-        color: theme.buttonBgDark,
+        color: theme.skyBlue,
         fontSize: 16,
         fontFamily: Fonts.medium
     },

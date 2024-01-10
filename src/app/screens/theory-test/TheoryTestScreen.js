@@ -26,7 +26,7 @@ const TheoryTestScreen = ({ navigation }) => {
         },
         {
             id: 2,
-            name: "Practive Revision Question",
+            name: "Practice Revision Question",
             description: 'Review questions sorted by topics',
             icon: <ReviewIcon />,
             link: 'all-mock-test-topics'
