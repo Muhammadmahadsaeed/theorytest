@@ -28,8 +28,8 @@ const styles = ({
     },
     text: {
         fontSize: 20,
-        fontFamily: Fonts.bold,
-        color: theme.textBlack,
+        fontFamily: Fonts.medium,
+        color: theme.black,
         textAlign: 'center'
     }
 })

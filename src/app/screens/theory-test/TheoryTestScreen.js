@@ -35,7 +35,9 @@ const TheoryTestScreen = ({ navigation }) => {
             id: 3,
             name: "My Questions",
             description: 'Find your questions',
-            icon: <QuestionIcon />
+            icon: <QuestionIcon />,
+            link: 'flag-nd-like',
+            short_name: 'liked'
         },
         {
             id: 3,
@@ -68,7 +70,22 @@ const TheoryTestScreen = ({ navigation }) => {
 
 
     const onClick = (el) => {
-        if (el.link) {
+        if (el.link && el.link == 'flag-nd-like') {
+            navigation.navigate('bottom-tab', {
+                screen: 'Profile',
+                params: {
+                    screen: el?.link,
+                    params: {
+                        fromRoute: el?.short_name,
+                        name: el.name,
+                        path: 'theory-test'
+                    }
+                },
+
+            })
+            return
+        }
+        if (el.link && el.link !== 'flag-nd-like') {
             navigation.navigate(el.link)
             return
         }
@@ -83,7 +100,7 @@ const TheoryTestScreen = ({ navigation }) => {
 
     return (
         <WrapperContainer1>
-            <HeaderWithBackButton text={"Theory Test"} />
+            <HeaderWithBackButton path={'bottom-tab'} text={"Theory Test"} />
             <View style={styles.innerContainer}>
                 {list.map((el, index) => (
                     <TheoryTestList key={index} data={el} onClick={onClick} />

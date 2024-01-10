@@ -98,7 +98,7 @@ const ReviewQuestionScreen = ({ navigation, route }) => {
                 setQuestions={setQuestArray}
                 goToBack={goToBack}
                 questions={questions}
-                showFlag={false}
+                showFlag={fromRoute ? true : false}
                 currentQuestionIndex={currentQuestionIndex} />
             <View style={styles.container}>
                 <QuestionProgress currentQuestionIndex={currentQuestionIndex} questions={questions} />
@@ -150,7 +150,7 @@ const ReviewQuestionScreen = ({ navigation, route }) => {
                 currentQuestionIndex={currentQuestionIndex}
                 setCurrentQuestionIndex={setCurrentQuestionIndex}
                 navigation={navigation} />
-            <TextModal ref={textModalRef} />
+            <TextModal ref={textModalRef} currentQuestion={currentQuestion} />
         </WrapperContainer1>
     )
 }

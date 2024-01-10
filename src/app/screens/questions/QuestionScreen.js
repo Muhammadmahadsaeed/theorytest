@@ -143,7 +143,7 @@ const QuestionScreen = ({ navigation, route }) => {
             {
                 result:
                     questions.slice(0, currentQuestionIndex),
-                isPractice: true
+                isPractice: false
             })
         } else {
             navigation.goBack()
@@ -159,7 +159,6 @@ const QuestionScreen = ({ navigation, route }) => {
                 currentQuestion={currentQuestion}
                 setQuestions={setQuestions}
                 questions={questions}
-                isMock={true}
                 flaggedQuestion={flaggedQuestion}
                 setFlaggedQuestion={setFlaggedQuestion}
                 currentQuestionIndex={currentQuestionIndex} />

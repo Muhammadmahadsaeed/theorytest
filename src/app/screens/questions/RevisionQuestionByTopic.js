@@ -248,7 +248,7 @@ const RevisionQuestionByTopic = ({ navigation, route }) => {
                     onCancel={handleClosePress}
                     onConfirm={onConfirm} />
             </BottomSheet>
-            <TextModal ref={textModalRef} />
+            <TextModal ref={textModalRef} currentQuestion={currentQuestion} />
         </WrapperContainer1>
     )
 }

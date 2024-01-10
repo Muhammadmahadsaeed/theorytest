@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Fonts } from '../../utils/fonts';
 import Button from '../Buttons/Button';
 import { theme } from '../../utils/colors';
+import { showFlashMessage } from '../../utils/Toast';
 
 
 const DeleteModal = React.forwardRef(({ navigation }, ref) => {
@@ -29,8 +30,10 @@ const DeleteModal = React.forwardRef(({ navigation }, ref) => {
         setIsVisible(false)
     }
 
-    const deleteAccount = async () => {
-       
+    const clearCache = async () => {
+       mapDispatchToProps({userFlag: [], userFavourite: []})
+       showFlashMessage("success", "Your cache has been cleared")
+       setIsVisible(false)
     }
 
     return (
@@ -50,7 +53,7 @@ const DeleteModal = React.forwardRef(({ navigation }, ref) => {
                     <Button
                         title={"Delete"}
                         loading={loading}
-                        onPress={() => deleteAccount()} />
+                        onPress={() => clearCache()} />
                     <TouchableOpacity
                         activeOpacity={0.8}
                         style={styles.btn}
@@ -103,10 +106,10 @@ const styles = StyleSheet.create({
         backgroundColor: theme.white,
         borderWidth: 1,
         borderColor: theme.skyBlue,
-        height: 60,
+        height: 50,
         width: '100%',
         alignSelf: 'center',
-        borderRadius: 16,
+        borderRadius: 8,
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 15

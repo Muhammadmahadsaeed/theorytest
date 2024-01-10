@@ -60,7 +60,7 @@ const MockTestResult = ({ navigation, route }) => {
                     <AnimatedCircularProgress
                         size={120}
                         width={8}
-                        fill={getResult?.percentage}
+                        fill={getResult?.percentage || 0}
                         rotation={180}
                         // arcSweepAngle={300}
                         tintColor={getResult?.percentage >= 86 ? theme.green : theme.red}

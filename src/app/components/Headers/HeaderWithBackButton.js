@@ -7,13 +7,17 @@ import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native';
 
 
-const HeaderWithBackButton = ({ text, rightIcon, onPress }) => {
+const HeaderWithBackButton = ({ text, rightIcon, onPress, path }) => {
 
     const navigation = useNavigation()
 
 
     const goToBack = () => {
-        navigation.goBack()
+        if (path) {
+            navigation.replace(path)
+        } else {
+            navigation.goBack()
+        }
     }
 
     return (

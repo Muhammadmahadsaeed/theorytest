@@ -17,7 +17,7 @@ const QuestionList = ({ data, onQuestionClick, index }) => {
             onPress={() => onQuestionClick(index)}>
             <View style={styles.textView}>
                 <Text style={styles.text}>
-                    {data.question}
+                    {data?.question}
                 </Text>
             </View>
             <View style={styles.icon}>
