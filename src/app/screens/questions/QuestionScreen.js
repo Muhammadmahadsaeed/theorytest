@@ -171,7 +171,9 @@ const QuestionScreen = ({ navigation, route }) => {
                 setFlaggedQuestion={setFlaggedQuestion}
                 currentQuestionIndex={currentQuestionIndex} />
             <View style={styles.container}>
-                <QuestionProgress currentQuestionIndex={currentQuestionIndex} questions={questions} />
+                <QuestionProgress
+                    currentQuestionIndex={currentQuestionIndex}
+                    questions={questions} />
                 <View style={styles.row}>
                     <Text style={styles.heading}>
                         Question {currentQuestionIndex + 1} / {questions.length}
