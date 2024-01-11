@@ -51,7 +51,7 @@ const DeleteModal = React.forwardRef(({ navigation }, ref) => {
                         After confirmation, all your account data will be permanently deleted and lost forever
                     </Text>
                     <Button
-                        title={"Delete"}
+                        title={"Clear Cache"}
                         loading={loading}
                         onPress={() => clearCache()} />
                     <TouchableOpacity
