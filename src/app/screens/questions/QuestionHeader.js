@@ -14,7 +14,8 @@ const QuestionHeader = ({
     setQuestions,
     goToBack,
     setFlaggedQuestion,
-    flaggedQuestion,
+    fromFlagndLikeRoute = false,
+    flaggedQuestion = [],
     showFlag = true
 }) => {
 
@@ -31,9 +32,8 @@ const QuestionHeader = ({
 
         const updatedFavorite = isItemInFavorites
             ? userFavourite.filter((el) => el.id !== item.id)
-            : [...userFavourite, item];
+            : [...userFavourite, { ...item, is_favorite: !item?.is_favorite }];
 
-        mapDispatchToProps({ userFavourite: updatedFavorite });
 
         updatedQuestions[currentQuestionIndex] = {
             ...updatedQuestions[currentQuestionIndex],
@@ -41,11 +41,13 @@ const QuestionHeader = ({
         };
 
         setQuestions(updatedQuestions);
+        mapDispatchToProps({ userFavourite: updatedFavorite });
+
     }, [currentQuestion, currentQuestionIndex])
 
     const onFlag = useCallback((item) => {
         let newFlaggedArr = [...flaggedQuestion]; //local flagged state
-        const updatedQuestions = [...questions]; //local question state
+        const updatedQuestions = [...questions]; //local question state  
 
         const isItemInFlags = userFlag.some((el) => el.id === item.id); //redux array
         const alreadyFlagged = flaggedQuestion.some(el => el.id === item.id); //local state
@@ -53,7 +55,7 @@ const QuestionHeader = ({
         //redux array
         const updatedFlag = isItemInFlags
             ? userFlag.filter((el) => el.id !== item.id)
-            : [...userFlag, item];
+            : [...userFlag, { ...item, is_flag: !item?.is_flag }];
 
         //local question state
         updatedQuestions[currentQuestionIndex] = {
@@ -72,7 +74,7 @@ const QuestionHeader = ({
             })
         }
         setQuestions(updatedQuestions); //local question state
-        setFlaggedQuestion(newFlaggedArr)//local flagged state
+        if (!fromFlagndLikeRoute) setFlaggedQuestion(newFlaggedArr)//local flagged state
         mapDispatchToProps({ userFlag: updatedFlag });//redux array
     }, [currentQuestion, currentQuestionIndex])
 

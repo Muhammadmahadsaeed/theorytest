@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     View,
     FlatList,
@@ -16,13 +16,17 @@ const FlagAndLikeQuestion = ({ navigation, route }) => {
 
     const { userFavourite, userFlag } = useSelector(state => state.userReducer)
 
-    const [questions, setQuestions] = useState(fromRoute == 'flag' ? userFlag : userFavourite || [])
+    const [questions, setQuestions] = useState([])
+
+    useEffect(() => {
+        setQuestions(fromRoute == 'flag' ? userFlag : userFavourite || [])
+    }, [userFavourite, userFlag])
 
     const onQuestionClick = (index) => {
         navigation.navigate('review-question', {
             result: fromRoute == 'flag' ? userFlag : userFavourite,
             index: index,
-            fromRoute: true
+            fromFlagndLikeRoute: true
         })
     }
 
@@ -45,7 +49,7 @@ const FlagAndLikeQuestion = ({ navigation, route }) => {
                             onQuestionClick={onQuestionClick} />}
                     />
                     :
-                    <EmptyList text={`You have no data`} />
+                    <EmptyList text={`You have no ${fromRoute == 'flag' ? 'Flag Questions' : 'Liked Questions'}`} />
                 }
             </View>
         </WrapperContainer1>

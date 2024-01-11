@@ -21,7 +21,7 @@ const QuestionFooter = ({
     config,
     setCurrentQuestionIndex,
     navigation,
-    fromRoute = false,
+    fromFlagndLikeRoute = false,
     flaggedQuestion,
     fromFlagScreen = false,
     isPractice = false
@@ -40,8 +40,9 @@ const QuestionFooter = ({
     useEffect(() => {
         console.log("change question=======");
         let len = currentQuestion?.user_answer?.length
-
+        console.log(len);
         if (config?.autoSkip && len) {
+            console.log("yh bhi call========");
             currentQuestion?.type == 'radio' ? onNext() : len && len < 2 && onNext()
         }
         
@@ -111,6 +112,7 @@ const QuestionFooter = ({
     }
 
     const onPrev = () => {
+        console.log("cal======");
         setCurrentQuestionIndex(currentQuestionIndex - 1)
     }
 
@@ -119,9 +121,9 @@ const QuestionFooter = ({
         let user_answer = questions[currentQuestionIndex]?.user_answer
 
         if (type == 'radio') {
-            return fromRoute ? true : user_answer?.length ? true : false
+            return fromFlagndLikeRoute ? true : user_answer?.length ? true : false
         }
-        return fromRoute ? true : user_answer?.length && user_answer?.length == 2 ? true : false
+        return fromFlagndLikeRoute ? true : user_answer?.length && user_answer?.length == 2 ? true : false
     }
 
     return (

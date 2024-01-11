@@ -18,7 +18,7 @@ import QuestionProgress from './QuestionProgress';
 
 const ReviewQuestionScreen = ({ navigation, route }) => {
 
-    const { result: questions, index, fromRoute } = route?.params || {}
+    const { result: questions, index, fromFlagndLikeRoute } = route?.params || {}
 
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(index || 0);
     const [questArray, setQuestArray] = useState([])
@@ -43,7 +43,7 @@ const ReviewQuestionScreen = ({ navigation, route }) => {
                 const userGotItRight = isCorrectAnswer && userAnswer.includes(o.option);
                 const userGotItWrong = !isCorrectAnswer && userAnswer.includes(o.option);
                 const userSelectedAnswer = isCorrectAnswer && !userAnswer.includes(o.option);
-                if (fromRoute) {
+                if (fromFlagndLikeRoute) {
                     return {
                         ...o,
                         isCorrectAnswer
@@ -63,6 +63,7 @@ const ReviewQuestionScreen = ({ navigation, route }) => {
                 options,
             }
         })
+        setQuestArray(array)
         return array
     }, [questions])
 
@@ -71,7 +72,7 @@ const ReviewQuestionScreen = ({ navigation, route }) => {
     }
 
     const getIcon = (item) => {
-        if (item.isCorrectAnswer && fromRoute) {
+        if (item.isCorrectAnswer && fromFlagndLikeRoute) {
             return <TickBoxIcon />
         }
         if (item.isCorrectAnswer && item.userGotItRight) {
@@ -89,22 +90,23 @@ const ReviewQuestionScreen = ({ navigation, route }) => {
         textModalRef.current.isOpen()
     }
 
-    let currentQuestion = questionsWithResult[currentQuestionIndex]
-
+    let currentQuestion = questArray[currentQuestionIndex]
+    // console.log(currentQuestion);
     return (
         <WrapperContainer1>
             <QuestionHeader
                 currentQuestion={currentQuestion}
                 setQuestions={setQuestArray}
                 goToBack={goToBack}
-                questions={questions}
-                showFlag={fromRoute ? true : false}
+                fromFlagndLikeRoute={fromFlagndLikeRoute}
+                questions={questArray}
+                showFlag={fromFlagndLikeRoute ? true : false}
                 currentQuestionIndex={currentQuestionIndex} />
             <View style={styles.container}>
-                <QuestionProgress currentQuestionIndex={currentQuestionIndex} questions={questions} />
+                <QuestionProgress currentQuestionIndex={currentQuestionIndex} questions={questArray} />
                 <View style={styles.row}>
                     <Text style={styles.heading}>
-                        Question {currentQuestionIndex + 1} / {questions.length}
+                        Question {currentQuestionIndex + 1} / {questArray.length}
                     </Text>
                     <TouchableOpacity
                         style={styles.timeView}
@@ -143,9 +145,9 @@ const ReviewQuestionScreen = ({ navigation, route }) => {
                 </View>
             </View>
             <QuestionFooter
-                questions={questions}
+                questions={questArray}
                 showNext={true}
-                fromRoute={fromRoute}
+                fromFlagndLikeRoute={fromFlagndLikeRoute}
                 currentQuestion={currentQuestion}
                 currentQuestionIndex={currentQuestionIndex}
                 setCurrentQuestionIndex={setCurrentQuestionIndex}
