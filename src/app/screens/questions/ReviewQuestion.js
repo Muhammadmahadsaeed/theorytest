@@ -18,7 +18,7 @@ import QuestionProgress from './QuestionProgress';
 
 const ReviewQuestionScreen = ({ navigation, route }) => {
 
-    const { result: questions, index, fromFlagndLikeRoute } = route?.params || {}
+    const { result: questions, index, fromFlagndLikeRoute, fromFlagScreen } = route?.params || {}
 
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(index || 0);
     const [questArray, setQuestArray] = useState([])
@@ -98,6 +98,7 @@ const ReviewQuestionScreen = ({ navigation, route }) => {
                 currentQuestion={currentQuestion}
                 setQuestions={setQuestArray}
                 goToBack={goToBack}
+                fromFlagScreen={fromFlagScreen}
                 fromFlagndLikeRoute={fromFlagndLikeRoute}
                 questions={questArray}
                 showFlag={fromFlagndLikeRoute ? true : false}
@@ -146,7 +147,6 @@ const ReviewQuestionScreen = ({ navigation, route }) => {
             </View>
             <QuestionFooter
                 questions={questArray}
-                showNext={true}
                 fromFlagndLikeRoute={fromFlagndLikeRoute}
                 currentQuestion={currentQuestion}
                 currentQuestionIndex={currentQuestionIndex}

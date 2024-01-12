@@ -26,7 +26,8 @@ const FlagAndLikeQuestion = ({ navigation, route }) => {
         navigation.navigate('review-question', {
             result: fromRoute == 'flag' ? userFlag : userFavourite,
             index: index,
-            fromFlagndLikeRoute: true
+            fromFlagndLikeRoute: true,
+            fromFlagScreen: fromRoute == 'flag' ? true : false
         })
     }
 

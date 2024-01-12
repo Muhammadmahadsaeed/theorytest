@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import {
     View,
     StyleSheet,
@@ -10,73 +10,65 @@ import { useDispatch, useSelector } from 'react-redux';
 const QuestionHeader = ({
     currentQuestion,
     currentQuestionIndex,
-    questions,
-    setQuestions,
     goToBack,
-    setFlaggedQuestion,
-    fromFlagndLikeRoute = false,
-    flaggedQuestion = [],
+    fromFlagScreen = false,
     showFlag = true
 }) => {
 
     const dispatch = useDispatch();
     const { userFlag, userFavourite } = useSelector(state => state.userReducer)
+    const [isFlag, setIsFlag] = useState(false)
+    const [isFavorite, setIsFavorite] = useState(false)
 
     const mapDispatchToProps = (value) => {
         dispatch({ type: 'update_redux', payload: value });
     };
 
-    const onFavoriteClick = useCallback((item) => {
-        const isItemInFavorites = userFavourite.some((el) => el.id === item.id);
-        const updatedQuestions = [...questions];
+    useEffect(() => {
+        checkQuestionIsFavorite()
+        if(fromFlagScreen) checkQuestionIsFlag()
+    }, [currentQuestion, currentQuestionIndex, userFavourite, userFlag])
 
+    const checkQuestionIsFavorite = () => {
+        const isItemInFavorites = userFavourite.some((el) => el.id === currentQuestion.id);
+        if (isItemInFavorites) {
+            setIsFavorite(true)
+        } else {
+            setIsFavorite(false)
+        }
+    }
+
+    const checkQuestionIsFlag = () => {
+        console.log("call=====");
+        const isItemInFavorites = userFlag.some((el) => el.id === currentQuestion.id);
+        if (isItemInFavorites) {
+            setIsFlag(true)
+        } else {
+            setIsFlag(false)
+        }
+    }
+
+    const onFavoriteClick = (item) => {
+        const isItemInFavorites = userFavourite.some((el) => el.id === item.id);
         const updatedFavorite = isItemInFavorites
             ? userFavourite.filter((el) => el.id !== item.id)
             : [...userFavourite, { ...item, is_favorite: !item?.is_favorite }];
 
-
-        updatedQuestions[currentQuestionIndex] = {
-            ...updatedQuestions[currentQuestionIndex],
-            is_favorite: !questions[currentQuestionIndex]?.is_favorite,
-        };
-
-        setQuestions(updatedQuestions);
         mapDispatchToProps({ userFavourite: updatedFavorite });
 
-    }, [currentQuestion, currentQuestionIndex])
+    }
 
-    const onFlag = useCallback((item) => {
-        let newFlaggedArr = [...flaggedQuestion]; //local flagged state
-        const updatedQuestions = [...questions]; //local question state  
+    const onFlag = (item) => {
 
         const isItemInFlags = userFlag.some((el) => el.id === item.id); //redux array
-        const alreadyFlagged = flaggedQuestion.some(el => el.id === item.id); //local state
 
         //redux array
         const updatedFlag = isItemInFlags
             ? userFlag.filter((el) => el.id !== item.id)
             : [...userFlag, { ...item, is_flag: !item?.is_flag }];
 
-        //local question state
-        updatedQuestions[currentQuestionIndex] = {
-            ...updatedQuestions[currentQuestionIndex],
-            is_flag: !questions[currentQuestionIndex]?.is_flag,
-        };
-
-        //local flagged state
-        if (alreadyFlagged) {
-            newFlaggedArr = flaggedQuestion.filter(el => el.id !== item.id)
-        } else {
-            newFlaggedArr.push({
-                ...item,
-                is_flag: !item?.is_flag,
-                originalIndex: currentQuestionIndex
-            })
-        }
-        setQuestions(updatedQuestions); //local question state
-        if (!fromFlagndLikeRoute) setFlaggedQuestion(newFlaggedArr)//local flagged state
         mapDispatchToProps({ userFlag: updatedFlag });//redux array
-    }, [currentQuestion, currentQuestionIndex])
+    }
 
     return (
         <View style={styles.headerTop}>
@@ -92,7 +84,7 @@ const QuestionHeader = ({
                         style={[styles.flagIcon, { alignItems: 'center' }]}
                         activeOpacity={0.8}
                         onPress={() => onFlag(currentQuestion)}>
-                        {currentQuestion?.is_flag ?
+                        {isFlag ?
                             <RedFlagIcon svgStyle={styles.flagIconSvg} />
                             :
                             <FlagIcon svgStyle={styles.flagIconSvg} />
@@ -103,7 +95,7 @@ const QuestionHeader = ({
                     style={[styles.flagIcon, { marginLeft: 5, alignItems: 'flex-end' }]}
                     activeOpacity={0.8}
                     onPress={() => onFavoriteClick(currentQuestion)}>
-                    {currentQuestion?.is_favorite ?
+                    {isFavorite ?
                         <RedHeartIcon svgStyle={styles.flagIconSvg} />
                         :
                         <HeartIcon svgStyle={styles.flagIconSvg} />

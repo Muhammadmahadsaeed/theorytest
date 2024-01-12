@@ -8,28 +8,15 @@ import {
 import { BackWardArrowIcon, ForwardEnWhiteIcon } from '../../utils/images';
 import { theme } from '../../utils/colors';
 import { Fonts } from '../../utils/fonts';
-import FlaggedQuestionAlertModal from '../../components/Modal/FlaggedQuestionAlert';
 
 const QuestionFooter = ({
     questions = [],
-    originalQuestion = [],
-    currentQuestion,
     currentQuestionIndex,
-    onCheck,
-    showResult = false,
-    showNext,
-    config,
     setCurrentQuestionIndex,
     navigation,
     fromFlagndLikeRoute = false,
-    flaggedQuestion,
-    fromFlagScreen = false,
-    isPractice = false,
-    isNext = false,
-    setIsNext
 }) => {
 
-    const flaggedModalRef = useRef(null)
 
     const onNext = () => {
         if ((currentQuestionIndex + 1) >= questions.length) {
@@ -39,72 +26,11 @@ const QuestionFooter = ({
         setCurrentQuestionIndex(currentQuestionIndex + 1)
     }
 
-    const onYessPress = () => {
-
-        // flaggedModalRef.current.isClose()
-        if (!fromFlagScreen) {
-            const newQuestion = flaggedQuestion.map((el) => {
-                let find = questions.find((elem, index) => el.originalIndex == index)
-                if (find) {
-                    return {
-                        ...el,
-                        user_answer: find.user_answer
-                    }
-                } else {
-                    return {
-                        ...el
-                    }
-
-                }
-            })
-            navigation.replace('flagged-question', { result: newQuestion, originalQuestion: questions })
-
-        }
-    }
-
-    const onNoPress = () => {
-        // flaggedModalRef.current?.isClose()
-        if (fromFlagScreen) {
-            const newQuestion = originalQuestion.map((el, index) => {
-                let find = questions.find((elem) => index == elem.originalIndex)
-                if (find) {
-                    return {
-                        ...el,
-                        user_answer: find.user_answer
-                    }
-                } else {
-                    return {
-                        ...el
-                    }
-                }
-            })
-            goToResult(newQuestion)
-        } else {
-            goToResult(questions)
-        }
-
-    }
-
     const onFinish = () => {
-        if (showResult && flaggedQuestion?.length > 0) {
-            flaggedModalRef.current.isOpen()
-            return
-        }
-        if (showResult) {
-            goToResult(questions)
-            return
-        } else {
-            navigation.goBack()
-        }
-    }
-
-    const goToResult = (questions) => {
-        navigation.replace('mock-result', { result: questions, isPractice })
+        navigation.goBack()
     }
 
     const onPrev = () => {
-        console.log("cal======");
-        if(isNext) setIsNext(false)
         setCurrentQuestionIndex(currentQuestionIndex - 1)
     }
 
@@ -133,35 +59,17 @@ const QuestionFooter = ({
                 :
                 <View />
             }
-            {(showNext || currentQuestion?.isCheck) && !config?.autoSkip &&
-                <TouchableOpacity
-                    style={styles.btn2(currentQuestion?.isCheck ? true : btnStatus())}
-                    disabled={currentQuestion?.isCheck ? false : btnStatus() ? false : true}
-                    activeOpacity={0.8}
-                    onPress={() => currentQuestionIndex == questions.length - 1 ? onFinish() : onNext()}>
-                    <Text style={styles.btn2Text}>
-                        {currentQuestionIndex == questions.length - 1 ? "Finish" : "Next"}
-                    </Text>
-                    <ForwardEnWhiteIcon svgStyle={styles.arrowSvg} />
-                </TouchableOpacity>
-            }
-            {!(showNext || currentQuestion?.isCheck) &&
-                <TouchableOpacity
-                    style={styles.btn2(btnStatus())}
-                    disabled={btnStatus() ? false : true}
-                    activeOpacity={0.8}
-                    onPress={() => onCheck()}>
-                    <Text style={styles.btn2Text}>
-                        Check
-                    </Text>
-                    <ForwardEnWhiteIcon svgStyle={styles.arrowSvg} />
-                </TouchableOpacity>
-            }
-            <FlaggedQuestionAlertModal
-                ref={flaggedModalRef}
-                flaggedQuestion={flaggedQuestion}
-                onYessPress={onYessPress}
-                onNoPress={onNoPress} />
+
+            <TouchableOpacity
+                style={styles.btn2(btnStatus())}
+                disabled={btnStatus() ? false : true}
+                activeOpacity={0.8}
+                onPress={() => currentQuestionIndex == questions.length - 1 ? onFinish() : onNext()}>
+                <Text style={styles.btn2Text}>
+                    {currentQuestionIndex == questions.length - 1 ? "Finish" : "Next"}
+                </Text>
+                <ForwardEnWhiteIcon svgStyle={styles.arrowSvg} />
+            </TouchableOpacity>
         </View>
     )
 }

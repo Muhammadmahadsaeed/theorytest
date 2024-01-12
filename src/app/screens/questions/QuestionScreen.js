@@ -127,7 +127,7 @@ const QuestionScreen = ({ navigation, route }) => {
             }
             return q
         })
-        
+
         setQuestions(updatedQuestions2);
         if (config?.autoSkip && updatedQuestions2[currentQuestionIndex]?.user_answer?.length > 0) {
             let leng = currentQuestion?.user_answer?.length
@@ -218,21 +218,20 @@ const QuestionScreen = ({ navigation, route }) => {
             originalIndex: currentQuestionIndex
         };
 
-       
+
         setQuestions(updatedQuestions); //local question state
         mapDispatchToProps({ userFlag: updatedFlag });//redux array
     }
 
     const onConfirm = () => {
         handleClosePress()
-        let find = questions.some(el => el.user_answer)
+        let find = questions.some(el => el.user_answer?.length)
         if (find) {
-            navigation.replace('mock-result',
-                {
-                    result:
-                        questions.slice(0, currentQuestionIndex),
-                    isPractice: false
-                })
+            navigation.replace('mock-result', {
+                result:
+                    questions.slice(0, currentQuestionIndex),
+                isPractice: false
+            })
         } else {
             navigation.goBack()
         }
