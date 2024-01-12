@@ -91,7 +91,7 @@ const ReviewQuestionScreen = ({ navigation, route }) => {
     }
 
     let currentQuestion = questArray[currentQuestionIndex]
-    // console.log(currentQuestion);
+    
     return (
         <WrapperContainer1>
             <QuestionHeader

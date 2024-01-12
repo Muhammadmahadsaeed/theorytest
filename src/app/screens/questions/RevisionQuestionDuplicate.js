@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import WrapperContainer1 from '../../components/Wrapper/WrapperContainer1';
-import { BackWardArrowIcon, CrossRoundIcon, ForwardEnWhiteIcon, InfoCircleIcon, TickBoxIcon } from '../../utils/images';
+import { CrossRoundIcon, InfoCircleIcon, TickBoxIcon } from '../../utils/images';
 import { theme } from '../../utils/colors';
 import { Fonts } from '../../utils/fonts';
 import questionArray from '../../services/section.json'
@@ -19,7 +19,6 @@ import TextModal from '../../components/Modal/TextModal';
 import QuestionFooter from './QuestionFooter';
 import QuestionHeader from './QuestionHeader';
 import QuestionProgress from './QuestionProgress';
-import FlaggedQuestionAlertModal from '../../components/Modal/FlaggedQuestionAlert';
 
 
 const RevisionQuestionByTopic = ({ navigation, route }) => {
@@ -30,7 +29,6 @@ const RevisionQuestionByTopic = ({ navigation, route }) => {
     const [questions, setQuestions] = useState(questionArray);
 
     const bottomSheetRef = useRef(null);
-    const flaggedModalRef = useRef(null)
     const textModalRef = useRef()
     const dispatch = useDispatch();
 
@@ -169,29 +167,6 @@ const RevisionQuestionByTopic = ({ navigation, route }) => {
         }
     }
 
-    const onNext = () => {
-        setCurrentQuestionIndex(currentQuestionIndex + 1)
-    }
-
-   
-    const onFinish = () => {
-        navigation.replace('mock-result', { result: questions, isPractice: true })
-    }
-
-    const onPrev = () => {
-        setCurrentQuestionIndex(currentQuestionIndex - 1)
-    }
-
-    const btnStatus = () => {
-        let type = questions[currentQuestionIndex]?.type
-        let user_answer = questions[currentQuestionIndex]?.user_answer
-
-        if (type == 'radio') {
-            return user_answer?.length ? true : false
-        }
-        return user_answer?.length && user_answer?.length == 2 ? true : false
-    }
-
     let currentQuestion = questions[currentQuestionIndex]
 
     return (
@@ -253,45 +228,16 @@ const RevisionQuestionByTopic = ({ navigation, route }) => {
                     </View>
                 </View>
             </View>
-            <View style={styles.footer}>
-                {currentQuestionIndex !== 0 ?
-                    <TouchableOpacity
-                        style={styles.btn1}
-                        activeOpacity={0.8}
-                        onPress={() => onPrev()}>
-                        <BackWardArrowIcon svgStyle={styles.arrowSvg1} />
-                        <Text style={styles.btn1Text}>
-                            Previous
-                        </Text>
-                    </TouchableOpacity>
-                    :
-                    <View />
-                }
-                {currentQuestion?.isCheck &&
-                    <TouchableOpacity
-                        style={styles.btn2(currentQuestion?.isCheck ? true : false)}
-                        disabled={currentQuestion?.isCheck ? false : true}
-                        activeOpacity={0.8}
-                        onPress={() => currentQuestionIndex == questions.length - 1 ? onFinish() : onNext()}>
-                        <Text style={styles.btn2Text}>
-                            {currentQuestionIndex == questions.length - 1 ? "Finish" : "Next"}
-                        </Text>
-                        <ForwardEnWhiteIcon svgStyle={styles.arrowSvg} />
-                    </TouchableOpacity>
-                }
-                {!currentQuestion?.isCheck &&
-                    <TouchableOpacity
-                        style={styles.btn2(btnStatus())}
-                        disabled={btnStatus() ? false : true}
-                        activeOpacity={0.8}
-                        onPress={() => onCheck()}>
-                        <Text style={styles.btn2Text}>
-                            Check
-                        </Text>
-                        <ForwardEnWhiteIcon svgStyle={styles.arrowSvg} />
-                    </TouchableOpacity>
-                }
-            </View>
+            <QuestionFooter
+                questions={questions}
+                showResult={true}
+                config={config}
+                isPractice={true}
+                currentQuestion={currentQuestion}
+                currentQuestionIndex={currentQuestionIndex}
+                setCurrentQuestionIndex={setCurrentQuestionIndex}
+                navigation={navigation}
+                onCheck={onCheck} />
             <BottomSheet
                 ref={bottomSheetRef}
                 index={-1}
@@ -416,7 +362,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: '32%',
         height: 47,
-        backgroundColor: theme.skyBlue,
+        backgroundColor: theme.buttonBg,
         paddingHorizontal: 20,
         paddingVertical: 10,
         borderRadius: 100,
@@ -432,7 +378,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: theme.skyBlue,
+        backgroundColor: theme.buttonBg,
         borderRadius: 100,
         opacity: is ? 1 : 0.5
     }),

@@ -52,7 +52,7 @@ const FlaggedQuestionAlertModal = React.forwardRef((props, ref) => {
                             onPress={() => {
                                 setIsVisible(false)
                                 setTimeout(() => {
-                                    onYessPress()
+                                    onYessPress(flaggedQuestion)
                                 }, 500)
                             }} />
                         <TouchableOpacity

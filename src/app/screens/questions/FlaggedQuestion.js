@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import WrapperContainer1 from '../../components/Wrapper/WrapperContainer1';
-import {  TimeIcon } from '../../utils/images';
+import { BackLeftIcon, BackWardArrowIcon, FlagIcon, ForwardEnWhiteIcon, HeartIcon, RedFlagIcon, RedHeartIcon, TimeIcon } from '../../utils/images';
 import { theme } from '../../utils/colors';
 import { Fonts } from '../../utils/fonts';
 import questionArray from '../../services/section.json'
@@ -18,21 +18,30 @@ import { useDispatch, useSelector } from 'react-redux';
 import QuestionFooter from './QuestionFooter';
 import QuestionHeader from './QuestionHeader';
 import QuestionProgress from './QuestionProgress';
+import FlaggedQuestionAlertModal from '../../components/Modal/FlaggedQuestionAlert';
 
 let totalTimeInMinutes = 57
 
 const FlaggedQuestionScreen = ({ navigation, route }) => {
 
-    const { result = [], config, originalQuestion  } = route?.params || {}
-    
+    const { result = [], config, originalQuestion } = route?.params || {}
+    // console.log(originalQuestion.length);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [timeRemaining, setTimeRemaining] = useState(totalTimeInMinutes * 60);
     const [questions, setQuestions] = useState(result);
-    const [flaggedQuestion, setFlaggedQuestion] = useState(result)
+    const [flaggedQuestion, setFlaggedQuestion] = useState([])
 
     let currentQuestion = questions[currentQuestionIndex]
 
+    const dispatch = useDispatch();
+    const { userFlag, userFavourite } = useSelector(state => state.userReducer)
+
+    const mapDispatchToProps = (value) => {
+        dispatch({ type: 'update_redux', payload: value });
+    };
+
     const bottomSheetRef = useRef(null);
+    const flaggedModalRef = useRef(null)
 
     const snapPoints = useMemo(() => ['40%'], []);
 
@@ -68,7 +77,7 @@ const FlaggedQuestionScreen = ({ navigation, route }) => {
 
 
     useEffect(() => {
-       
+
         const backAction = () => {
             Alert.alert('Hold on!', 'Are you sure you want to go back?', [
                 {
@@ -102,13 +111,25 @@ const FlaggedQuestionScreen = ({ navigation, route }) => {
     }
     // for auto skip 
     const onNext = (questions) => {
-        let index = currentQuestionIndex + 1
-        if (index >= questions.length) {
-            navigation.replace('mock-result', { result: questions })
+        if ((currentQuestionIndex + 1) >= questions.length) {
+            onFinish()
             return
         }
         setCurrentQuestionIndex(currentQuestionIndex + 1)
     }
+
+    const onFinish = () => {
+        let flaggedQuestion = questions.filter(el => el?.is_flag)
+        if (flaggedQuestion?.length > 0) {
+            setFlaggedQuestion(flaggedQuestion)
+            flaggedModalRef.current.isOpen()
+            return
+        }
+        else {
+            goToResult()
+        }
+    }
+
 
     const onSelectOption = (item) => {
 
@@ -131,40 +152,149 @@ const FlaggedQuestionScreen = ({ navigation, route }) => {
             return q
         })
         setQuestions(updatedQuestions2);
-        if (config?.autoSkip) {
-            currentQuestion?.type == 'radio' ? onNext(updatedQuestions2) : currentQuestion?.user_answer?.length && currentQuestion?.user_answer?.length < 2 && onNext(updatedQuestions2)
-       }
+        // if (config?.autoSkip) {
+        //     currentQuestion?.type == 'radio' ? onNext(updatedQuestions2) : currentQuestion?.user_answer?.length && currentQuestion?.user_answer?.length < 2 && onNext(updatedQuestions2)
+        // }
     };
 
     const highLightOption = (el) => {
         let user_answer = questions[currentQuestionIndex]?.user_answer
-        
+
         return user_answer?.length && user_answer.includes(el.option) ? true : false
     }
 
 
-    const onConfirm = () => {
-        handleClosePress()
-        let find = questions.some(el => el.user_answer)
-        if (find) {
-            navigation.replace('mock-result', { result: questions })
-        } else {
-            navigation.goBack()
-        }
+    const onPrev = () => {
+        setCurrentQuestionIndex(currentQuestionIndex - 1)
     }
 
-   
+    const onYessPress = (flaggedQuestion) => {
+        let quest = arrangeOriginalQuestions(flaggedQuestion)
+        navigation.replace('flagged-question', { result: flaggedQuestion, originalQuestion: quest })
+    }
+
+    const btnStatus = () => {
+        let type = questions[currentQuestionIndex]?.type
+        let user_answer = questions[currentQuestionIndex]?.user_answer
+
+        if (type == 'radio') {
+            return user_answer?.length ? true : false
+        }
+        return user_answer?.length && user_answer?.length == 2 ? true : false
+    }
+
+    const onFavoriteClick = (item) => {
+        const isItemInFavorites = userFavourite.some((el) => el.id === item.id);
+        const updatedQuestions = [...questions];
+
+        const updatedFavorite = isItemInFavorites
+            ? userFavourite.filter((el) => el.id !== item.id)
+            : [...userFavourite, { ...item, is_favorite: !item?.is_favorite }];
+
+
+        updatedQuestions[currentQuestionIndex] = {
+            ...updatedQuestions[currentQuestionIndex],
+            is_favorite: !item?.is_favorite,
+        };
+
+        setQuestions(updatedQuestions);
+        mapDispatchToProps({ userFavourite: updatedFavorite });
+
+    }
+
+    const onFlag = (item) => {
+        const updatedQuestions = [...questions]; //local question state  
+
+        const isItemInFlags = userFlag.some((el) => el.id === item.id); //redux array
+
+        //redux array
+        const updatedFlag = isItemInFlags
+            ? userFlag.filter((el) => el.id !== item.id)
+            : [...userFlag, { ...item, is_flag: !item?.is_flag }];
+
+        //local question state
+        updatedQuestions[currentQuestionIndex] = {
+            ...updatedQuestions[currentQuestionIndex],
+            is_flag: !item?.is_flag
+        };
+
+        setQuestions(updatedQuestions); //local question state
+        mapDispatchToProps({ userFlag: updatedFlag });//redux array
+    }
+
+    const onConfirm = () => {
+        handleClosePress()
+        navigation.replace('mock-result',
+            {
+                result: arrangeOriginalQuestions(),
+                isPractice: false
+            })
+
+    }
+
+    const arrangeOriginalQuestions = () => {
+        const newQuestion = originalQuestion.map((el, index) => {
+            let find = questions.find((elem) => index == elem.originalIndex)
+            if (find) {
+                return {
+                    ...el,
+                    user_answer: find?.user_answer,
+                    is_favorite: find.is_favorite ?? false,
+                    is_flag: find.is_flag ?? false 
+                }
+            } else {
+                return {
+                    ...el
+                }
+            }
+        })
+        return newQuestion
+    }
+
+    const onNoPress = (flaggedQuestion) => {
+        let quest = arrangeOriginalQuestions(flaggedQuestion)
+        navigation.replace('mock-result', { result: quest, isPractice: false })
+    }
+
+    const goToResult = () => {
+        let quest = arrangeOriginalQuestions()
+        console.log("on no flag quest", quest);
+        // navigation.replace('mock-result', { result: quest, isPractice: false })
+    }
+
     return (
         <WrapperContainer1>
-            <QuestionHeader
-                goToBack={goToBack}
-                currentQuestion={currentQuestion}
-                setQuestions={setQuestions}
-                questions={questions}
-                flaggedQuestion={flaggedQuestion}
-                setFlaggedQuestion={setFlaggedQuestion}
-                currentQuestionIndex={currentQuestionIndex} />
-             <View style={styles.container}>
+            <View style={styles.headerTop}>
+                <TouchableOpacity
+                    style={styles.left}
+                    activeOpacity={0.95}
+                    onPress={() => goToBack(0)}>
+                    <BackLeftIcon />
+                </TouchableOpacity>
+                <View style={styles.right}>
+                    <TouchableOpacity
+                        style={[styles.flagIcon, { alignItems: 'center' }]}
+                        activeOpacity={0.8}
+                        onPress={() => onFlag(currentQuestion)}>
+                        {currentQuestion?.is_flag ?
+                            <RedFlagIcon svgStyle={styles.flagIconSvg} />
+                            :
+                            <FlagIcon svgStyle={styles.flagIconSvg} />
+                        }
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={[styles.flagIcon, { marginLeft: 5, alignItems: 'flex-end' }]}
+                        activeOpacity={0.8}
+                        onPress={() => onFavoriteClick(currentQuestion)}>
+                        {currentQuestion?.is_favorite ?
+                            <RedHeartIcon svgStyle={styles.flagIconSvg} />
+                            :
+                            <HeartIcon svgStyle={styles.flagIconSvg} />
+                        }
+                    </TouchableOpacity>
+                </View>
+            </View>
+            <View style={styles.container}>
                 <QuestionProgress currentQuestionIndex={currentQuestionIndex} questions={questions} />
                 <View style={styles.row}>
                     <Text style={styles.heading}>
@@ -202,18 +332,38 @@ const FlaggedQuestionScreen = ({ navigation, route }) => {
                     </View>
                 </View>
             </View>
-           <QuestionFooter
-                questions={questions}
-                showNext={true}
-                currentQuestion={currentQuestion}
-                currentQuestionIndex={currentQuestionIndex}
-                config={config}
-                fromFlagScreen={true}
-                showResult={true}
-                originalQuestion={originalQuestion}
+            <View style={styles.footer}>
+                {currentQuestionIndex !== 0 ?
+                    <TouchableOpacity
+                        style={styles.btn1}
+                        activeOpacity={0.8}
+                        onPress={() => onPrev()}>
+                        <BackWardArrowIcon svgStyle={styles.arrowSvg1} />
+                        <Text style={styles.btn1Text}>
+                            Previous
+                        </Text>
+                    </TouchableOpacity>
+                    :
+                    <View />
+                }
+                {!config?.autoSkip &&
+                    <TouchableOpacity
+                        style={styles.btn2(btnStatus())}
+                        disabled={btnStatus() ? false : true}
+                        activeOpacity={0.8}
+                        onPress={() => currentQuestionIndex == questions.length - 1 ? onFinish() : onNext(questions)}>
+                        <Text style={styles.btn2Text}>
+                            {currentQuestionIndex == questions.length - 1 ? "Finish" : "Next"}
+                        </Text>
+                        <ForwardEnWhiteIcon svgStyle={styles.arrowSvg} />
+                    </TouchableOpacity>
+                }
+            </View>
+            <FlaggedQuestionAlertModal
+                ref={flaggedModalRef}
                 flaggedQuestion={flaggedQuestion}
-                setCurrentQuestionIndex={setCurrentQuestionIndex}
-                navigation={navigation} />
+                onYessPress={onYessPress}
+                onNoPress={onNoPress} />
             <BottomSheet
                 ref={bottomSheetRef}
                 index={-1}
@@ -235,7 +385,31 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingHorizontal: 15,
     },
-
+    headerTop: {
+        paddingHorizontal: 15,
+        height: 70,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    left: {
+        height: 40,
+        width: 40
+    },
+    right: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    flagIcon: {
+        height: 50,
+        width: 50,
+        justifyContent: 'center'
+    },
+    flagIconSvg: {
+        height: 25,
+        width: 25
+    },
     progressView: {
         marginTop: 20,
         height: 5,
@@ -308,4 +482,65 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: theme.black
     },
+    footer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingVertical: 20,
+        paddingHorizontal: 15,
+        position: 'absolute',
+        bottom: 0,
+        width: '100%',
+        alignSelf: 'center',
+        backgroundColor: theme.bg,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+
+        elevation: 5,
+    },
+    btn1: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '32%',
+        height: 47,
+        backgroundColor: theme.skyBlue,
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        borderRadius: 100,
+    },
+    btn1Text: {
+        color: theme.white,
+        fontFamily: Fonts.medium,
+        fontSize: 16
+    },
+    btn2: (is) => ({
+        width: '32%',
+        height: 47,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: theme.skyBlue,
+        borderRadius: 100,
+        opacity: is ? 1 : 0.5
+    }),
+    btn2Text: {
+        color: theme.white,
+        fontFamily: Fonts.medium,
+        fontSize: 16
+    },
+    arrowSvg: {
+        height: 25,
+        width: 25
+    },
+    arrowSvg1: {
+        height: 12,
+        width: 12,
+        marginRight: 5
+    }
 })

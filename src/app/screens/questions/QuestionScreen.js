@@ -127,8 +127,9 @@ const QuestionScreen = ({ navigation, route }) => {
             }
             return q
         })
+        
         setQuestions(updatedQuestions2);
-        if (config?.autoSkip) {
+        if (config?.autoSkip && updatedQuestions2[currentQuestionIndex]?.user_answer?.length > 0) {
             let leng = currentQuestion?.user_answer?.length
             currentQuestion?.type == 'radio' ? onNext(updatedQuestions2) : leng && leng < 2 && onNext(updatedQuestions2)
         }
@@ -147,26 +148,8 @@ const QuestionScreen = ({ navigation, route }) => {
         setCurrentQuestionIndex(currentQuestionIndex + 1)
     }
 
-    const onYessPress = () => {
-
-        const newQuestion = flaggedQuestion.map((el) => {
-            let find = questions.find((elem, index) => el.originalIndex == index)
-            if (find) {
-                return {
-                    ...el,
-                    is_favorite: find?.is_favorite,
-                    user_answer: find.user_answer
-                }
-            } else {
-                return {
-                    ...el
-                }
-
-            }
-        })
-        navigation.replace('flagged-question', { result: newQuestion, originalQuestion: questions })
-
-
+    const onYessPress = (flaggedQuestion) => {
+        navigation.replace('flagged-question', { result: flaggedQuestion, originalQuestion: questions })
     }
 
     const onFinish = () => {

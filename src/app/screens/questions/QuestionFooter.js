@@ -24,7 +24,9 @@ const QuestionFooter = ({
     fromFlagndLikeRoute = false,
     flaggedQuestion,
     fromFlagScreen = false,
-    isPractice = false
+    isPractice = false,
+    isNext = false,
+    setIsNext
 }) => {
 
     const flaggedModalRef = useRef(null)
@@ -36,17 +38,6 @@ const QuestionFooter = ({
         }
         setCurrentQuestionIndex(currentQuestionIndex + 1)
     }
-
-    useEffect(() => {
-        console.log("change question=======");
-        let len = currentQuestion?.user_answer?.length
-        console.log(len);
-        if (config?.autoSkip && len) {
-            console.log("yh bhi call========");
-            currentQuestion?.type == 'radio' ? onNext() : len && len < 2 && onNext()
-        }
-        
-    }, [currentQuestionIndex, currentQuestion])
 
     const onYessPress = () => {
 
@@ -113,6 +104,7 @@ const QuestionFooter = ({
 
     const onPrev = () => {
         console.log("cal======");
+        if(isNext) setIsNext(false)
         setCurrentQuestionIndex(currentQuestionIndex - 1)
     }
 
