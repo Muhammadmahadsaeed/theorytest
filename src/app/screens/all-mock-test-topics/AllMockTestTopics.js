@@ -74,9 +74,17 @@ const AllMockTestTopic = ({ navigation }) => {
         handleSnapPress(0)
     }
 
-    const onContinue = (data) => {
+    const onContinue = (config, questLeng) => {
         bottomSheetRef.current?.close();
-        navigation.replace('revision-question-by-topic', { result: selectedItem, config: data })
+        let questions =
+            questLeng == 'all' ?
+                selectedItem :
+                { ...selectedItem, questions: selectedItem?.questions?.slice(0, questLeng) }
+    
+        navigation.replace('revision-question-by-topic', {
+            result: questions,
+            config
+        })
     }
 
     return (

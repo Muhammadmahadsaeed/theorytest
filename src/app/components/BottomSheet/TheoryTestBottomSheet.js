@@ -252,7 +252,7 @@ const TheoryTestBottomSheet = ({ navigation, selectedItem, onCancel, onContinue,
                     <View style={styles.seperator} />
                 </View>
             </BottomSheetScrollView>
-            <Button title={"Continue"} onPress={() => onContinue(toggles)} />
+            <Button title={"Continue"} onPress={() => onContinue(toggles, quesLen)} />
         </View>
     )
 }
