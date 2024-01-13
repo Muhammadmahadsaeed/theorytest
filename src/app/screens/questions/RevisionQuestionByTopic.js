@@ -12,25 +12,21 @@ import WrapperContainer1 from '../../components/Wrapper/WrapperContainer1';
 import { BackWardArrowIcon, CrossRoundIcon, ForwardEnWhiteIcon, InfoCircleIcon, TickBoxIcon } from '../../utils/images';
 import { theme } from '../../utils/colors';
 import { Fonts } from '../../utils/fonts';
-import questionArray from '../../services/section.json'
 import AlertBottomSheetComponent from '../../components/BottomSheet/AlertBottomSheetComponent';
 import { useDispatch } from 'react-redux';
 import TextModal from '../../components/Modal/TextModal';
-import QuestionFooter from './QuestionFooter';
 import QuestionHeader from './QuestionHeader';
 import QuestionProgress from './QuestionProgress';
-import FlaggedQuestionAlertModal from '../../components/Modal/FlaggedQuestionAlert';
 
 
 const RevisionQuestionByTopic = ({ navigation, route }) => {
 
-    const { config } = route?.params || {}
+    const { config, result = [] } = route?.params || {}
 
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-    const [questions, setQuestions] = useState(questionArray);
+    const [questions, setQuestions] = useState(result?.questions);
 
     const bottomSheetRef = useRef(null);
-    const flaggedModalRef = useRef(null)
     const textModalRef = useRef()
     const dispatch = useDispatch();
 
@@ -140,14 +136,13 @@ const RevisionQuestionByTopic = ({ navigation, route }) => {
 
     const onConfirm = () => {
         handleClosePress()
-        let find = questions.some(el => el.user_answer)
+        let find = questions.some(el => el.user_answer && el.user_answer.length > 0);
+
         if (find) {
-            navigation.replace('mock-result',
-                {
-                    result:
-                        questions.slice(0, currentQuestionIndex),
-                    isPractice: true
-                })
+            navigation.replace('mock-result', {
+                result: questions.slice(0, currentQuestionIndex == 0 ? currentQuestionIndex + 1 : currentQuestionIndex),
+                isPractice: true
+            })
         } else {
             navigation.goBack()
         }
@@ -173,7 +168,7 @@ const RevisionQuestionByTopic = ({ navigation, route }) => {
         setCurrentQuestionIndex(currentQuestionIndex + 1)
     }
 
-   
+
     const onFinish = () => {
         navigation.replace('mock-result', { result: questions, isPractice: true })
     }

@@ -1,20 +1,5 @@
 import moment from "moment";
-import Alertness from '../services/alertness.json'
 
-export function formatData() {
-    let arr = Alertness.questions.map((el) => {
-        return {
-            id: el.uuid,
-            type: el.type == 'choice' ? 'radio' : 'checkbox',
-            question: el.config.text,
-            options: el.config.choices.map((elem) => ({ option: elem.label })),
-            correct_answer: el.config.choices.filter((elem) => elem.correct).map(({ label }) => label),
-            explanation: el.config.messages.correct.text,
-            audios: Object.values(el.assets)
-        }
-    })
-    console.log(arr);
-}
 
 export function isObjEmpty(obj) {
     if (obj) {

@@ -13,90 +13,41 @@ import { theme } from '../../utils/colors';
 import { Fonts } from '../../utils/fonts';
 import AllMockTestTopicList from './AllMockTestTopicsList';
 import TheoryTestBottomSheet from '../../components/BottomSheet/TheoryTestBottomSheet';
-import { formatData } from '../../helper/helper';
+import questionArray from '../../services/section.json'
+import groupArray from '../../services/groups.json'
 
 const AllMockTestTopic = ({ navigation }) => {
 
-    const [list, setList] = useState([
-        {
-            id: 1,
-            name: 'Alertness',
-            // icon: <ClockWatchIcon />,
-
-        },
-        {
-            id: 2,
-            name: "Attitude",
-            // icon: <ReviewIcon />,
-            // link: 'revision-question'
-        },
-        {
-            id: 3,
-            name: "Documents",
-            // icon: <QuestionIcon />
-        },
-        {
-            id: 3,
-            name: "Hazard Awareness",
-            // icon: <SearchFileIcon />
-        },
-        {
-            id: 1,
-            name: 'Motorway Rules',
-            // icon: <ClockWatchIcon />,
-
-        },
-        {
-            id: 2,
-            name: "Other Types of Vehicle",
-            // icon: <ReviewIcon />,
-            // link: 'revision-question'
-        },
-        {
-            id: 3,
-            name: "Road and Traffic Signs",
-            // icon: <QuestionIcon />
-        },
-        {
-            id: 3,
-            name: "Vehicle Handling",
-            // icon: <SearchFileIcon />
-        },
-        {
-            id: 1,
-            name: 'Vulnerable Road Users',
-            // icon: <ClockWatchIcon />,
-
-        },
-        {
-            id: 2,
-            name: "Safety Margins",
-            // icon: <ReviewIcon />,
-            // link: 'revision-question'
-        },
-        {
-            id: 3,
-            name: "Safety and Your Vehicle",
-            // icon: <QuestionIcon />
-        },
-        {
-            id: 3,
-            name: "Vehicle Loading",
-            // icon: <SearchFileIcon />
-        },
-        {
-            id: 3,
-            name: "Incidents, Accidents and Emergencies",
-            // icon: <SearchFileIcon />
-        }
-    ])
+    const [list, setList] = useState([])
     const [selectedItem, setSelectedItem] = useState({})
 
     const bottomSheetRef = useRef(null);
 
     useEffect(() => {
-        // formatData()
-    },[])
+        formatQuestions()
+    }, [])
+
+    const findNameByTags = (item) => {
+        const category = groupArray.find(category => item.some(tag => category.tags.includes(tag)))
+        return category ? category.name : null;
+    }
+
+
+    const formatQuestions = () => {
+        const mergedQuestions = [];
+
+        questionArray.forEach(item => {
+            const categoryName = findNameByTags(item.tags);
+            const categoryIndex = mergedQuestions.findIndex(category => category.name == categoryName);
+
+            if (categoryIndex === -1) {
+                mergedQuestions.push({ name: categoryName, questions: [item] });
+            } else {
+                mergedQuestions[categoryIndex].questions.push(item);
+            }
+        });
+        setList(mergedQuestions);
+    }
 
     const snapPoints = useMemo(() => ['95%'], []);
 
@@ -120,16 +71,12 @@ const AllMockTestTopic = ({ navigation }) => {
 
     const onClick = (el) => {
         setSelectedItem(el)
-        if (el.link) {
-            navigation.navigate(el.link)
-            return
-        }
         handleSnapPress(0)
     }
 
-    const onContinue = () => {
+    const onContinue = (data) => {
         bottomSheetRef.current?.close();
-        navigation.replace('revision-question-by-topic')
+        navigation.replace('revision-question-by-topic', { result: selectedItem, config: data })
     }
 
     return (

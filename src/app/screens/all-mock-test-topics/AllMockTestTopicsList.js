@@ -1,14 +1,11 @@
-import React, { useState, useRef, useCallback, useMemo } from 'react';
+import React from 'react';
 import {
     View,
     TouchableOpacity,
     Text,
     StyleSheet,
-    ScrollView
 } from 'react-native';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
-import WrapperContainer1 from '../../components/Wrapper/WrapperContainer1';
-import HeaderWithBackButton from '../../components/Headers/HeaderWithBackButton';
 import { theme } from '../../utils/colors';
 import { Fonts } from '../../utils/fonts';
 

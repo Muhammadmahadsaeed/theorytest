@@ -40,7 +40,7 @@ const TextModal = React.forwardRef((props, ref) => {
                     <ScrollView showsVerticalScrollIndicator={false}>
                         <View style={styles.descriptionView}>
                             <Text style={styles.description}>
-                                {currentQuestion?.explanation}
+                                {currentQuestion?.explanation?.text}
                             </Text>
                         </View>
                     </ScrollView>

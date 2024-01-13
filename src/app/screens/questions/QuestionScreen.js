@@ -15,8 +15,6 @@ import { Fonts } from '../../utils/fonts';
 import questionArray from '../../services/section.json'
 import AlertBottomSheetComponent from '../../components/BottomSheet/AlertBottomSheetComponent';
 import { useDispatch, useSelector } from 'react-redux';
-import QuestionFooter from './QuestionFooter';
-import QuestionHeader from './QuestionHeader';
 import QuestionProgress from './QuestionProgress';
 import FlaggedQuestionAlertModal from '../../components/Modal/FlaggedQuestionAlert';
 
@@ -225,11 +223,10 @@ const QuestionScreen = ({ navigation, route }) => {
 
     const onConfirm = () => {
         handleClosePress()
-        let find = questions.some(el => el.user_answer?.length)
+        let find = questions.some(el => el.user_answer && el.user_answer.length > 0);
         if (find) {
             navigation.replace('mock-result', {
-                result:
-                    questions.slice(0, currentQuestionIndex),
+                result: questions.slice(0, currentQuestionIndex == 0 ? currentQuestionIndex + 1 : currentQuestionIndex),
                 isPractice: false
             })
         } else {

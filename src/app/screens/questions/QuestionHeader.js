@@ -30,7 +30,7 @@ const QuestionHeader = ({
     }, [currentQuestion, currentQuestionIndex, userFavourite, userFlag])
 
     const checkQuestionIsFavorite = () => {
-        const isItemInFavorites = userFavourite.some((el) => el.id === currentQuestion.id);
+        const isItemInFavorites = userFavourite.some((el) => el?.id === currentQuestion?.id);
         if (isItemInFavorites) {
             setIsFavorite(true)
         } else {
@@ -39,8 +39,7 @@ const QuestionHeader = ({
     }
 
     const checkQuestionIsFlag = () => {
-        console.log("call=====");
-        const isItemInFavorites = userFlag.some((el) => el.id === currentQuestion.id);
+        const isItemInFavorites = userFlag.some((el) => el?.id === currentQuestion?.id);
         if (isItemInFavorites) {
             setIsFlag(true)
         } else {
