@@ -9,7 +9,7 @@ import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import { theme } from '../../utils/colors';
 import { Fonts } from '../../utils/fonts';
 
-const AllMockTestTopicList = ({ data, onClick }) => {
+const AllMockTestTopicList = ({ data, onClick, length }) => {
 
     return (
         <TouchableOpacity
@@ -28,10 +28,10 @@ const AllMockTestTopicList = ({ data, onClick }) => {
                 </View>
                 <View style={styles.row1}>
                     <Text style={styles.text1}>
-                        Answered: 1/20
+                        Answered: 1/{length}
                     </Text>
                     <Text style={styles.text1}>
-                        Correctly: 1/20
+                        Correctly: 1/{length}
                     </Text>
                 </View>
             </View>

@@ -5,6 +5,7 @@ export const initialState = {
     token: null,
     isAppIntro: false,
     userFavourite: [],
-    userFlag: []
+    userFlag: [],
+    practiceTestProgress: {}
 }
 

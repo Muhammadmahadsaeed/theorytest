@@ -80,7 +80,7 @@ const AllMockTestTopic = ({ navigation }) => {
             questLeng == 'all' ?
                 selectedItem :
                 { ...selectedItem, questions: selectedItem?.questions?.slice(0, questLeng) }
-    
+
         navigation.replace('revision-question-by-topic', {
             result: questions,
             config
@@ -93,7 +93,11 @@ const AllMockTestTopic = ({ navigation }) => {
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={styles.innerContainer}>
                     {list.map((el, index) => (
-                        <AllMockTestTopicList key={index} data={el} onClick={onClick} />
+                        <AllMockTestTopicList
+                            length={list[index].questions.length}
+                            key={index}
+                            data={el}
+                            onClick={onClick} />
                     ))}
                 </View>
             </ScrollView>

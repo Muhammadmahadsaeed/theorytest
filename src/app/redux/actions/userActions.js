@@ -6,7 +6,8 @@ export const mapStateToProps = (state) => {
         token: store.token,
         isAppIntro: store.isAppIntro,
         userFlag: store.userFlag,
-        userFavourite: store.userFavourite
+        userFavourite: store.userFavourite,
+        practiceTestProgress: store.practiceTestProgress
     }
 };
 //data set

@@ -72,7 +72,10 @@ const ReviewMockTest = ({ navigation, route }) => {
     }
 
     const onQuestionClick = (index) => {
-        navigation.navigate('review-question', { result: getQuestions[selectedTab].questions, index: index })
+        navigation.navigate('review-question', {
+            result: getQuestions[selectedTab].questions,
+            index: index
+        })
     }
 
     return (
