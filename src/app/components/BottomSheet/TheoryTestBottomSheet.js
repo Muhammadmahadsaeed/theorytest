@@ -14,7 +14,7 @@ import Button from '../Buttons/Button';
 import { Fonts } from '../../utils/fonts';
 import { ReviewFileIcon, SmileIcon, TimerIcon } from '../../utils/images';
 
-const TheoryTestBottomSheet = ({ navigation, selectedItem, onCancel, onContinue, type }) => {
+const TheoryTestBottomSheet = ({ questions, selectedItem, onCancel, onContinue, type }) => {
 
     const [countries, setCountries] = useState([
         {
@@ -104,7 +104,7 @@ const TheoryTestBottomSheet = ({ navigation, selectedItem, onCancel, onContinue,
                                     {
                                         (fill) => (
                                             <Text style={styles.fillText}>
-                                                1/800
+                                                1/{questions.length}
                                             </Text>
                                         )
                                     }

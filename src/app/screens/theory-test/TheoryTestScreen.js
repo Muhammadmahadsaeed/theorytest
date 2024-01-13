@@ -11,6 +11,7 @@ import { Fonts } from '../../utils/fonts';
 import { ClockWatchIcon, QuestionIcon, ReviewIcon, SearchFileIcon } from '../../utils/images';
 import TheoryTestBottomSheet from '../../components/BottomSheet/TheoryTestBottomSheet';
 import TheoryTestList from './TheoryTestList';
+import questionArray from '../../services/section.json'
 
 const TheoryTestScreen = ({ navigation }) => {
 
@@ -46,6 +47,7 @@ const TheoryTestScreen = ({ navigation }) => {
             icon: <SearchFileIcon />
         }
     ])
+    const [questions, setQuestions] = useState(questionArray)
     const [selectedItem, setSelectedItem] = useState({})
 
     const snapPoints = useMemo(() => ['95%'], []);
@@ -95,7 +97,7 @@ const TheoryTestScreen = ({ navigation }) => {
 
     const onContinue = (data) => {
         bottomSheetRef.current?.close();
-        navigation.replace('question', { config: data })
+        navigation.replace('question', { config: data, result: questions.slice(0, 50) })
     }
 
     return (
@@ -113,6 +115,7 @@ const TheoryTestScreen = ({ navigation }) => {
                 snapPoints={snapPoints}>
                 <TheoryTestBottomSheet
                     navigation={navigation}
+                    questions={questions}
                     selectedItem={selectedItem}
                     onCancel={handleClosePress}
                     onContinue={onContinue}

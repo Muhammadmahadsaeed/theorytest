@@ -12,7 +12,6 @@ import WrapperContainer1 from '../../components/Wrapper/WrapperContainer1';
 import { BackLeftIcon, BackWardArrowIcon, FlagIcon, ForwardEnWhiteIcon, HeartIcon, RedFlagIcon, RedHeartIcon, TimeIcon } from '../../utils/images';
 import { theme } from '../../utils/colors';
 import { Fonts } from '../../utils/fonts';
-import questionArray from '../../services/section.json'
 import AlertBottomSheetComponent from '../../components/BottomSheet/AlertBottomSheetComponent';
 import { useDispatch, useSelector } from 'react-redux';
 import QuestionProgress from './QuestionProgress';
@@ -22,11 +21,11 @@ let totalTimeInMinutes = 57
 
 const QuestionScreen = ({ navigation, route }) => {
 
-    const { config } = route?.params || {}
+    const { config, result = [] } = route?.params || {}
 
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [timeRemaining, setTimeRemaining] = useState(totalTimeInMinutes * 60);
-    const [questions, setQuestions] = useState(questionArray);
+    const [questions, setQuestions] = useState(result);
     const [flaggedQuestion, setFlaggedQuestion] = useState([])
 
 
