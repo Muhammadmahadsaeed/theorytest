@@ -3,7 +3,8 @@ import {
     View,
     Text,
     StyleSheet,
-    TouchableOpacity
+    TouchableOpacity,
+    ScrollView
 } from 'react-native';
 import WrapperContainer1 from '../../components/Wrapper/WrapperContainer1';
 import HeaderWithBackButton from '../../components/Headers/HeaderWithBackButton';
@@ -20,7 +21,7 @@ const obj = [
 
 const ReviewMockTest = ({ navigation, route }) => {
 
-    const { result: questions } = route?.params || []
+    const { result: questions, isPractice = false } = route?.params || []
 
     const [selectedTab, setSelectedTab] = useState(0)
 
@@ -108,7 +109,7 @@ const ReviewMockTest = ({ navigation, route }) => {
                         selectedTab={selectedTab}
                     />
                     }
-                    {selectedTab == 2 && <ReviewMockTestQuestion
+                    {!isPractice && selectedTab == 2 && <ReviewMockTestQuestion
                         questions={getQuestions[selectedTab].questions}
                         onQuestionClick={onQuestionClick}
                         selectedTab={selectedTab}

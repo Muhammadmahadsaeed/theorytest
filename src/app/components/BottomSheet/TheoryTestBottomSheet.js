@@ -39,22 +39,26 @@ const TheoryTestBottomSheet = ({ questions, selectedItem, onCancel, onContinue, 
         {
             id: 1,
             name: 'All',
-            length: 'all'
+            length: 'all',
+            isShow: true
         },
         {
             id: 1,
             name: '10',
-            length: '10'
+            length: '10',
+            isShow: true
         },
         {
             id: 1,
             name: '20',
-            length: '20'
+            length: '20',
+            isShow: true
         },
         {
             id: 1,
             name: '50',
-            length: '50'
+            length: '50',
+            isShow: questions?.length > 50 ? true : false
         },
 
     ])
@@ -156,17 +160,21 @@ const TheoryTestBottomSheet = ({ questions, selectedItem, onCancel, onContinue, 
                                 No of Questions
                             </Text>
                             <View style={[styles.tabView01]}>
-                                {numOfQues.map((el, index) => (
-                                    <TouchableOpacity
-                                        key={index}
-                                        activeOpacity={0.8}
-                                        onPress={() => onChangeTab(el)}
-                                        style={styles.tab01(quesLen == el.length)}>
-                                        <Text style={styles.tabText01(quesLen == el.length)}>
-                                            {el.name}
-                                        </Text>
-                                    </TouchableOpacity>
-                                ))}
+                                {numOfQues.map((el, index) => {
+                                    if (el.isShow) {
+                                        return (
+                                            <TouchableOpacity
+                                                key={index}
+                                                activeOpacity={0.8}
+                                                onPress={() => onChangeTab(el)}
+                                                style={styles.tab01(quesLen == el.length)}>
+                                                <Text style={styles.tabText01(quesLen == el.length)}>
+                                                    {el.name}
+                                                </Text>
+                                            </TouchableOpacity>
+                                        )
+                                    }
+                                })}
                             </View>
                         </View>
                     }

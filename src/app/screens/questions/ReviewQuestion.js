@@ -3,10 +3,12 @@ import {
     View,
     Text,
     StyleSheet,
-    TouchableOpacity
+    TouchableOpacity,
+    Image,
+    ScrollView
 } from 'react-native';
 import WrapperContainer1 from '../../components/Wrapper/WrapperContainer1';
-import { CrossRoundIcon, InfoCircleIcon, TickBoxIcon } from '../../utils/images';
+import { CrossRoundIcon, InfoCircleIcon, TickBoxIcon, ZoomPlusIcon } from '../../utils/images';
 import { theme } from '../../utils/colors';
 import { Fonts } from '../../utils/fonts';
 import { useDispatch } from 'react-redux';
@@ -14,6 +16,7 @@ import TextModal from '../../components/Modal/TextModal';
 import QuestionHeader from './QuestionHeader';
 import QuestionFooter from './QuestionFooter';
 import QuestionProgress from './QuestionProgress';
+import ImageModal from '../../components/Modal/ImageModal';
 
 
 const ReviewQuestionScreen = ({ navigation, route }) => {
@@ -26,6 +29,7 @@ const ReviewQuestionScreen = ({ navigation, route }) => {
     const dispatch = useDispatch();
 
     const textModalRef = useRef()
+    const imageModalRef = useRef()
 
     const mapDispatchToProps = (value) => {
         dispatch({ type: 'update_redux', payload: value });
@@ -90,8 +94,12 @@ const ReviewQuestionScreen = ({ navigation, route }) => {
         textModalRef.current.isOpen()
     }
 
+    const openImageModal = (uri) => {
+        imageModalRef.current.isOpen(uri);
+    }
+
     let currentQuestion = questArray[currentQuestionIndex]
-    
+
     return (
         <WrapperContainer1>
             <QuestionHeader
@@ -103,48 +111,75 @@ const ReviewQuestionScreen = ({ navigation, route }) => {
                 questions={questArray}
                 showFlag={fromFlagndLikeRoute ? true : false}
                 currentQuestionIndex={currentQuestionIndex} />
-            <View style={styles.container}>
-                <QuestionProgress currentQuestionIndex={currentQuestionIndex} questions={questArray} />
-                <View style={styles.row}>
-                    <Text style={styles.heading}>
-                        Question {currentQuestionIndex + 1} / {questArray.length}
-                    </Text>
-                    <TouchableOpacity
-                        style={styles.timeView}
-                        activeOpacity={0.8}
-                        onPress={() => openModal()}>
-                        <View style={styles.clockIcon}>
-                            <InfoCircleIcon />
-                        </View>
-                        <Text style={styles.time}>
-                            Explain
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={styles.contentContainerStyle}>
+                <View style={styles.container}>
+                    <QuestionProgress currentQuestionIndex={currentQuestionIndex} questions={questArray} />
+                    <View style={styles.row}>
+                        <Text style={styles.heading}>
+                            Question {currentQuestionIndex + 1} / {questArray.length}
                         </Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.questionView}>
-                    <Text style={styles.text}>
-                        {currentQuestion?.question}
-                    </Text>
-                    <View style={styles.optionView}>
-                        {currentQuestion?.options?.map((el, index) => (
+                        <TouchableOpacity
+                            style={styles.timeView}
+                            activeOpacity={0.8}
+                            onPress={() => openModal()}>
+                            <View style={styles.clockIcon}>
+                                <InfoCircleIcon />
+                            </View>
+                            <Text style={styles.time}>
+                                Explain
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.questionView}>
+                        <Text style={styles.text}>
+                            {currentQuestion?.question}
+                        </Text>
+                        {currentQuestion?.image &&
                             <TouchableOpacity
                                 activeOpacity={0.8}
-                                key={index}
-                                disabled={true}
-                                style={[styles.option(el), styles.option1]}>
-                                <View style={styles.textView}>
-                                    <Text style={styles.optionText}>
-                                        {el.option}
-                                    </Text>
+                                onPress={() => openImageModal(currentQuestion?.imageUrl)}
+                                style={styles.imgView}>
+                                <Image style={styles.img} source={{ uri: currentQuestion?.imageUrl }} />
+                                <View style={styles.iconView}>
+                                    <ZoomPlusIcon />
                                 </View>
-                                <View style={styles.icon01}>
-                                    {getIcon(el)}
-                                </View>
+                                <View style={styles.overlay} />
                             </TouchableOpacity>
-                        ))}
+                        }
+                        <View style={[currentQuestion?.optionType == 'text' ? {} : styles.gridView, styles.optionView]}>
+                            {currentQuestion?.options?.map((el, index) => (
+                                <TouchableOpacity
+                                    activeOpacity={0.8}
+                                    key={index}
+                                    disabled={true}
+                                    style={el.image ? styles.gridView1(el) : styles.option(el)}>
+                                    {el.image ?
+                                        <View style={styles.optionImg}>
+                                            <Image source={{ uri: el.option }} style={styles.opImg} />
+                                            <View style={styles.icon02}>
+                                                {getIcon(el)}
+                                            </View>
+                                        </View>
+                                        :
+                                        <>
+                                            <View style={styles.textView}>
+                                                <Text style={styles.optionText}>
+                                                    {el.option}
+                                                </Text>
+                                            </View>
+                                            <View style={styles.icon01}>
+                                                {getIcon(el)}
+                                            </View>
+                                        </>
+                                    }
+                                </TouchableOpacity>
+                            ))}
+                        </View>
                     </View>
                 </View>
-            </View>
+            </ScrollView>
             <QuestionFooter
                 questions={questArray}
                 fromFlagndLikeRoute={fromFlagndLikeRoute}
@@ -153,6 +188,7 @@ const ReviewQuestionScreen = ({ navigation, route }) => {
                 setCurrentQuestionIndex={setCurrentQuestionIndex}
                 navigation={navigation} />
             <TextModal ref={textModalRef} currentQuestion={currentQuestion} />
+            <ImageModal ref={imageModalRef} />
         </WrapperContainer1>
     )
 }
@@ -160,6 +196,7 @@ const ReviewQuestionScreen = ({ navigation, route }) => {
 export default ReviewQuestionScreen
 
 const styles = StyleSheet.create({
+    contentContainerStyle: { paddingBottom: 100 },
     container: {
         flex: 1,
         paddingHorizontal: 15,
@@ -198,8 +235,55 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: theme.black
     },
+    imgView: {
+        height: 180,
+        marginTop: 15,
+    },
+    img: {
+        height: '100%',
+        width: '100%',
+        resizeMode: 'contain'
+    },
+    iconView: {
+        height: 40,
+        width: 40,
+        backgroundColor: theme.white,
+        borderRadius: 7,
+        position: 'absolute',
+        bottom: 10,
+        right: 10,
+        zIndex: 100,
+        padding: 6
+    },
+    overlay: {
+        height: '100%',
+        width: '100%',
+        backgroundColor: 'rgba(0,0,0,0.2)',
+        position: 'absolute'
+    },
     optionView: {
         marginTop: 40
+    },
+    gridView: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        flexWrap: 'wrap'
+    },
+    gridView1: (is) => ({
+        width: 100 / 2.2 + '%',
+        marginBottom: 20,
+        borderColor: theme.skyBlue,
+        borderRadius: 7,
+        backgroundColor: theme.greenish
+    }),
+    optionImg: {
+        height: 150,
+    },
+    opImg: {
+        height: '100%',
+        width: '100%',
+        resizeMode: 'contain'
     },
     text01: {
         fontFamily: Fonts.medium,
@@ -208,28 +292,37 @@ const styles = StyleSheet.create({
         marginBottom: 5
     },
     option1: {
+
+    },
+    textView: {
+        flex: 1,
+        marginRight: 10
+    },
+    option: (is) => ({
         paddingVertical: 15,
         marginBottom: 20,
         paddingHorizontal: 20,
         borderRadius: 7,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: theme.greenish
+
+    }),
+    optionImg: {
+        height: 150,
     },
-    textView: {
-        flex: 1,
-        marginRight: 10
+    opImg: {
+        height: '100%',
+        width: '100%',
+        resizeMode: 'contain'
     },
-    option: (is) => {
-        // if (is.isCorrectAnswer && is.userGotItRight) {
-        //     return { backgroundColor: theme.green }
-        // }
-        // if (!is.isCorrectAnswer && is.userGotItWrong) {
-        //     // return { backgroundColor: theme.lightRed }
-        // } 
-        return {
-            backgroundColor: theme.greenish
-        }
+    icon02: {
+        height: 25,
+        width: 25,
+        position: 'absolute',
+        top: 0,
+        right: 0
     },
     icon01: {
         height: 25,

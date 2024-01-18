@@ -119,7 +119,7 @@ const MockTestResult = ({ navigation, route }) => {
                         <TouchableOpacity
                             style={styles.btn}
                             activeOpacity={0.8}
-                            onPress={() => navigation.navigate('review-mock-test', { result: questions })}>
+                            onPress={() => navigation.navigate('review-mock-test', { result: questions, isPractice: isPractice })}>
                             <ReviewQuestionIcon svgStyle={styles.svgStyle1} />
                             <Text style={styles.btnText}>
                                 Review Your Answers

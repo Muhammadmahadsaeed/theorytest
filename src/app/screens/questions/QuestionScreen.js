@@ -5,17 +5,20 @@ import {
     Alert,
     BackHandler,
     StyleSheet,
-    TouchableOpacity
+    TouchableOpacity,
+    Image,
+    ScrollView
 } from 'react-native';
 import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import WrapperContainer1 from '../../components/Wrapper/WrapperContainer1';
-import { BackLeftIcon, BackWardArrowIcon, FlagIcon, ForwardEnWhiteIcon, HeartIcon, RedFlagIcon, RedHeartIcon, TimeIcon } from '../../utils/images';
+import { BackLeftIcon, BackWardArrowIcon, FlagIcon, ForwardEnWhiteIcon, HeartIcon, RedFlagIcon, RedHeartIcon, TimeIcon, ZoomPlusIcon } from '../../utils/images';
 import { theme } from '../../utils/colors';
 import { Fonts } from '../../utils/fonts';
 import AlertBottomSheetComponent from '../../components/BottomSheet/AlertBottomSheetComponent';
 import { useDispatch, useSelector } from 'react-redux';
 import QuestionProgress from './QuestionProgress';
 import FlaggedQuestionAlertModal from '../../components/Modal/FlaggedQuestionAlert';
+import ImageModal from '../../components/Modal/ImageModal';
 
 let totalTimeInMinutes = 57
 
@@ -31,6 +34,7 @@ const QuestionScreen = ({ navigation, route }) => {
 
     const bottomSheetRef = useRef(null);
     const flaggedModalRef = useRef(null)
+    const imageModalRef = useRef()
 
     const dispatch = useDispatch();
     const { userFlag, userFavourite } = useSelector(state => state.userReducer)
@@ -139,7 +143,7 @@ const QuestionScreen = ({ navigation, route }) => {
 
     const onNext = (questions) => {
         if ((currentQuestionIndex + 1) >= questions.length) {
-            onFinish()
+            onFinish(questions)
             return
         }
         setCurrentQuestionIndex(currentQuestionIndex + 1)
@@ -149,7 +153,7 @@ const QuestionScreen = ({ navigation, route }) => {
         navigation.replace('flagged-question', { result: flaggedQuestion, originalQuestion: questions })
     }
 
-    const onFinish = () => {
+    const onFinish = (questions) => {
         let flaggedQuestion = questions.filter(el => el?.is_flag)
         if (flaggedQuestion?.length > 0) {
             setFlaggedQuestion(flaggedQuestion)
@@ -157,11 +161,11 @@ const QuestionScreen = ({ navigation, route }) => {
             return
         }
         else {
-            goToResult()
+            goToResult(questions)
         }
     }
 
-    const goToResult = () => {
+    const goToResult = (questions) => {
         navigation.replace('mock-result', { result: questions, isPractice: false })
     }
 
@@ -233,8 +237,12 @@ const QuestionScreen = ({ navigation, route }) => {
         }
     }
 
-    let currentQuestion = questions[currentQuestionIndex]
+    const openImageModal = (uri) => {
+        imageModalRef.current.isOpen(uri);
+    }
 
+    let currentQuestion = questions[currentQuestionIndex]
+    // console.log(currentQuestion);
     return (
         <WrapperContainer1>
             <View style={styles.headerTop}>
@@ -267,46 +275,69 @@ const QuestionScreen = ({ navigation, route }) => {
                     </TouchableOpacity>
                 </View>
             </View>
-            <View style={styles.container}>
-                <QuestionProgress
-                    currentQuestionIndex={currentQuestionIndex}
-                    questions={questions} />
-                <View style={styles.row}>
-                    <Text style={styles.heading}>
-                        Question {currentQuestionIndex + 1} / {questions.length}
-                    </Text>
-                    <View style={styles.timeView}>
-                        <View style={styles.clockIcon}>
-                            <TimeIcon />
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={styles.contentContainerStyle}>
+                <View style={styles.container}>
+                    <QuestionProgress
+                        currentQuestionIndex={currentQuestionIndex}
+                        questions={questions} />
+                    <View style={styles.row}>
+                        <Text style={styles.heading}>
+                            Question {currentQuestionIndex + 1} / {questions.length}
+                        </Text>
+                        <View style={styles.timeView}>
+                            <View style={styles.clockIcon}>
+                                <TimeIcon />
+                            </View>
+                            <Text style={styles.time}>
+                                {formatTime(timeRemaining)}
+                            </Text>
                         </View>
-                        <Text style={styles.time}>
-                            {formatTime(timeRemaining)}
-                        </Text>
                     </View>
-                </View>
-                <View style={styles.questionView}>
-                    <Text style={styles.text}>
-                        {currentQuestion?.question}
-                    </Text>
-                    <View style={styles.optionView}>
-                        <Text style={styles.text01}>
-                            {currentQuestion?.type == 'radio' ? "Please select one answer" : "Please select one or more answer"}
+                    <View style={styles.questionView}>
+                        <Text style={styles.text}>
+                            {currentQuestion?.question}
                         </Text>
-
-                        {currentQuestion?.options?.map((el, index) => (
+                        {currentQuestion?.image &&
                             <TouchableOpacity
                                 activeOpacity={0.8}
-                                key={index}
-                                style={styles.option(highLightOption(el))}
-                                onPress={() => onSelectOption(el)}>
-                                <Text style={styles.optionText}>
-                                    {el.option}
-                                </Text>
+                                onPress={() => openImageModal(currentQuestion?.imageUrl)}
+                                style={styles.imgView}>
+                                <Image style={styles.img} source={{ uri: currentQuestion?.imageUrl }} />
+                                <View style={styles.iconView}>
+                                    <ZoomPlusIcon />
+                                </View>
+                                <View style={styles.overlay} />
                             </TouchableOpacity>
-                        ))}
+                        }
+                        <View style={styles.optionView}>
+                            <Text style={styles.text01}>
+                                {currentQuestion?.type == 'radio' ? "Please select one answer" : "Please select one or more answer"}
+                            </Text>
+                            <View style={currentQuestion?.optionType == 'text' ? {} : styles.gridView}>
+                                {currentQuestion?.options?.map((el, index) => (
+                                    <TouchableOpacity
+                                        activeOpacity={0.8}
+                                        key={index}
+                                        style={el.image ? styles.gridView1(highLightOption(el)) : styles.option(highLightOption(el))}
+                                        onPress={() => onSelectOption(el)}>
+                                        {el.image ?
+                                            <View style={styles.optionImg}>
+                                                <Image source={{ uri: el.option }} style={styles.opImg} />
+                                            </View>
+                                            :
+                                            <Text style={styles.optionText}>
+                                                {el.option}
+                                            </Text>
+                                        }
+                                    </TouchableOpacity>
+                                ))}
+                            </View>
+                        </View>
                     </View>
                 </View>
-            </View>
+            </ScrollView>
             <View style={styles.footer}>
                 {currentQuestionIndex !== 0 ?
                     <TouchableOpacity
@@ -326,7 +357,7 @@ const QuestionScreen = ({ navigation, route }) => {
                         style={styles.btn2(btnStatus())}
                         disabled={btnStatus() ? false : true}
                         activeOpacity={0.8}
-                        onPress={() => currentQuestionIndex == questions.length - 1 ? onFinish() : onNext(questions)}>
+                        onPress={() => currentQuestionIndex == questions.length - 1 ? onFinish(questions) : onNext(questions)}>
                         <Text style={styles.btn2Text}>
                             {currentQuestionIndex == questions.length - 1 ? "Finish" : "Next"}
                         </Text>
@@ -338,7 +369,7 @@ const QuestionScreen = ({ navigation, route }) => {
                 ref={flaggedModalRef}
                 flaggedQuestion={flaggedQuestion}
                 onYessPress={onYessPress}
-                onNoPress={goToResult} />
+                onNoPress={() => goToResult(questions)} />
             <BottomSheet
                 ref={bottomSheetRef}
                 index={-1}
@@ -349,7 +380,7 @@ const QuestionScreen = ({ navigation, route }) => {
                     onCancel={handleClosePress}
                     onConfirm={onConfirm} />
             </BottomSheet>
-
+            <ImageModal ref={imageModalRef} />
         </WrapperContainer1>
     )
 }
@@ -361,6 +392,7 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingHorizontal: 15,
     },
+    contentContainerStyle: { paddingBottom: 100 },
     headerTop: {
         paddingHorizontal: 15,
         height: 70,
@@ -428,6 +460,7 @@ const styles = StyleSheet.create({
         marginLeft: 10
     },
     questionView: {
+        flex: 1,
         marginTop: 30
     },
     text: {
@@ -443,6 +476,54 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: theme.grayShade1,
         marginBottom: 5
+    },
+    imgView: {
+        height: 180,
+        marginTop: 15,
+    },
+    img: {
+        height: '100%',
+        width: '100%',
+        resizeMode: 'contain'
+    },
+    iconView: {
+        height: 40,
+        width: 40,
+        backgroundColor: theme.white,
+        borderRadius: 7,
+        position: 'absolute',
+        bottom: 10,
+        right: 10,
+        zIndex: 100,
+        padding: 6
+    },
+    overlay: {
+        height: '100%',
+        width: '100%',
+        backgroundColor: 'rgba(0,0,0,0.2)',
+        position: 'absolute'
+    },
+    gridView: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        flexWrap: 'wrap'
+    },
+    gridView1: (is) => ({
+        width: 100 / 2.2 + '%',
+        marginBottom: 20,
+        borderColor: theme.skyBlue,
+        backgroundColor: theme.greenish,
+        borderWidth: is ? 1.5 : 0,
+        borderRadius: 7
+    }),
+    optionImg:{
+        height: 150,
+    },
+    opImg: {
+        height: '100%',
+        width: '100%',
+        resizeMode: 'contain'
     },
     option: (is) => ({
         borderColor: theme.skyBlue,

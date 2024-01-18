@@ -5,11 +5,13 @@ import {
     Alert,
     BackHandler,
     StyleSheet,
-    TouchableOpacity
+    TouchableOpacity,
+    ScrollView,
+    Image
 } from 'react-native';
 import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import WrapperContainer1 from '../../components/Wrapper/WrapperContainer1';
-import { BackWardArrowIcon, CrossRoundIcon, ForwardEnWhiteIcon, InfoCircleIcon, TickBoxIcon } from '../../utils/images';
+import { BackWardArrowIcon, CrossRoundIcon, ForwardEnWhiteIcon, InfoCircleIcon, TickBoxIcon, ZoomPlusIcon } from '../../utils/images';
 import { theme } from '../../utils/colors';
 import { Fonts } from '../../utils/fonts';
 import AlertBottomSheetComponent from '../../components/BottomSheet/AlertBottomSheetComponent';
@@ -17,6 +19,7 @@ import { useDispatch } from 'react-redux';
 import TextModal from '../../components/Modal/TextModal';
 import QuestionHeader from './QuestionHeader';
 import QuestionProgress from './QuestionProgress';
+import ImageModal from '../../components/Modal/ImageModal';
 
 
 const RevisionQuestionByTopic = ({ navigation, route }) => {
@@ -28,6 +31,8 @@ const RevisionQuestionByTopic = ({ navigation, route }) => {
 
     const bottomSheetRef = useRef(null);
     const textModalRef = useRef()
+    const imageModalRef = useRef()
+
     const dispatch = useDispatch();
 
     const mapDispatchToProps = (value) => {
@@ -187,6 +192,10 @@ const RevisionQuestionByTopic = ({ navigation, route }) => {
         return user_answer?.length && user_answer?.length == 2 ? true : false
     }
 
+    const openImageModal = (uri) => {
+        imageModalRef.current.isOpen(uri);
+    }
+
     let currentQuestion = questions[currentQuestionIndex]
 
     return (
@@ -198,56 +207,85 @@ const RevisionQuestionByTopic = ({ navigation, route }) => {
                 goToBack={goToBack}
                 showFlag={false}
                 currentQuestionIndex={currentQuestionIndex} />
-            <View style={styles.container}>
-                <QuestionProgress currentQuestionIndex={currentQuestionIndex} questions={questions} />
-                <View style={styles.row}>
-                    <Text style={styles.heading}>
-                        Question {currentQuestionIndex + 1} / {questions.length}
-                    </Text>
-                    {currentQuestion?.isCheck ?
-                        <TouchableOpacity
-                            style={styles.timeView}
-                            activeOpacity={0.8}
-                            onPress={() => openModal()}>
-                            <View style={styles.clockIcon}>
-                                <InfoCircleIcon />
-                            </View>
-                            <Text style={styles.time}>
-                                Explain
-                            </Text>
-                        </TouchableOpacity>
-                        :
-                        null
-                    }
-                </View>
-                <View style={styles.questionView}>
-                    <Text style={styles.text}>
-                        {currentQuestion?.question}
-                    </Text>
-                    <View style={styles.optionView}>
-                        <Text style={styles.text01}>
-                            {currentQuestion?.type == 'radio' ? "Please select one answer" : "Please select one or more answer"}
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={styles.contentContainerStyle}>
+                <View style={styles.container}>
+                    <QuestionProgress currentQuestionIndex={currentQuestionIndex} questions={questions} />
+                    <View style={styles.row}>
+                        <Text style={styles.heading}>
+                            Question {currentQuestionIndex + 1} / {questions.length}
                         </Text>
-
-                        {currentQuestion?.options?.map((el, index) => (
+                        {currentQuestion?.isCheck ?
+                            <TouchableOpacity
+                                style={styles.timeView}
+                                activeOpacity={0.8}
+                                onPress={() => openModal()}>
+                                <View style={styles.clockIcon}>
+                                    <InfoCircleIcon />
+                                </View>
+                                <Text style={styles.time}>
+                                    Explain
+                                </Text>
+                            </TouchableOpacity>
+                            :
+                            null
+                        }
+                    </View>
+                    <View style={styles.questionView}>
+                        <Text style={styles.text}>
+                            {currentQuestion?.question}
+                        </Text>
+                        {currentQuestion?.image &&
                             <TouchableOpacity
                                 activeOpacity={0.8}
-                                key={index}
-                                style={[styles.row01, currentQuestion?.isCheck ? styles.option1 : styles.option(highLightOption(el))]}
-                                onPress={() => onSelectOption(el)}>
-                                <View style={styles.textView}>
-                                    <Text style={styles.optionText}>
-                                        {el.option}
-                                    </Text>
+                                onPress={() => openImageModal(currentQuestion?.imageUrl)}
+                                style={styles.imgView}>
+                                <Image style={styles.img} source={{ uri: currentQuestion?.imageUrl }} />
+                                <View style={styles.iconView}>
+                                    <ZoomPlusIcon />
                                 </View>
-                                <View style={styles.icon01}>
-                                    {getIcon(el)}
-                                </View>
+                                <View style={styles.overlay} />
                             </TouchableOpacity>
-                        ))}
+                        }
+
+                        <View style={[styles.optionView]}>
+                            <Text style={styles.text01}>
+                                {currentQuestion?.type == 'radio' ? "Please select one answer" : "Please select one or more answer"}
+                            </Text>
+                            <View style={currentQuestion?.optionType == 'text' ? {} : styles.gridView}>
+                                {currentQuestion?.options?.map((el, index) => (
+                                    <TouchableOpacity
+                                        activeOpacity={0.8}
+                                        key={index}
+                                        style={[el.image ? styles.gridView1(highLightOption(el)) : styles.row01, currentQuestion?.isCheck ? styles.option1 : styles.option(highLightOption(el))]}
+                                        onPress={() => onSelectOption(el)}>
+                                        {el.image ?
+                                            <View style={styles.optionImg}>
+                                                <Image source={{ uri: el.option }} style={styles.opImg} />
+                                                <View style={styles.icon02}>
+                                                    {getIcon(el)}
+                                                </View>
+                                            </View>
+                                            :
+                                            <>
+                                                <View style={styles.textView}>
+                                                    <Text style={styles.optionText}>
+                                                        {el.option}
+                                                    </Text>
+                                                </View>
+                                                <View style={styles.icon01}>
+                                                    {getIcon(el)}
+                                                </View>
+                                            </>
+                                        }
+                                    </TouchableOpacity>
+                                ))}
+                            </View>
+                        </View>
                     </View>
                 </View>
-            </View>
+            </ScrollView>
             <View style={styles.footer}>
                 {currentQuestionIndex !== 0 ?
                     <TouchableOpacity
@@ -298,13 +336,15 @@ const RevisionQuestionByTopic = ({ navigation, route }) => {
                     onConfirm={onConfirm} />
             </BottomSheet>
             <TextModal ref={textModalRef} currentQuestion={currentQuestion} />
-        </WrapperContainer1>
+            <ImageModal ref={imageModalRef} />
+        </WrapperContainer1 >
     )
 }
 
 export default RevisionQuestionByTopic
 
 const styles = StyleSheet.create({
+    contentContainerStyle: { paddingBottom: 100 },
     container: {
         flex: 1,
         paddingHorizontal: 15,
@@ -351,6 +391,61 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: theme.grayShade1,
         marginBottom: 5
+    },
+    imgView: {
+        height: 180,
+        marginTop: 15,
+    },
+    img: {
+        height: '100%',
+        width: '100%',
+        resizeMode: 'contain'
+    },
+    iconView: {
+        height: 40,
+        width: 40,
+        backgroundColor: theme.white,
+        borderRadius: 7,
+        position: 'absolute',
+        bottom: 10,
+        right: 10,
+        zIndex: 100,
+        padding: 6
+    },
+    overlay: {
+        height: '100%',
+        width: '100%',
+        backgroundColor: 'rgba(0,0,0,0.2)',
+        position: 'absolute'
+    },
+    gridView: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        flexWrap: 'wrap'
+    },
+    gridView1: (is) => ({
+        width: 100 / 2.2 + '%',
+        marginBottom: 20,
+        borderColor: theme.skyBlue,
+        backgroundColor: theme.greenish,
+        // borderWidth: is ? 1.5 : 0,
+        borderRadius: 7
+    }),
+    optionImg: {
+        height: 150,
+    },
+    opImg: {
+        height: '100%',
+        width: '100%',
+        resizeMode: 'contain'
+    },
+    icon02: {
+        height: 25,
+        width: 25,
+        position: 'absolute',
+        top: 0,
+        right: 0
     },
     textView: {
         flex: 1,

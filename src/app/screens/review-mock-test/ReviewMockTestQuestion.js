@@ -11,6 +11,7 @@ const ReviewMockTestQuestion = ({ questions = [],  onQuestionClick }) => {
     return (
         <FlatList
             data={questions}
+            
             showsVerticalScrollIndicator={false}
             contentContainerStyle={styles.innerContainer}
             keyExtractor={(item, index) => index.toString()}
@@ -23,6 +24,6 @@ export default ReviewMockTestQuestion
 
 const styles = StyleSheet.create({
     innerContainer: {
-        flex: 1,
+        flexGrow: 1,
     }
 })

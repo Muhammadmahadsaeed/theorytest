@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback, useMemo } from 'react';
+import React, { useState, useRef, useCallback, useMemo, useEffect } from 'react';
 import {
     View,
     StyleSheet
@@ -52,6 +52,9 @@ const TheoryTestScreen = ({ navigation }) => {
 
     const snapPoints = useMemo(() => ['95%'], []);
 
+    useEffect(() => {
+    },[])
+
     const handleSnapPress = useCallback((index) => {
         bottomSheetRef.current?.snapToIndex(index);
     }, []);
@@ -97,7 +100,7 @@ const TheoryTestScreen = ({ navigation }) => {
 
     const onContinue = (data) => {
         bottomSheetRef.current?.close();
-        navigation.replace('question', { config: data, result: questions.slice(0, 50) })
+        navigation.replace('question', { config: data, result: questions.slice(22, 50) })
     }
 
     return (
