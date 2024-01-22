@@ -42,11 +42,18 @@ const HazardPerception = ({ navigation }) => {
     ])
 
     const onClick = (item) => {
-        if(item.short_name == 'mock_test'){
-            videoModalRef.current.isOpen()
+        if(item.short_name == 'mock_test' || item.short_name == 'review_clips'){
+            videoModalRef.current.isOpen(item.short_name)
         }else{
             navigation.navigate(item.link)
         }
+    }
+
+    const onModalClose = (type, toggle) => {
+        videoModalRef.current.isClose()
+        navigation.navigate(type == 'review_clips' ? "review-clips" : "", {
+            toggle
+        })
     }
 
     return (
@@ -76,7 +83,7 @@ const HazardPerception = ({ navigation }) => {
                     </TouchableOpacity>
                 ))}
             </View>
-            <VideoModal ref={videoModalRef} />
+            <VideoModal ref={videoModalRef} onModalClose={onModalClose} />
         </WrapperContainer1>
     )
 }

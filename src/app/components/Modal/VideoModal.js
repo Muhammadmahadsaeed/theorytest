@@ -17,14 +17,19 @@ import Button from '../Buttons/Button';
 const VideoModal = React.forwardRef((props, ref) => {
 
     const [isVisible, setIsVisible] = useState(false)
-    const [toggles, setToggles] = useState({ "showLowScore": false })
+    const [toggles, setToggles] = useState({ "showLowScore": false, "autoPlay": false })
+    const [type, setType] = useState('')
 
-    const { } = props
+    const { onModalClose } = props
 
     useImperativeHandle(ref, () => ({
         isOpen(data) {
+            setType(data)
             setIsVisible(true)
-        }
+        },
+        isClose() {
+            setIsVisible(false)
+        },
     }))
 
     const onCancel = () => {
@@ -42,22 +47,24 @@ const VideoModal = React.forwardRef((props, ref) => {
                     <View style={styles.descriptionView}>
                         <View style={styles.textView}>
                             <Text style={styles.heading}>
-                                Show Low Score Clips
+                                {type == 'review_clips' ? "Auto Play" : "Show Low Score Clips"}
                             </Text>
                             <Text style={styles.text}>
-                                If you turn this on, you will be shown more clips that you scored low
+                                {`If you turn this on, ${type == 'review_clips' ? "video will be auto play" : "you will be shown more clips that you scored low"}`}
                             </Text>
                         </View>
                         <ToggleSwitch
-                            isOn={toggles["autoSkip"]}
+                            isOn={toggles[type == 'review_clips' ? "autoPlay" : "showLowScore"]}
                             onColor="green"
                             offColor={theme.lightBorderGrey}
                             size="medium"
-                            onToggle={isOn => setToggles({ showLowScore: isOn })}
+                            onToggle={isOn => setToggles(type == 'review_clips' ? {...toggles, "autoPlay": isOn } : {...toggles, "showLowScore": isOn })}
                         />
                     </View>
                     <View style={styles.footer}>
-                        <Button title={"Start Test"} />
+                        <Button
+                            onPress={() => onModalClose(type, toggles)}
+                            title={type == 'review_clips' ? "Start Practice" : "Start Test"} />
                         <TouchableOpacity
                             style={styles.btn1}
                             activeOpacity={0.8}

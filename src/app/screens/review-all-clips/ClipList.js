@@ -10,18 +10,18 @@ import { Fonts } from '../../utils/fonts';
 import { theme } from '../../utils/colors';
 import { VideoWhiteIcon } from '../../utils/images';
 
-const ClipList = ({ data, onChangeVideo }) => {
+const ClipList = ({ data, index, onChangeVideo }) => {
     return (
         <TouchableOpacity
             style={styles.box}
             activeOpacity={0.8}
-            onPress={() => onChangeVideo(data)}>
+            onPress={() => onChangeVideo(data, index)}>
             <View style={styles.icon}>
-                <Image source={{uri: data?.thumbnailUrl}} style={styles.img} />
+                <Image source={{ uri: data?.thumbnailUrl }} style={styles.img} />
                 <View style={styles.svgIcon}>
                     <VideoWhiteIcon svgStyle={styles.svgStyle} />
                 </View>
-                <View style={styles.overlay}  />
+                <View style={styles.overlay} />
             </View>
             <View style={styles.textView}>
                 <Text style={styles.title} numberOfLines={1}>
@@ -31,7 +31,7 @@ const ClipList = ({ data, onChangeVideo }) => {
                     Your consultation is timed and finished, please rate us so we can serve you better!
                 </Text>
             </View>
-           
+
         </TouchableOpacity>
     )
 }
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
         elevation: 7,
     },
     icon: {
-        backgroundColor: 'green',
+        backgroundColor: theme.black,
         height: 55,
         width: 80,
         borderRadius: 7

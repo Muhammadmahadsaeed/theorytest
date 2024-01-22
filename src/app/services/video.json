@@ -1,106 +1,1262 @@
 [
     {
-        "id": "1",
-        "title": "Big Buck Bunny",
-        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Big_Buck_Bunny_thumbnail_vlc.png/1200px-Big_Buck_Bunny_thumbnail_vlc.png",
-        "duration": "8:18",
-        "uploadTime": "May 9, 2011",
-        "views": "24,969,123",
-        "author": "Vlc Media Player",
-        "videoUrl": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-        "description": "Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself. When one sunny day three rodents rudely harass him, something snaps... and the rabbit ain't no bunny anymore! In the typical cartoon tradition he prepares the nasty rodents a comical revenge.\n\nLicensed under the Creative Commons Attribution license\nhttp://www.bigbuckbunny.org",
-        "subscriber": "25254545 Subscribers",
-        "isLive": true
+        "id": "2d5a252e-5e70-4712-bb0d-ef584c4b2440",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4034/4032/1365.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4034/4032/1365.jpg",
+        "clickLimit": 10,
+        "startTime": 21.3,
+        "endTime": 24,
+        "hazardId": 1,
+        "windows": [
+            21.84,
+            22.38,
+            22.92,
+            23.46
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "You needed to respond to the man approaching the crossing. The road is wet and late braking could endanger him."
+            }
+        }
     },
     {
-        "id": "2",
-        "title": "The first Blender Open Movie from 2006",
-        "thumbnailUrl": "https://i.ytimg.com/vi_webp/gWw23EYM9VM/maxresdefault.webp",
-        "duration": "12:18",
-        "uploadTime": "May 9, 2011",
-        "views": "24,969,123",
-        "author": "Blender Inc.",
-        "videoUrl": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
-        "description": "Song : Raja Raja Kareja Mein Samaja\nAlbum : Raja Kareja Mein Samaja\nArtist : Radhe Shyam Rasia\nSinger : Radhe Shyam Rasia\nMusic Director : Sohan Lal, Dinesh Kumar\nLyricist : Vinay Bihari, Shailesh Sagar, Parmeshwar Premi\nMusic Label : T-Series",
-        "subscriber": "25254545 Subscribers",
-        "isLive": true
+        "id": "43b23cf5-a5b4-4363-a73c-d92718683528",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4016/4014/1093.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4016/4014/1093.jpg",
+        "clickLimit": 10,
+        "startTime": 7.7,
+        "endTime": 11,
+        "hazardId": 1,
+        "windows": [
+            8.36,
+            9.02,
+            9.68,
+            10.34
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "When negotiating a bend you should ask yourself, 'What if there’s something around this bend that means I have to change speed or direction?'"
+            }
+        }
     },
     {
-        "id": "3",
-        "title": "For Bigger Blazes",
-        "thumbnailUrl": "https://i.ytimg.com/vi/Dr9C2oswZfA/maxresdefault.jpg",
-        "duration": "8:18",
-        "uploadTime": "May 9, 2011",
-        "views": "24,969,123",
-        "author": "T-Series Regional",
-        "videoUrl": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-        "description": "Song : Raja Raja Kareja Mein Samaja\nAlbum : Raja Kareja Mein Samaja\nArtist : Radhe Shyam Rasia\nSinger : Radhe Shyam Rasia\nMusic Director : Sohan Lal, Dinesh Kumar\nLyricist : Vinay Bihari, Shailesh Sagar, Parmeshwar Premi\nMusic Label : T-Series",
-        "subscriber": "25254545 Subscribers",
-        "isLive": true
+        "id": "52f595e9-6608-4fc3-8afa-a0aa565e37d6",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4021/4019/1250.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4021/4019/1250.jpg",
+        "clickLimit": 10,
+        "startTime": 11.7,
+        "endTime": 20,
+        "hazardId": 1,
+        "windows": [
+            13.36,
+            15.02,
+            16.68,
+            18.34
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "A temporary road sign warned you of roadworks and the works van was displaying its amber warning beacon and hazard lights. You needed to slow down and be ready to give way to oncoming vehicles."
+            }
+        }
     },
     {
-        "id": "4",
-        "title": "For Bigger Escape",
-        "thumbnailUrl": "https://img.jakpost.net/c/2019/09/03/2019_09_03_78912_1567484272._large.jpg",
-        "duration": "8:18",
-        "uploadTime": "May 9, 2011",
-        "views": "24,969,123",
-        "author": "T-Series Regional",
-        "videoUrl": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-        "description": " Introducing Chromecast. The easiest way to enjoy online video and music on your TV—for when Batman's escapes aren't quite big enough. For $35. Learn how to use Chromecast with Google Play Movies and more at google.com/chromecast.",
-        "subscriber": "25254545 Subscribers",
-        "isLive": false
+        "id": "23cb7763-f071-4853-89a4-37004acfbd04",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4030/4028/1204.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4030/4028/1204.jpg",
+        "clickLimit": 10,
+        "startTime": 22.6,
+        "endTime": 26.5,
+        "hazardId": 1,
+        "windows": [
+            23.38,
+            24.16,
+            24.94,
+            25.72
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "The vehicle ahead, with its reversing light on, was blocking the nearside lane. You need to be alert and observant at all times."
+            }
+        }
     },
     {
-        "id": "5",
-        "title": "Big Buck Bunny",
-        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Big_Buck_Bunny_thumbnail_vlc.png/1200px-Big_Buck_Bunny_thumbnail_vlc.png",
-        "duration": "8:18",
-        "uploadTime": "May 9, 2011",
-        "views": "24,969,123",
-        "author": "Vlc Media Player",
-        "videoUrl": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-        "description": "Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself. When one sunny day three rodents rudely harass him, something snaps... and the rabbit ain't no bunny anymore! In the typical cartoon tradition he prepares the nasty rodents a comical revenge.\n\nLicensed under the Creative Commons Attribution license\nhttp://www.bigbuckbunny.org",
-        "subscriber": "25254545 Subscribers",
-        "isLive": true
+        "id": "e7565ce4-5e12-462b-869e-a8801de59ff3",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4051/4049/1304.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4051/4049/1304.jpg",
+        "clickLimit": 10,
+        "startTime": 18,
+        "endTime": 22.5,
+        "hazardId": 1,
+        "windows": [
+            18.9,
+            19.8,
+            20.7,
+            21.6
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "You needed to respond to the horses in good time. A startled horse can be unpredictable, so give them as much room as possible and keep your speed down when passing them."
+            }
+        }
     },
     {
-        "id": "6",
-        "title": "For Bigger Blazes",
-        "thumbnailUrl": "https://i.ytimg.com/vi/Dr9C2oswZfA/maxresdefault.jpg",
-        "duration": "8:18",
-        "uploadTime": "May 9, 2011",
-        "views": "24,969,123",
-        "author": "T-Series Regional",
-        "videoUrl": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-        "description": "Song : Raja Raja Kareja Mein Samaja\nAlbum : Raja Kareja Mein Samaja\nArtist : Radhe Shyam Rasia\nSinger : Radhe Shyam Rasia\nMusic Director : Sohan Lal, Dinesh Kumar\nLyricist : Vinay Bihari, Shailesh Sagar, Parmeshwar Premi\nMusic Label : T-Series",
-        "subscriber": "25254545 Subscribers",
-        "isLive": false
+        "id": "04d47d1c-1c00-48a0-b004-6b8df1bf3b51",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4027/4025/1125.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4027/4025/1125.jpg",
+        "clickLimit": 10,
+        "startTime": 12,
+        "endTime": 15,
+        "hazardId": 1,
+        "windows": [
+            12.6,
+            13.2,
+            13.8,
+            14.4
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "When one vehicle moves out to pass an obstruction, be prepared for other vehicles to follow."
+            }
+        }
     },
     {
-        "id": "7",
-        "title": "For Bigger Escape",
-        "thumbnailUrl": "https://img.jakpost.net/c/2019/09/03/2019_09_03_78912_1567484272._large.jpg",
-        "duration": "8:18",
-        "uploadTime": "May 9, 2011",
-        "views": "24,969,123",
-        "author": "T-Series Regional",
-        "videoUrl": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-        "description": " Introducing Chromecast. The easiest way to enjoy online video and music on your TV—for when Batman's escapes aren't quite big enough. For $35. Learn how to use Chromecast with Google Play Movies and more at google.com/chromecast.",
-        "subscriber": "25254545 Subscribers",
-        "isLive": true
+        "id": "c3af00d4-2e6d-41d3-895d-1bd4c7ac5703",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4004/4002/sheep.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4004/4002/sheep.jpg",
+        "clickLimit": 10,
+        "startTime": 17.6,
+        "endTime": 26,
+        "hazardId": 1,
+        "windows": [
+            19.28,
+            20.96,
+            22.64,
+            24.32
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "The muck on the road and verges gave you a clue that there may be livestock in the area."
+            }
+        }
     },
     {
-        "id": "8",
-        "title": "The first Blender Open Movie from 2006",
-        "thumbnailUrl": "https://i.ytimg.com/vi_webp/gWw23EYM9VM/maxresdefault.webp",
-        "duration": "12:18",
-        "uploadTime": "May 9, 2011",
-        "views": "24,969,123",
-        "author": "Blender Inc.",
-        "videoUrl": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
-        "description": "Song : Raja Raja Kareja Mein Samaja\nAlbum : Raja Kareja Mein Samaja\nArtist : Radhe Shyam Rasia\nSinger : Radhe Shyam Rasia\nMusic Director : Sohan Lal, Dinesh Kumar\nLyricist : Vinay Bihari, Shailesh Sagar, Parmeshwar Premi\nMusic Label : T-Series",
-        "subscriber": "25254545 Subscribers",
-        "isLive": false
+        "id": "8a461bf1-13bd-4b01-beca-4df984918b06",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4032/4030/1290.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4032/4030/1290.jpg",
+        "clickLimit": 10,
+        "startTime": 13,
+        "endTime": 20.5,
+        "hazardId": 1,
+        "windows": [
+            14.5,
+            16,
+            17.5,
+            19
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "The pedestrian was walking in the road, but not facing the traffic. They were difficult to see due to their dark clothing. You needed to approach with care because they were approaching a bend and you couldn't see if there was any oncoming traffic."
+            }
+        }
+    },
+    {
+        "id": "da067f94-4ac8-4154-a35c-f76dfd00f0f3",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4020/4018/1205.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4020/4018/1205.jpg",
+        "clickLimit": 10,
+        "startTime": 9.5,
+        "endTime": 13,
+        "hazardId": 1,
+        "windows": [
+            10.2,
+            10.9,
+            11.6,
+            12.3
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "The pedestrian getting into the car was unexpected. You need to concentrate at all times so you can respond safely when necessary."
+            }
+        }
+    },
+    {
+        "id": "2d0f5701-8e1e-4e8d-8c87-190d379954c4",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4001/3999/1325.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4001/3999/1325.jpg",
+        "clickLimit": 10,
+        "startTime": 10.8,
+        "endTime": 14.3,
+        "hazardId": 1,
+        "windows": [
+            11.5,
+            12.2,
+            12.9,
+            13.6
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "The lorry needed to avoid the overhanging hedge and this caused the driver to use both sides of this narrow road. The low winter sun was dazzling and surface water covered most of the road at this point. The spray thrown up by the lorry gave you a clue and you needed to respond promptly to deal safely with the situation."
+            }
+        }
+    },
+    {
+        "id": "1bcf03b6-ff17-4bf5-baea-46759aa0c634",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/3997/3995/1202.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/3997/3995/1202.jpg",
+        "clickLimit": 10,
+        "startTime": 9,
+        "endTime": 12.5,
+        "hazardId": 1,
+        "windows": [
+            9.7,
+            10.4,
+            11.1,
+            11.8
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "There were pedestrians ahead approaching a zebra crossing. Always give way to pedestrians on a zebra crossing."
+            }
+        }
+    },
+    {
+        "id": "b628761f-309a-478d-a18b-d3583ea9f879",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/3995/3993/1153.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/3995/3993/1153.jpg",
+        "clickLimit": 10,
+        "startTime": 22.35,
+        "endTime": 25,
+        "hazardId": 1,
+        "windows": [
+            22.88,
+            23.41,
+            23.94,
+            24.47
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "There's a lot to think about here. The roadworks making the surface uneven may have distracted you from the possibility of a vehicle emerging from the left."
+            }
+        }
+    },
+    {
+        "id": "e5beb0b9-b1af-4d96-b345-47020ec49a80",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4037/4035/1187.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4037/4035/1187.jpg",
+        "clickLimit": 10,
+        "startTime": 8,
+        "endTime": 11.5,
+        "hazardId": 1,
+        "windows": [
+            8.7,
+            9.4,
+            10.1,
+            10.8
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "The first group of pedestrians gave you a clue, and you should have been looking for others. The second group were hidden by the parked car and you needed to respond as they stepped into the road."
+            }
+        }
+    },
+    {
+        "id": "09e75370-2562-4d1c-b968-956be517d7c9",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4053/4051/1292.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4053/4051/1292.jpg",
+        "clickLimit": 10,
+        "startTime": 11.4,
+        "endTime": 17,
+        "hazardId": 1,
+        "windows": [
+            12.52,
+            13.64,
+            14.76,
+            15.88
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "You needed to respond to the runner in the road. The bend obscured your view of the road ahead, so you needed to take this into account when passing the runner."
+            }
+        }
+    },
+    {
+        "id": "49dda725-d225-4570-950c-a1654974751c",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4011/4009/1239.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4011/4009/1239.jpg",
+        "clickLimit": 10,
+        "startTime": 17,
+        "endTime": 19.5,
+        "hazardId": 1,
+        "windows": [
+            17.5,
+            18,
+            18.5,
+            19
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "You needed to scan the road ahead and ask yourself ‘What if that waiting car emerges?’ This would allow you to respond in good time."
+            }
+        }
+    },
+    {
+        "id": "2f582a17-04ef-46ca-aff4-d4e1924523e4",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4033/4031/1341.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4033/4031/1341.jpg",
+        "clickLimit": 10,
+        "startTime": 12.8,
+        "endTime": 17,
+        "hazardId": 1,
+        "windows": [
+            13.64,
+            14.48,
+            15.32,
+            16.16
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "The parked car created an obstruction and you needed to give way to the approaching tractor. The churned verges show where approaching vehicles have used the verge to pass each other. When it's wet this brings mud onto the road and makes it slippery."
+            }
+        }
+    },
+    {
+        "id": "27fc8436-2828-4918-8b7d-4b9bb2a2ba5c",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4003/4001/1373.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4003/4001/1373.jpg",
+        "clickLimit": 10,
+        "startTime": 12.8,
+        "endTime": 20.5,
+        "hazardId": 1,
+        "windows": [
+            14.34,
+            15.88,
+            17.42,
+            18.96
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "If you see any unusual driving behaviour, you should take care. Here the driver’s signal was the clue that they were joining the road."
+            }
+        }
+    },
+    {
+        "id": "ac6fde53-0c94-4f27-9497-f83285e4ba20",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4044/4042/upton2.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4044/4042/upton2.jpg",
+        "clickLimit": 20,
+        "startTime": 7,
+        "endTime": 16,
+        "hazardId": 1,
+        "windows": [
+            8.8,
+            10.6,
+            12.4,
+            14.2
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "The road is narrow and the lorry driver didn’t wait. You needed to respond to avoid any risk to the pedestrians walking on the narrow footpath."
+            }
+        }
+    },
+    {
+        "id": "aded5c62-57c7-440d-9720-c540cf8085ae",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4028/4026/1159.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4028/4026/1159.jpg",
+        "clickLimit": 10,
+        "startTime": 11.5,
+        "endTime": 15.5,
+        "hazardId": 1,
+        "windows": [
+            12.3,
+            13.1,
+            13.9,
+            14.7
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "There were roadworks on the left which you had to respond to. The reversing 4x4 meant that you had to slow down and give way."
+            }
+        }
+    },
+    {
+        "id": "484b8e33-9bdf-491f-bfac-75ecb1ddda88",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4024/4022/1342.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4024/4022/1342.jpg",
+        "clickLimit": 10,
+        "startTime": 22,
+        "endTime": 25.1,
+        "hazardId": 1,
+        "windows": [
+            22.62,
+            23.24,
+            23.86,
+            24.48
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "Look well ahead to anticipate what might happen and don’t assume another road user has seen you."
+            }
+        }
+    },
+    {
+        "id": "cff649f7-23f5-49a9-833b-e6375293b650",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4052/4050/1126.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4052/4050/1126.jpg",
+        "clickLimit": 10,
+        "startTime": 16.7,
+        "endTime": 21.5,
+        "hazardId": 1,
+        "windows": [
+            17.66,
+            18.62,
+            19.58,
+            20.54
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "The van in front of the lorry braked. This was the clue that the lorry was also going to brake. Keeping well back allowed you to see past the lorry and gave you an opportunity to respond safely."
+            }
+        }
+    },
+    {
+        "id": "10b8bd03-fb32-48fe-baf8-108b963245c4",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4005/4003/1090.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4005/4003/1090.jpg",
+        "clickLimit": 20,
+        "startTime": 6.2,
+        "endTime": 13.8,
+        "hazardId": 1,
+        "windows": [
+            7.72,
+            9.24,
+            10.76,
+            12.28
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "By looking and scanning ahead you can see approaching vehicles and respond safely."
+            }
+        }
+    },
+    {
+        "id": "c2b3517c-8c0a-4ba2-b0e2-bc37e16cf882",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4025/4023/upton1.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4025/4023/upton1.jpg",
+        "clickLimit": 10,
+        "startTime": 9.8,
+        "endTime": 21,
+        "hazardId": 1,
+        "windows": [
+            12.04,
+            14.28,
+            16.52,
+            18.76
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "The marker posts showed that the road narrows at this point. When you saw the approaching lorry you should have realised there wasn't much room. By holding back you have let the lorry pass safely."
+            }
+        }
+    },
+    {
+        "id": "df8d5bc4-ab15-4839-895e-ba487872ee57",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4042/4040/1199.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4042/4040/1199.jpg",
+        "clickLimit": 10,
+        "startTime": 7,
+        "endTime": 20,
+        "hazardId": 1,
+        "windows": [
+            9.6,
+            12.2,
+            14.8,
+            17.4
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "Near schools, be prepared for adults and children crossing the road. You must obey signals given by a school-crossing patrol."
+            }
+        }
+    },
+    {
+        "id": "c199567b-837e-4a16-8a63-3c1b555e1ab9",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4012/4010/1268.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4012/4010/1268.jpg",
+        "clickLimit": 10,
+        "startTime": 25,
+        "endTime": 28,
+        "hazardId": 1,
+        "windows": [
+            25.6,
+            26.2,
+            26.8,
+            27.4
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "The darkness, glare from lights, and the cyclist’s dark clothing all combine to make this cyclist difficult to see. You need to be able to respond to hazards in all conditions."
+            }
+        }
+    },
+    {
+        "id": "6b93320c-00e1-488d-b236-1a8f8bff9247",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4029/4027/1195.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4029/4027/1195.jpg",
+        "clickLimit": 10,
+        "startTime": 10.5,
+        "endTime": 13.3,
+        "hazardId": 1,
+        "windows": [
+            11.06,
+            11.62,
+            12.18,
+            12.74
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "The cyclist looked over their shoulder and decided to join the road. Were you prepared for this manoeuvre?"
+            }
+        }
+    },
+    {
+        "id": "42a73edc-c898-47ff-b3a6-1221b2eb2dce",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4040/4038/1104.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4040/4038/1104.jpg",
+        "clickLimit": 10,
+        "startTime": 8,
+        "endTime": 11,
+        "hazardId": 1,
+        "windows": [
+            8.6,
+            9.2,
+            9.8,
+            10.4
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "The vehicle was rolling into the junction, keen to emerge into the traffic. Spotting hazards early allows you to respond in good time."
+            }
+        }
+    },
+    {
+        "id": "8e51cbdc-a130-4d7b-929c-7826585b055c",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4026/4024/1092.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4026/4024/1092.jpg",
+        "clickLimit": 10,
+        "startTime": 10.5,
+        "endTime": 13,
+        "hazardId": 1,
+        "windows": [
+            11,
+            11.5,
+            12,
+            12.5
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "In residential areas with no footpaths, pedestrians may be walking on the road. Be aware of this, especially when your view is restricted."
+            }
+        }
+    },
+    {
+        "id": "800690e0-271a-43ad-a0ce-a85f8cf20ba5",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4043/4041/1265.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4043/4041/1265.jpg",
+        "clickLimit": 10,
+        "startTime": 15,
+        "endTime": 19,
+        "hazardId": 1,
+        "windows": [
+            15.8,
+            16.6,
+            17.4,
+            18.2
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "The lorry needed space in this narrow road, so the safest option was to stay back and give way. Always leave yourself enough time and space to cope with what's ahead."
+            }
+        }
+    },
+    {
+        "id": "26180d07-caac-4401-b1fb-0c8ecb1d6a18",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4007/4005/1116.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4007/4005/1116.jpg",
+        "clickLimit": 10,
+        "startTime": 17.3,
+        "endTime": 19.5,
+        "hazardId": 1,
+        "windows": [
+            17.74,
+            18.18,
+            18.62,
+            19.06
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "Consider using your horn if you think another driver hasn't seen you, but always give yourself time to stop."
+            }
+        }
+    },
+    {
+        "id": "31397bea-9e1f-49f1-9781-0a8edea03bfb",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4010/4008/1194.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4010/4008/1194.jpg",
+        "clickLimit": 10,
+        "startTime": 10.8,
+        "endTime": 17,
+        "hazardId": 1,
+        "windows": [
+            12.04,
+            13.28,
+            14.52,
+            15.76
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "You should have anticipated that the cyclist would pull out around the parked vehicle. They may not have heard you approaching as they were wearing headphones. You couldn’t see if there was any oncoming traffic, so the safest course of action would be to stay back and let the cyclist proceed."
+            }
+        }
+    },
+    {
+        "id": "4f30dbbe-d3a7-48ba-b307-ea8d59d15f24",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4013/4011/1294.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4013/4011/1294.jpg",
+        "clickLimit": 10,
+        "startTime": 10,
+        "endTime": 13,
+        "hazardId": 1,
+        "windows": [
+            10.6,
+            11.2,
+            11.8,
+            12.4
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "The pedestrian was wearing dark clothes and was not easy to see in the poor light. In such conditions, control your speed so that you can respond safely if necessary."
+            }
+        }
+    },
+    {
+        "id": "d667dfb1-f306-450a-8cd1-00bd7ea7abcf",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/3994/3992/1127.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/3994/3992/1127.jpg",
+        "clickLimit": 10,
+        "startTime": 6,
+        "endTime": 9,
+        "hazardId": 1,
+        "windows": [
+            6.6,
+            7.2,
+            7.8,
+            8.4
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "Situations can change quickly. Were you expecting the postman to cross here?"
+            }
+        }
+    },
+    {
+        "id": "9a358289-9588-41a6-9b77-a39d381ca836",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4022/4020/1291.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4022/4020/1291.jpg",
+        "clickLimit": 10,
+        "startTime": 20,
+        "endTime": 24,
+        "hazardId": 1,
+        "windows": [
+            20.8,
+            21.6,
+            22.4,
+            23.2
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "The red light was a clue that traffic could be approaching. Traffic was then visible crossing the bridge. You needed to give way before the parked cars so the traffic could pass safely."
+            }
+        }
+    },
+    {
+        "id": "1a672e20-dfbb-4d43-9cdb-adace225cb67",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/3993/3991/1115.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/3993/3991/1115.jpg",
+        "clickLimit": 10,
+        "startTime": 15.1,
+        "endTime": 19.5,
+        "hazardId": 1,
+        "windows": [
+            15.98,
+            16.86,
+            17.74,
+            18.62
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "The sign gave you a warning that you were entering a two-way road. By looking well down the road, you should have seen the car approaching. Give yourself time to respond safely by anticipating danger."
+            }
+        }
+    },
+    {
+        "id": "d7c7b8c6-2a3d-404c-a927-d5c43fe601fc",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4017/4015/1108.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4017/4015/1108.jpg",
+        "clickLimit": 10,
+        "startTime": 20,
+        "endTime": 22.5,
+        "hazardId": 1,
+        "windows": [
+            20.5,
+            21,
+            21.5,
+            22
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "The road surface here is damp and could be slippery. The bend in the road is hiding the oncoming vehicle. When your view is restricted, be prepared for oncoming vehicles or other hazards."
+            }
+        }
+    },
+    {
+        "id": "5aef3d94-8b40-4d9c-bb21-a95d833c180a",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4000/3998/1293.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4000/3998/1293.jpg",
+        "clickLimit": 20,
+        "startTime": 14,
+        "endTime": 19,
+        "hazardId": 1,
+        "windows": [
+            15,
+            16,
+            17,
+            18
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "The road was narrow here due to the parked cars on the right. You needed to adjust your speed to ensure the bus could pass safely."
+            }
+        }
+    },
+    {
+        "id": "9107943d-800f-4513-bb1b-4103f073e341",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4039/4037/1345.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4039/4037/1345.jpg",
+        "clickLimit": 10,
+        "startTime": 15,
+        "endTime": 18.9,
+        "hazardId": 1,
+        "windows": [
+            15.78,
+            16.56,
+            17.34,
+            18.12
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "On a busy road like this, drivers often take every opportunity to move into the traffic. Keeping a safe distance from the vehicle in front allows you time and space to respond safely."
+            }
+        }
+    },
+    {
+        "id": "fa3f05c9-6954-40b4-b6dc-c524bba6debc",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4045/4043/1135.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4045/4043/1135.jpg",
+        "clickLimit": 10,
+        "startTime": 17.5,
+        "endTime": 21,
+        "hazardId": 1,
+        "windows": [
+            18.2,
+            18.9,
+            19.6,
+            20.3
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "When joining another road, you need to be prepared for anything that might require your immediate attention. Here, the oncoming vehicle requires you to give way."
+            }
+        }
+    },
+    {
+        "id": "a4147cf0-250e-4c14-99a8-fd64353fbebe",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/3991/3989/1091.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/3991/3989/1091.jpg",
+        "clickLimit": 10,
+        "startTime": 13,
+        "endTime": 16.5,
+        "hazardId": 1,
+        "windows": [
+            13.7,
+            14.4,
+            15.1,
+            15.8
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "On a road like this where parked vehicles are narrowing the road, be ready in case you have to slow down or stop and give way to oncoming vehicles."
+            }
+        }
+    },
+    {
+        "id": "bac3fd35-cb6c-4ba4-b4a2-c115c2706dea",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4047/4045/1296.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4047/4045/1296.jpg",
+        "clickLimit": 10,
+        "startTime": 23.4,
+        "endTime": 28.4,
+        "hazardId": 1,
+        "windows": [
+            24.4,
+            25.4,
+            26.4,
+            27.4
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "The silver car pulled out and then had to move around the parked car into your lane. Scanning ahead allows you to anticipate and respond to complicated hazards like this one."
+            }
+        }
+    },
+    {
+        "id": "4db507a7-4801-4938-a968-786ff2b931f5",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4048/4046/1107.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4048/4046/1107.jpg",
+        "clickLimit": 10,
+        "startTime": 11.3,
+        "endTime": 13.5,
+        "hazardId": 1,
+        "windows": [
+            11.74,
+            12.18,
+            12.62,
+            13.06
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "Here there are parked vehicles on both sides of the road, plus a bend. Think about the possibility of a vehicle coming the other way, so that you are ready to slow down or stop."
+            }
+        }
+    },
+    {
+        "id": "3a3a4350-79f0-44a3-983b-796f6e2e9f42",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4049/4047/1240.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4049/4047/1240.jpg",
+        "clickLimit": 10,
+        "startTime": 19.5,
+        "endTime": 23.5,
+        "hazardId": 1,
+        "windows": [
+            20.3,
+            21.1,
+            21.9,
+            22.7
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "The traffic was bunching up ahead and the vehicles were braking. You had just joined the dual carriageway and because of the slight bend in the road you didn’t have as good a view as those in the lanes to your right."
+            }
+        }
+    },
+    {
+        "id": "5ca2a903-e167-4f25-b76f-cba718d5f065",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4046/4044/1255.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4046/4044/1255.jpg",
+        "clickLimit": 10,
+        "startTime": 23.1,
+        "endTime": 25.5,
+        "hazardId": 1,
+        "windows": [
+            23.58,
+            24.06,
+            24.54,
+            25.02
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "The runner looked around before moving into the road to avoid the cones. This clue should have alerted you to the danger."
+            }
+        }
+    },
+    {
+        "id": "a8d50aa0-fc10-4cfc-bfe8-2a539adf4746",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4015/4013/1372.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4015/4013/1372.jpg",
+        "clickLimit": 10,
+        "startTime": 13.1,
+        "endTime": 17.6,
+        "hazardId": 1,
+        "windows": [
+            14,
+            14.9,
+            15.8,
+            16.7
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "The oncoming bus moved out to pass the parked vehicles and you needed to respond by giving way. You could then continue when the way was clear."
+            }
+        }
+    },
+    {
+        "id": "94ff31e2-7388-4a4e-8d71-468f6bd999c9",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4041/4039/1172.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4041/4039/1172.jpg",
+        "clickLimit": 10,
+        "startTime": 5.2,
+        "endTime": 8,
+        "hazardId": 1,
+        "windows": [
+            5.76,
+            6.32,
+            6.88,
+            7.44
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "The vehicle cut the corner and crossed to your side of the road. The road was narrow so you needed to respond promptly. Always be prepared to give way and allow for other drivers’ mistakes."
+            }
+        }
+    },
+    {
+        "id": "6a90cb8f-7c12-48b0-b5af-3adc7baac8dc",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4008/4006/1131.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4008/4006/1131.jpg",
+        "clickLimit": 10,
+        "startTime": 14,
+        "endTime": 20,
+        "hazardId": 1,
+        "windows": [
+            15.2,
+            16.4,
+            17.6,
+            18.8
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "The sign warned you that the road was narrowing. The bright light made it difficult to see the oncoming vehicle. Control your speed and allow for the conditions."
+            }
+        }
+    },
+    {
+        "id": "31c8e74c-54df-4726-ae35-4aa9756e63f7",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/3999/3997/1267.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/3999/3997/1267.jpg",
+        "clickLimit": 10,
+        "startTime": 12.5,
+        "endTime": 16,
+        "hazardId": 1,
+        "windows": [
+            13.2,
+            13.9,
+            14.6,
+            15.3
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "The works van was narrowing the road. You needed to wait until it was safe to pass and also consider the possibility of workers in the road."
+            }
+        }
+    },
+    {
+        "id": "6f9dcd34-7bc5-499d-ab70-7d2b608f03a2",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/3996/3994/1186.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/3996/3994/1186.jpg",
+        "clickLimit": 10,
+        "startTime": 11,
+        "endTime": 14.8,
+        "hazardId": 1,
+        "windows": [
+            11.76,
+            12.52,
+            13.28,
+            14.04
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "Buses stop and start frequently for passengers. In this instance, the bus indicated left so you would have planned to pass it. When the bus indicated right, you needed to change your plan."
+            }
+        }
+    },
+    {
+        "id": "8079ef9f-c4af-4334-b5ed-e089287c8cac",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4031/4029/1256.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4031/4029/1256.jpg",
+        "clickLimit": 20,
+        "startTime": 14,
+        "endTime": 18.5,
+        "hazardId": 1,
+        "windows": [
+            14.9,
+            15.8,
+            16.7,
+            17.6
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "The bends and parked vehicles restricted the view here. By looking well ahead you should have been able to see the vehicle appearing around the bend."
+            }
+        }
+    },
+    {
+        "id": "c9cea4cf-be73-4c7a-b2a3-587c701dfbcf",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4009/4007/1161.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4009/4007/1161.jpg",
+        "clickLimit": 10,
+        "startTime": 26.6,
+        "endTime": 32,
+        "hazardId": 1,
+        "windows": [
+            27.68,
+            28.76,
+            29.84,
+            30.92
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "The parked cars narrowed the road and you needed to respond to the approaching traffic."
+            }
+        }
+    },
+    {
+        "id": "e69d6f53-f90f-43cc-87ee-dfb5779acebd",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4023/4021/1308.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4023/4021/1308.jpg",
+        "clickLimit": 10,
+        "startTime": 36.5,
+        "endTime": 41.5,
+        "hazardId": 1,
+        "windows": [
+            37.5,
+            38.5,
+            39.5,
+            40.5
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "On a rural road like this you should keep the possibility of farm vehicles and animals in mind. Always slow down, give them room and be prepared to stop."
+            }
+        }
+    },
+    {
+        "id": "036a9fd0-d9c8-4eab-a94d-06a72a2f8bed",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4002/4000/1346.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4002/4000/1346.jpg",
+        "clickLimit": 10,
+        "startTime": 18,
+        "endTime": 22.5,
+        "hazardId": 1,
+        "windows": [
+            18.9,
+            19.8,
+            20.7,
+            21.6
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "In busy urban areas there can be a lot going on and it’s easy to be distracted. By keeping a safe distance from the car ahead you can see situations develop and respond safely."
+            }
+        }
+    },
+    {
+        "id": "466c597b-7caa-4a77-bb37-8b269a8d6f8c",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/3998/3996/1249.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/3998/3996/1249.jpg",
+        "clickLimit": 10,
+        "startTime": 3.9,
+        "endTime": 7.2,
+        "hazardId": 1,
+        "windows": [
+            4.56,
+            5.22,
+            5.88,
+            6.54
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "The sign warned you that there could be pedestrians in the road ahead. In situations like this, you need to control your speed and be ready to slow down, stop, or change direction."
+            }
+        }
+    },
+    {
+        "id": "b24f500d-66b0-41cf-b486-a72ce0cd589a",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4019/4017/1182.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4019/4017/1182.jpg",
+        "clickLimit": 10,
+        "startTime": 8.5,
+        "endTime": 11,
+        "hazardId": 1,
+        "windows": [
+            9,
+            9.5,
+            10,
+            10.5
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "Where trees overhang roads there's always a risk of fallen trees. Be prepared for such obstructions at any time of the year but especially after stormy weather."
+            }
+        }
+    },
+    {
+        "id": "5564befb-2313-4965-9074-e338332a0ffc",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/3992/3990/1099.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/3992/3990/1099.jpg",
+        "clickLimit": 10,
+        "startTime": 21,
+        "endTime": 24.5,
+        "hazardId": 1,
+        "windows": [
+            21.7,
+            22.4,
+            23.1,
+            23.8
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "Were the pedestrians going to cross or walk past the crossing? You didn’t know, so you should have been ready in case they decided to cross."
+            }
+        }
+    },
+    {
+        "id": "6a65e900-e7d3-400a-b7d8-3604411d8d64",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4018/4016/1130.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4018/4016/1130.jpg",
+        "clickLimit": 20,
+        "startTime": 10.6,
+        "endTime": 17,
+        "hazardId": 1,
+        "windows": [
+            11.88,
+            13.16,
+            14.44,
+            15.72
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "In busy areas such as towns, you may need to give way many times in quick succession. Be patient, and wait until it's safe to proceed."
+            }
+        }
+    },
+    {
+        "id": "3f1eb922-60e4-4247-b364-6af4cf1ae919",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4036/4034/1132.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4036/4034/1132.jpg",
+        "clickLimit": 10,
+        "startTime": 19.3,
+        "endTime": 22.7,
+        "hazardId": 1,
+        "windows": [
+            19.98,
+            20.66,
+            21.34,
+            22.02
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "When passing the obstruction you need to be prepared for oncoming vehicles. The approaching vehicle is hidden from view where the road ahead dips."
+            }
+        }
+    },
+    {
+        "id": "f23d2fab-e635-419d-8601-88dd509c808c",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4035/4033/1094.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4035/4033/1094.jpg",
+        "clickLimit": 10,
+        "startTime": 9,
+        "endTime": 14,
+        "hazardId": 1,
+        "windows": [
+            10,
+            11,
+            12,
+            13
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "At this traffic-calming feature, the sign gives an order. You must give way to all oncoming vehicles."
+            }
+        }
+    },
+    {
+        "id": "ba04a783-41d4-4eff-8a56-fb8ce51ce974",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4038/4036/1266.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4038/4036/1266.jpg",
+        "clickLimit": 20,
+        "startTime": 19.2,
+        "endTime": 23.7,
+        "hazardId": 1,
+        "windows": [
+            20.1,
+            21,
+            21.9,
+            22.8
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "Slowing down and moving into a gap between the parked cars allowed room for the oncoming vehicles to pass safely."
+            }
+        }
+    },
+    {
+        "id": "a5b2d888-c4f7-4620-be37-246913ad6837",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4006/4004/1096.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4006/4004/1096.jpg",
+        "clickLimit": 10,
+        "startTime": 3.6,
+        "endTime": 7,
+        "hazardId": 1,
+        "windows": [
+            4.28,
+            4.96,
+            5.64,
+            6.32
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "When passing parked cars, allow for doors opening and people getting out of their cars."
+            }
+        }
+    },
+    {
+        "id": "43077b27-1b30-49eb-81ec-800ae80df396",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4014/4012/1338.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4014/4012/1338.jpg",
+        "clickLimit": 10,
+        "startTime": 18,
+        "endTime": 21,
+        "hazardId": 1,
+        "windows": [
+            18.6,
+            19.2,
+            19.8,
+            20.4
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "In narrow country roads you may not be able to see very far ahead due to bends and hedges. In winter you can expect to find leaves and mud on the road making it slippery and increasing your stopping distance. Drive so that you can stop well within your range of vision."
+            }
+        }
+    },
+    {
+        "id": "66395279-91ed-48ea-b6e6-2ffc36114513",
+        "videoUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4050/4048/1289.mp4",
+        "thumbnailUrl": "https://storage.googleapis.com/bolt-production-qb-pub-bucket/6/4050/4048/1289.jpg",
+        "clickLimit": 10,
+        "startTime": 16.5,
+        "endTime": 20,
+        "hazardId": 1,
+        "windows": [
+            17.2,
+            17.9,
+            18.6,
+            19.3
+        ],
+        "explanation": {
+            "explanation": {
+                "text": "You should only move over to allow traffic to join a dual carriageway if you can do so safely. If you cannot change lanes, you may need to adjust your speed."
+            }
+        }
     }
 ]

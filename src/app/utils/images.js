@@ -116,7 +116,13 @@ import Support from '../../assets/images/support.svg'
 import Clear from '../../assets/images/clear.svg'
 import Crown from '../../assets/images/crown.svg'
 import ZoomPlus from '../../assets/images/zoom-plus.svg'
+import ExclamationWhite from '../../assets/images/exclamation-mark.svg'
 
+export const ExclamationWhiteIcon = ({ svgStyle }) => (
+     <View style={{ ...svgStyle }}>
+          <ExclamationWhite width="100%" height="100%" />
+     </View>
+)
 export const ZoomPlusIcon = ({ svgStyle }) => (
      <View style={{ ...svgStyle }}>
           <ZoomPlus width="100%" height="100%" />
