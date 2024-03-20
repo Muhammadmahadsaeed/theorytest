@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "817674860566",
+    "project_id": "prediction-app-e42f0",
+    "storage_bucket": "prediction-app-e42f0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:817674860566:android:f46519d7400005dc0f9d37",
+        "android_client_info": {
+          "package_name": "com.goldsignal.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAe55mWt-GKzN6iBp674Y3h4d1aozo3TB8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

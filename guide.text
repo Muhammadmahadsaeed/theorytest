@@ -1,0 +1,4 @@
+take the value of string under REVERERSED_CLIENT_ID from GoogleService-info.plist.
+add it in url type in xcode.
+pod install in ios.
+run the code.
