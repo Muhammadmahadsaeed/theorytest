@@ -7,7 +7,6 @@ import { PersistGate } from "redux-persist/es/integration/react";
 import { NavigationContainer } from '@react-navigation/native';
 import configureStore from "./app/redux/store/index";
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import WrapperContainer from './app/components/WrapperContainer/WrapperContainer';
 import RootNavigation from './app/navigation/RootNavigator/RootNavigator';
 import CodePush from "react-native-code-push";
 
@@ -41,12 +40,10 @@ export default function App() {
       <Provider store={store}>
         <PersistGate persistor={persistor}>
           <NavigationContainer>
-            <WrapperContainer>
               <StatusBar style="light" />
               <RootNavigation />
               <Toast />
               <FlashMessage position="top" />
-            </WrapperContainer>
           </NavigationContainer>
         </PersistGate>
       </Provider>

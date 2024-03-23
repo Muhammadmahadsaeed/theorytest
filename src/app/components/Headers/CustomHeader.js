@@ -4,7 +4,7 @@ import { theme } from '../../utils/colors';
 import { BackCircleWhiteIcon, BackLeftIcon, ClockRectIcon } from '../../utils/images';
 import { Fonts } from '../../utils/fonts';
 import { useNavigation } from '@react-navigation/native';
-import I18n from 'i18n-js';
+// import I18n from 'i18n-js';
 
 
 const CustomHeader = ({ text, isLeft, customStyle, isRight, type, path, params, isOtp }) => {
@@ -51,7 +51,7 @@ const CustomHeader = ({ text, isLeft, customStyle, isRight, type, path, params, 
             {isOtp ?
                 <View style={styles.body}>
                     <Text style={styles.bodyText}>
-                        {I18n.t('your_otp')} {params?.otp}
+                        {/* {I18n.t('your_otp')} {params?.otp} */}
                     </Text>
                 </View>
                 :

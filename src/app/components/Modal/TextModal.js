@@ -9,7 +9,6 @@ import {
     useWindowDimensions,
     ScrollView
 } from 'react-native';
-import RenderHtml from 'react-native-render-html';
 import { theme } from '../../utils/colors';
 import { Fonts } from '../../utils/fonts';
 

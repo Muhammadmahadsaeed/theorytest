@@ -1,7 +1,6 @@
 import axios from "axios";
 import { baseURL, baseURL1, book_serivce, forgot_password, get_appointment, get_categories, get_config, get_news, get_payment_method, get_seller_by_category, get_seller_by_id, get_services_by_category, get_tags, google_login, login, register, reset_password, search_by_name_loc, seller_by_tags, seller_category, seller_near_you, time_slots, top_offers, top_seller, update_profile, verify_otp } from "./constants";
 import { store } from './../redux/store/index';
-import i18n from "../i18n";
 
 export const Api_Header = axios.create({
     baseURL: baseURL,
@@ -44,7 +43,7 @@ Api_Header.interceptors.request.use(async config => {
 // );
 
 const getParams = (body) => {
-    body["lang"] = i18n.locale === 'en' ? 'en_US' : 'ar_001';
+   
     let params = {
         "jsonrpc": "2.0",
         "params": body

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, Image } from 'react-native'
 import { theme } from '../../utils/colors';
-import { AlarmIcon, AvatarIcon, MapPinWhiteIcon, SearchColorFullIcon, UpArrowIcon } from '../../utils/images';
+import { AvatarIcon, SearchColorFullIcon } from '../../utils/images';
 import { Fonts } from '../../utils/fonts';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';

@@ -9,7 +9,8 @@ import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import HeaderWithBackButton from '../../components/Headers/HeaderWithBackButton';
 import { theme } from '../../utils/colors';
 import { Fonts } from '../../utils/fonts';
-import { ForwardEnIcon, call18, fb1, tw2 } from '../../utils/images';
+import { ForwardEnIcon,  } from '../../utils/images';
+import WrapperContainer1 from '../../components/Wrapper/WrapperContainer1';
 
 
 const HelpCenter = ({ }) => {
@@ -18,34 +19,34 @@ const HelpCenter = ({ }) => {
         id: 1,
         title: 'WANT US TO CALL YOU',
         description: 'Let us know when would be the best time to contact you',
-        icon: call18
+        // icon: call18
     }, {
         id: 2,
         title: 'CALL 800227344837',
         text1: 'Mon-Fri: 8:30 a.m to 8:00 p.m',
         text2: 'Sat: 10:30 a.m to 4:00 p.m',
-        icon: call18
+        // icon: call18
     }, {
         id: 3,
         title: 'FACEBOOK',
         description: '800 Caregiver',
-        icon: fb1
+        // icon: fb1
     }, {
         id: 4,
         title: 'TWITTER',
         description: '@800caregiver',
-        icon: tw2
+        // icon: tw2
     }])
 
     return (
-        <View style={styles.container}>
+        <WrapperContainer1>
             <HeaderWithBackButton text={"Help Center"} />
             <View style={styles.innerContainer}>
                 {data.map((item, index) => {
                     return (
                         <View style={styles.row} key={index}>
                             <View style={styles.icon}>
-                                <Image source={item.icon} style={styles.img} />
+                                {/* <Image source={item.icon} style={styles.img} /> */}
                             </View>
                             <View style={{ flex: 1, marginHorizontal: 10, alignItems: 'flex-start' }}>
                                 <Text style={styles.title}>
@@ -80,7 +81,7 @@ const HelpCenter = ({ }) => {
                     )
                 })}
             </View>
-        </View>
+        </WrapperContainer1>
     )
 }
 

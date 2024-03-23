@@ -4,12 +4,12 @@ import {
     StyleSheet,
     Share,
     Text,
-    TouchableOpacity
+    TouchableOpacity,
+    ScrollView
 } from 'react-native';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import WrapperContainer from '../../components/Wrapper/WrapperContainer';
 import CustomHeader from '../../components/Headers/CustomHeader';
-import { ScrollView } from 'react-native';
 import { ClearIcon, FlagIcon, HeartIcon, HelpIcon, ShareIcon, SupportIcon } from '../../utils/images';
 import { theme } from '../../utils/colors';
 import { Fonts } from '../../utils/fonts';
@@ -105,10 +105,10 @@ const ProfileScreen = ({ navigation }) => {
             return
         }
         if (item?.route == 'share') {
-            onShare()
+          return  onShare()
         }
         if (item?.route == 'cache') {
-            deleteModal.current.isOpen()
+            return deleteModal.current.isOpen()
         }
         else {
             navigation.navigate(item?.route)

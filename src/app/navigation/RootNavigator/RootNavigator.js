@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import GettingStartedScreen from '../../screens/getting-started/GettingStartedScreen';
 import BottomTabNavigator from '../BottomTab/BottomTabNavigator';
-import AuthStackNavigator from '../AuthStack/AuthStackNavigator';
+// import AuthStackNavigator from '../AuthStack/AuthStackNavigator';
 import { useDispatch, useSelector } from 'react-redux';
 import { Loading } from '../../components/Loading/Loading';
 import { theme } from '../../utils/colors';
@@ -67,7 +67,7 @@ const RootNavigation = () => {
             <Stack.Screen name="review-question" component={ReviewQuestionScreen} />
             <Stack.Screen name="all-mock-test-topics" component={AllMockTestTopic} />
             <Stack.Screen name="revision-question-by-topic" component={RevisionQuestionByTopic} />
-            <Stack.Screen name="auth-stack" component={AuthStackNavigator} />
+            {/* <Stack.Screen name="auth-stack" component={AuthStackNavigator} /> */}
         </Stack.Navigator>
     )
 }

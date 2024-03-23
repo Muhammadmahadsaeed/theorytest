@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, Image, Dimensions, TouchableOpacity } from 'react-native'
+import { View, Text, Image, Dimensions, TouchableOpacity, StyleSheet } from 'react-native'
 import { theme, white } from '../../utils/colors';
 import { Fonts } from '../../utils/fonts';
 
@@ -28,18 +28,20 @@ const SliderList = ({ data }) => {
     )
 }
 
-const styles = ({
+const styles = StyleSheet.create({
     cardView: {
         height: height * 0.8,
         width: width,
         justifyContent: "center",
         alignItems: "center",
+        
     },
     image: {
         width: width * 0.9,
         height: height * 0.6,
     },
     textView: {
+        flex:1,
         paddingHorizontal: 15,
     },
     itemText: {

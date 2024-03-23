@@ -43,7 +43,7 @@ const QuestionScreen = ({ navigation, route }) => {
         dispatch({ type: 'update_redux', payload: value });
     };
 
-    const snapPoints = useMemo(() => ['40%'], []);
+    const snapPoints = useMemo(() => ['42%'], []);
 
     const handleSheetChanges = useCallback((index) => {
     }, []);

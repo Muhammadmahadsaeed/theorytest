@@ -8,7 +8,7 @@ import {
     Image,
     Linking
 } from 'react-native';
-import { Video, ResizeMode } from 'expo-av';
+import Video from 'react-native-video';
 import { theme } from '../../utils/colors';
 import HomeHeader from '../../components/Headers/HomeHeader';
 import { Fonts } from '../../utils/fonts';
@@ -22,7 +22,7 @@ const today = moment().format('dddd, DD MMM YYYY');
 const HomeScreen = ({ navigation }) => {
 
     const { userData, } = useSelector(state => state.userReducer)
-    const video = useRef(null);
+    const videoRef = useRef(null);
 
     const [list, setList] = useState([
         {
@@ -89,17 +89,10 @@ const HomeScreen = ({ navigation }) => {
                                 <Loading color={theme.skyBlue} size={40} />
                             } */}
                             <Video
-                                ref={video}
+                                ref={videoRef}
                                 style={styles.video}
-                                source={{
-                                    uri: 'https://media.safedrivingforlife.info/media/intro.webm',
-                                }}
-                                useNativeControls={false}
-                                resizeMode={ResizeMode.COVER}
-                                shouldPlay
-                                isMuted
-                                isLooping={true}
-                                onLoad={() => setVideoLoading(false)}
+                                source={{uri: 'https://media.safedrivingforlife.info/media/intro.webm'}}
+                                
                             // onPlaybackStatusUpdate={status => setStatus(() => status)}
                             />
 
@@ -147,8 +140,14 @@ const styles = StyleSheet.create({
         marginTop: 15
     },
     video: {
-        height: 200,
-        width: '100%'
+        backgroundColor: 'blue',
+        // height: 200,
+        // width: '100%'
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
     },
     svgStyle: {
         height: 70,

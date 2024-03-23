@@ -12,18 +12,23 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		165B6E40E3C94F05B40CD785 /* Inter-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0169E3A9FC7743D8B8B19019 /* Inter-Light.ttf */; };
 		1EA7E3838270448B91D7FC1A /* EuclidCircularABold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C2F92A983FBB448E959270A8 /* EuclidCircularABold.ttf */; };
+		2826C32A78294716BCEF9DC0 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B130054D0E184A36ACFC361C /* Inter-Regular.ttf */; };
+		2A4C74B0F75D4AA9BEC6E04A /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F80C0F03946F4518B83E1E56 /* Inter-Medium.ttf */; };
 		30EB92DED3E24C908543048E /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B0BB0F91C07C46B99DEFE556 /* Montserrat-Light.ttf */; };
 		6967A69033F34AE3B855F6A0 /* EuclidCircularAMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 149C0E440A734D1BB63B1551 /* EuclidCircularAMedium.ttf */; };
 		6B93C088ECF7444CBA961980 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 254C9D1E87AB4CEDAB0B8A56 /* Montserrat-Regular.ttf */; };
 		735A3E325BE44EB299C7B157 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 70677D58241C41AB8E7BF3DD /* Montserrat-SemiBold.ttf */; };
 		7F8C74CFD76E43C7827F9E23 /* EuclidCircularALight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 26FC61E69B834AC987B25E68 /* EuclidCircularALight.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		8705D2D3B5F54999B493A0E7 /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 33DBE2BCE7064741BCD00FE8 /* Inter-Bold.ttf */; };
 		9200F5E22B28758E001D97B9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9200F5E12B28758E001D97B9 /* GoogleService-Info.plist */; };
 		9DD9C9AAA2BCCFDDD73D8BA1 /* Pods_Easysms.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0028DDAF9FBAED00EC79E7EC /* Pods_Easysms.framework */; };
 		B6734A87D31D464FA054DEB8 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 44BE7D0E0751431484B11D6F /* Montserrat-Bold.ttf */; };
 		C5E951BAF43E4651805B1509 /* EuclidCircularASemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 43157B6A4FA14ADCBE3B0D2E /* EuclidCircularASemiBold.ttf */; };
 		CF62B21BB222712783071373 /* Pods_Easysms_EasysmsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D15870E5E35B45D169738BEE /* Pods_Easysms_EasysmsTests.framework */; };
+		D3BEC933097341139D4AFD5C /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B3C86165764543FCBEF4E991 /* Inter-SemiBold.ttf */; };
 		D41A33E1455140D995A2C9A4 /* EuclidCircularARegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 355BFFE0FC6F495CB7C6E83A /* EuclidCircularARegular.ttf */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +60,7 @@
 		00E356EE1AD99517003FC87E /* EasysmsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EasysmsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* EasysmsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EasysmsTests.m; sourceTree = "<group>"; };
+		0169E3A9FC7743D8B8B19019 /* Inter-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Light.ttf"; path = "../src/assets/fonts/Inter-Light.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* Easysms.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Easysms.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Easysms/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = Easysms/AppDelegate.mm; sourceTree = "<group>"; };
@@ -65,6 +71,7 @@
 		254C9D1E87AB4CEDAB0B8A56 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Regular.ttf"; path = "../src/assets/fonts/Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		26FC61E69B834AC987B25E68 /* EuclidCircularALight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EuclidCircularALight.ttf; path = ../src/assets/fonts/EuclidCircularALight.ttf; sourceTree = "<group>"; };
 		2BC4D8AC3DEC383BC70C26F7 /* Pods-Easysms.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Easysms.release.xcconfig"; path = "Target Support Files/Pods-Easysms/Pods-Easysms.release.xcconfig"; sourceTree = "<group>"; };
+		33DBE2BCE7064741BCD00FE8 /* Inter-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Bold.ttf"; path = "../src/assets/fonts/Inter-Bold.ttf"; sourceTree = "<group>"; };
 		355BFFE0FC6F495CB7C6E83A /* EuclidCircularARegular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EuclidCircularARegular.ttf; path = ../src/assets/fonts/EuclidCircularARegular.ttf; sourceTree = "<group>"; };
 		39A1D7E3834C8A0F44234514 /* Pods-Easysms.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Easysms.debug.xcconfig"; path = "Target Support Files/Pods-Easysms/Pods-Easysms.debug.xcconfig"; sourceTree = "<group>"; };
 		43157B6A4FA14ADCBE3B0D2E /* EuclidCircularASemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EuclidCircularASemiBold.ttf; path = ../src/assets/fonts/EuclidCircularASemiBold.ttf; sourceTree = "<group>"; };
@@ -79,11 +86,14 @@
 		97C356882B0B8CB9000BE3DD /* hermes.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = hermes.xcframework; path = "Pods/hermes-engine/destroot/Library/Frameworks/universal/hermes.xcframework"; sourceTree = "<group>"; };
 		97F84B0A2B0B9493002B7037 /* FirebaseAnalytics.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = FirebaseAnalytics.xcframework; path = Pods/FirebaseAnalytics/Frameworks/FirebaseAnalytics.xcframework; sourceTree = "<group>"; };
 		B0BB0F91C07C46B99DEFE556 /* Montserrat-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Light.ttf"; path = "../src/assets/fonts/Montserrat-Light.ttf"; sourceTree = "<group>"; };
+		B130054D0E184A36ACFC361C /* Inter-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Regular.ttf"; path = "../src/assets/fonts/Inter-Regular.ttf"; sourceTree = "<group>"; };
+		B3C86165764543FCBEF4E991 /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-SemiBold.ttf"; path = "../src/assets/fonts/Inter-SemiBold.ttf"; sourceTree = "<group>"; };
 		C2F92A983FBB448E959270A8 /* EuclidCircularABold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EuclidCircularABold.ttf; path = ../src/assets/fonts/EuclidCircularABold.ttf; sourceTree = "<group>"; };
 		C321E4E3CBD00A666A6252C2 /* Pods-Easysms-EasysmsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Easysms-EasysmsTests.debug.xcconfig"; path = "Target Support Files/Pods-Easysms-EasysmsTests/Pods-Easysms-EasysmsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D15870E5E35B45D169738BEE /* Pods_Easysms_EasysmsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Easysms_EasysmsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F30178C07705FB24E840256A /* Pods-Easysms-EasysmsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Easysms-EasysmsTests.release.xcconfig"; path = "Target Support Files/Pods-Easysms-EasysmsTests/Pods-Easysms-EasysmsTests.release.xcconfig"; sourceTree = "<group>"; };
+		F80C0F03946F4518B83E1E56 /* Inter-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Medium.ttf"; path = "../src/assets/fonts/Inter-Medium.ttf"; sourceTree = "<group>"; };
 		FD11D9F791D34DE188A1B470 /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Medium.ttf"; path = "../src/assets/fonts/Montserrat-Medium.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -166,6 +176,11 @@
 				FD11D9F791D34DE188A1B470 /* Montserrat-Medium.ttf */,
 				254C9D1E87AB4CEDAB0B8A56 /* Montserrat-Regular.ttf */,
 				70677D58241C41AB8E7BF3DD /* Montserrat-SemiBold.ttf */,
+				33DBE2BCE7064741BCD00FE8 /* Inter-Bold.ttf */,
+				0169E3A9FC7743D8B8B19019 /* Inter-Light.ttf */,
+				F80C0F03946F4518B83E1E56 /* Inter-Medium.ttf */,
+				B130054D0E184A36ACFC361C /* Inter-Regular.ttf */,
+				B3C86165764543FCBEF4E991 /* Inter-SemiBold.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -324,6 +339,11 @@
 				6B93C088ECF7444CBA961980 /* Montserrat-Regular.ttf in Resources */,
 				735A3E325BE44EB299C7B157 /* Montserrat-SemiBold.ttf in Resources */,
 				9200F5E22B28758E001D97B9 /* GoogleService-Info.plist in Resources */,
+				8705D2D3B5F54999B493A0E7 /* Inter-Bold.ttf in Resources */,
+				165B6E40E3C94F05B40CD785 /* Inter-Light.ttf in Resources */,
+				2A4C74B0F75D4AA9BEC6E04A /* Inter-Medium.ttf in Resources */,
+				2826C32A78294716BCEF9DC0 /* Inter-Regular.ttf in Resources */,
+				D3BEC933097341139D4AFD5C /* Inter-SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -598,7 +618,7 @@
 				DEVELOPMENT_TEAM = 298G4XBLQS;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Easysms/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "SMS Virtual";
+				INFOPLIST_KEY_CFBundleDisplayName = "Theory Test UK";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -634,7 +654,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 298G4XBLQS;
 				INFOPLIST_FILE = Easysms/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "SMS Virtual";
+				INFOPLIST_KEY_CFBundleDisplayName = "Theory Test UK";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

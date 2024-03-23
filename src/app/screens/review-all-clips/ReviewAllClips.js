@@ -7,7 +7,7 @@ import {
     FlatList
 } from 'react-native';
 import * as Progress from 'react-native-progress';
-import { Video, ResizeMode } from 'expo-av';
+import Video from 'react-native-video';
 import { Gesture, GestureDetector, GestureHandlerRootView } from "react-native-gesture-handler";
 import WrapperContainer1 from '../../components/Wrapper/WrapperContainer1';
 import HeaderWithBackButton from '../../components/Headers/HeaderWithBackButton';
@@ -38,16 +38,17 @@ const ReviewAllClips = ({ navigation, route }) => {
         // player.current.loadAsync({ uri: item.videoUrl }, {}, false);
     }
 
-    const handlePlaybackStatusUpdate = (status) => {
-
-        if (status.didJustFinish && autoPlay) {
-            playNextVideo();
-        }
-        if (status.isLoaded) {
-            const currentProgress = status.progressUpdateIntervalMillis / status.durationMillis;
-            console.log(status);
-            setProgress(currentProgress);
-        }
+    const handlePlaybackProgress = (status) => {
+            const currentProgress = status.currentTime / status.playableDuration;
+        console.log(currentProgress);
+        setProgress(currentProgress)
+        // if (status.didJustFinish && autoPlay) {
+        //     playNextVideo();
+        // }
+        // if (status.isLoaded) {
+        //     console.log(status);
+        //     setProgress(currentProgress);
+        // }
         // if (!status.isLoaded) {
         //     setLoading(false)
         //     setIsError(true)
@@ -80,19 +81,14 @@ const ReviewAllClips = ({ navigation, route }) => {
                                 source={{
                                     uri: videos[currentIndex].videoUrl,
                                 }}
-                                useNativeControls={false}
-                                resizeMode={ResizeMode.COVER}
-                                shouldPlay={true}
-                                isMuted
-                                isLooping={false}
-                                
+                                resizeMode='cover'
                                 onError={() => setIsError(true)}
                                 onReadyForDisplay={() => {
                                     setLoading(false)
                                     setIsError(false)
                                 }}
                                 onLoadStart={(e) => setLoading(true)}
-                                onPlaybackStatusUpdate={handlePlaybackStatusUpdate}
+                                onProgress={handlePlaybackProgress}
                             />
                             {loading &&
                                 <View style={styles.overlay}>
@@ -106,15 +102,14 @@ const ReviewAllClips = ({ navigation, route }) => {
                             }
                         </View>
                     </GestureDetector>
-                    {/* <View style={styles.progressView}> */}
                     <Progress.Bar
                         style={styles.progressView}
+                        height={14}
                         progress={progress}
-                        unfilledColor={theme.grayShade1}
+                        unfilledColor={theme.disableGray}
                         color={theme.skyBlue}
-                        width={500} />
-                    {/* <View style={[styles.progressBar, { width: (((currentQuestionIndex + 1) / questions.length) * 100) + '%' }]} /> */}
-                    {/* </View> */}
+                        animationType="timing"
+                        width={null} />
                     <View style={styles.listView}>
                         <FlatList
                             data={videos}
@@ -150,8 +145,8 @@ const styles = StyleSheet.create({
         zIndex: 1000
     },
     progressView: {
-        height: 12,
-
+        height: 14,
+        borderRadius: 0
     },
     progressBar: {
         height: 5,
@@ -163,7 +158,7 @@ const styles = StyleSheet.create({
         left: 0,
         bottom: 0,
         right: 0,
-        zIndex: -100
+        zIndex: -100,
     },
     listView: {
         flex: 1,
