@@ -30,6 +30,7 @@ const HazardPractice = ({ navigation, route }) => {
     const [loading, setLoading] = useState(true)
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isError, setIsError] = useState(false)
+    const [isBuffer, setIsBuffer] = useState(false)
 
     const player = useRef()
     const bottomSheetRef = useRef(null);
@@ -76,6 +77,7 @@ const HazardPractice = ({ navigation, route }) => {
     };
 
     const onVideoTap = (item) => {
+        
         const updatedMarkers = [...videos]
         const currentMarker = item?.markers || []
         const updatedVideo = updatedMarkers.map((el) => {
@@ -136,13 +138,21 @@ const HazardPractice = ({ navigation, route }) => {
                                     setIsError(false)
                                 }}
                                 onEnd={() => console.log("video end====")}
-                                onBuffer={(e) => console.log(e)}
+                                onBuffer={(e) => {
+                                    console.log(e);
+                                    setIsBuffer(e.isBuffering)}
+                                }
                                 onLoadStart={(e) => setLoading(true)}
                                 onProgress={handlePlaybackProgress}
                             />
                             {loading &&
-                                <View style={styles.overlay}>
+                                <View style={styles.overlay(false)}>
                                     <Loading size={40} color={theme.white} />
+                                </View>
+                            }
+                             {!loading && isBuffer &&
+                                <View style={styles.overlay(isBuffer)}>
+                                    <Loading size={50} color={theme.red} />
                                 </View>
                             }
                             {isError &&
@@ -204,15 +214,15 @@ const styles = StyleSheet.create({
         width: '100%',
         zIndex: -100
     },
-    overlay: {
+    overlay: (is) => ({
         top: 0,
         left: 0,
         bottom: 0,
         right: 0,
         position: 'absolute',
-        backgroundColor: 'rgb(0,0,0)',
+        backgroundColor: is ? 'rgba(0,0,0,0.4)' : 'rgb(0,0,0)',
         zIndex: 1000
-    },
+    }),
     progressView: {
         // position: 'absolute',
         // bottom: 0,
