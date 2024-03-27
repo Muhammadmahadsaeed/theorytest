@@ -17,6 +17,7 @@ import RevisionQuestionByTopic from '../../screens/questions/RevisionQuestionByT
 import ReviewQuestionScreen from '../../screens/questions/ReviewQuestion';
 import FlaggedQuestionScreen from '../../screens/questions/FlaggedQuestion';
 import DownloadVideoScreen from '../../screens/download-video/DownloadVideoScreen';
+import HazardPractice from '../../screens/hazard-practice/HazardPractice';
 
 
 const Stack = createNativeStackNavigator();
@@ -60,6 +61,7 @@ const RootNavigation = () => {
             <Stack.Screen name="question" component={QuestionScreen} />
             <Stack.Screen name="hazard" component={HazardPerception} />
             <Stack.Screen name="review-clips" component={ReviewAllClips} />
+            <Stack.Screen name="practice-clips" component={HazardPractice} />
             <Stack.Screen name="download-video" component={DownloadVideoScreen} />
             <Stack.Screen name="flagged-question" component={FlaggedQuestionScreen} />
             <Stack.Screen name="mock-result" component={MockTestResult} />

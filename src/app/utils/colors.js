@@ -34,5 +34,6 @@ export const theme = {
     lightPurple: '#E7E5FF',
     purple: '#7065E4',
     buttonBg: '#1DA49E',
-    greenish: '#E7E5FF'
+    greenish: '#E7E5FF',
+    orange: '#FF6600'
 }

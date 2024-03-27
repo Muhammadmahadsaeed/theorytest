@@ -315,3 +315,4 @@ export const AppLogoIcon = ({ svgStyle }) => (
 export const imagegallery = require('../../assets/images/image-gallery.png')
 export const govuk = require('../../assets/images/govuk.png')
 export const info = require('../../assets/images/info.png')
+export const red_flag = require('../../assets/images/red-flag.png')

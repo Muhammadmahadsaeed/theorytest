@@ -27,8 +27,16 @@ const HazardPerception = ({ navigation }) => {
         },
         {
             id: 1,
+            name: "Practice",
+            description: "Practice all the clips and see your score",
+            short_name: 'practice_clips',
+            icon: <VideoIcon />,
+            link: "practice-clips"
+        },
+        {
+            id: 1,
             name: "Review All Clips",
-            description: "Review all the clips and see your score",
+            description: "Review all the clips and see your mistakes",
             short_name: 'review_clips',
             icon: <VideoIcon />,
             link: "review-clips"

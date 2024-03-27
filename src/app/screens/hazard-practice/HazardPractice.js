@@ -4,20 +4,21 @@ import {
     TouchableOpacity,
     Text,
     StyleSheet,
-    FlatList
+    FlatList,
+    Image
 } from 'react-native';
-import * as Progress from 'react-native-progress';
+import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import Video from 'react-native-video';
 import { Gesture, GestureDetector, GestureHandlerRootView } from "react-native-gesture-handler";
 import WrapperContainer1 from '../../components/Wrapper/WrapperContainer1';
-import HeaderWithBackButton from '../../components/Headers/HeaderWithBackButton';
 import data from '../../services/video.json'
-import ClipList from './ClipList';
 import { theme } from '../../utils/colors';
 import { Loading } from '../../components/Loading/Loading';
 import VideoError from '../../components/VideoError/VideoError';
+import { CrossRoundIcon, red_flag } from '../../utils/images';
+import AlertBottomSheetComponent from '../../components/BottomSheet/AlertBottomSheetComponent';
 
-const ReviewAllClips = ({ navigation, route }) => {
+const HazardPractice = ({ navigation, route }) => {
 
     const { toggle } = route?.params || {}
 
@@ -31,12 +32,26 @@ const ReviewAllClips = ({ navigation, route }) => {
     const [isError, setIsError] = useState(false)
 
     const player = useRef()
+    const bottomSheetRef = useRef(null);
 
-    const onChangeVideo = (item, index) => {
-        setCurrentVideo(item)
-        setCurrentIndex(index)
-        // player.current.loadAsync({ uri: item.videoUrl }, {}, false);
-    }
+    const snapPoints = useMemo(() => ['42%'], []);
+
+    const handleSheetChanges = useCallback((index) => {
+    }, []);
+
+    const handleClosePress = useCallback(() => {
+        bottomSheetRef.current?.close();
+    }, []);
+
+    const renderBackdrop = useCallback(props => (
+        <BottomSheetBackdrop
+            {...props}
+            disappearsOnIndex={-1}
+            appearsOnIndex={0}
+            pressBehavior={"close"}
+            enableTouchThrough
+        />
+    ), []);
 
     const handlePlaybackProgress = (status) => {
         const currentProgress = ((status.currentTime / status.seekableDuration) * 100);
@@ -60,19 +75,53 @@ const ReviewAllClips = ({ navigation, route }) => {
         }
     };
 
-    const singleTap = Gesture.Tap().onStart((event) => {
-        console.log(event);
-        // setShowControls(!showControls);
-        // Simulate show/hide controls behavior here
-    });
+    const onVideoTap = (item) => {
+        const updatedMarkers = [...videos]
+        const currentMarker = item?.markers || []
+        const updatedVideo = updatedMarkers.map((el) => {
+            if (el.id == item.id) {
+                return {
+                    ...el,
+                    markers: [...currentMarker, parseFloat(progress).toFixed(2)]
+                }
+            } else {
+                return {...el}
+            }
+        })
+        setCurrentVideo(updatedVideo[currentIndex])
+        setVideos(updatedVideo)
+    };
 
-    // console.log(currentVideo);
+    useEffect(() => {
+        console.log("click===", currentVideo);
+
+    },[videos])
+
+
+    const onClose = (index) => {
+        bottomSheetRef.current?.snapToIndex(index);
+    }
+
+    const onConfirm = () => {
+        handleClosePress()
+        navigation.goBack()
+    }
+
     return (
         <GestureHandlerRootView style={{ flex: 1 }}>
             <WrapperContainer1>
-                <HeaderWithBackButton text={"All Clips"} />
-                <View style={styles.innerContainer}>
-                    <GestureDetector gesture={Gesture.Exclusive(singleTap)}>
+                <View style={styles.header}>
+                    <TouchableOpacity 
+                    style={styles.btn}
+                    activeOpacity={0.8}
+                    onPress={() => onClose(0)}>
+                        <CrossRoundIcon />
+                    </TouchableOpacity>
+                </View>
+                <TouchableOpacity 
+                    activeOpacity={1}
+                    style={styles.innerContainer}
+                    onPress={() => onVideoTap(videos[currentIndex])}>
                         <View style={styles.videoView}>
                             <Video
                                 ref={player}
@@ -102,35 +151,56 @@ const ReviewAllClips = ({ navigation, route }) => {
                                 </View>
                             }
                         </View>
-                    </GestureDetector>
-                    <View style={styles.progressView}>
-                        <View style={[styles.progressBar, { width: (progress + 1) + '%' }]} />
-                        {currentVideo?.windows.map((point, index) => (
-                            <View key={index} style={[styles.marker(index), { left: point + '%' }]} />
-                        ))}
-                    </View>
-                    <View style={styles.listView}>
-                        <FlatList
-                            data={videos}
-                            showsVerticalScrollIndicator={false}
-                            keyExtractor={(item, index) => index.toString()}
-                            renderItem={({ item, index }) => <ClipList data={item} index={index} onChangeVideo={onChangeVideo} />}
-                        />
-                    </View>
+                </TouchableOpacity>
+                <View style={styles.progressView}>
+                    <View style={[styles.progressBar, { width: (progress + 1) + '%' }]} />
+                    {currentVideo?.markers?.map((point, index) => (
+                        <View key={index} style={[styles.marker(index), {left: point + '%'}]}>
+                            <Image source={red_flag} style={styles.img} />
+                        </View>
+                    ))}
                 </View>
+                <BottomSheet
+                ref={bottomSheetRef}
+                index={-1}
+                backdropComponent={renderBackdrop}
+                snapPoints={snapPoints}
+                onChange={handleSheetChanges}>
+                <AlertBottomSheetComponent
+                    onCancel={handleClosePress}
+                    onConfirm={onConfirm} />
+            </BottomSheet>
             </WrapperContainer1>
         </GestureHandlerRootView>
     )
 }
 
-export default ReviewAllClips
+export default HazardPractice
 
 const styles = StyleSheet.create({
+    header: {
+        height: 65,
+        backgroundColor: 'rgba(1, 1, 1, 0.7)',
+        justifyContent: 'center',
+        alignItems: 'flex-end',
+        paddingHorizontal: 15
+    },
+    btn: {
+        backgroundColor: theme.white,
+        borderRadius: 100,
+        width: 40,
+        height: 40,
+        padding: 6,
+        justifyContent: 'center',
+    },
     innerContainer: {
-        flex: 1
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(1, 1, 1, 0.7)'
     },
     videoView: {
-        height: '30%',
+        height: '40%',
         width: '100%',
         zIndex: -100
     },
@@ -144,6 +214,9 @@ const styles = StyleSheet.create({
         zIndex: 1000
     },
     progressView: {
+        // position: 'absolute',
+        // bottom: 0,
+        // zIndex: 100,
         height: 20,
         borderRadius: 0,
         backgroundColor: theme.borderGrey
@@ -166,10 +239,13 @@ const styles = StyleSheet.create({
     },
     marker: (index) => ({
         position: 'absolute',
-        width: 10,
-        borderRadius: 10,
+        zIndex: 1000,
+        height: 30,
+        width: 30,
+        top: -30,
+    }),
+    img: {
         height: '100%',
-        backgroundColor: index == 0 ? theme.red : index == 1 ? theme.orange : index == 2 ? theme.yellow : theme.lightGreen, // Change marker color as needed
-        zIndex: 1,
-      }),
+        width: '100%'
+    }
 })
